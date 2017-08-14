@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B2F06DC3-E861-416A-A384-53DACEA6FF79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apis", "Apis", "{CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markets", "Markets", "{AF5C696F-E7FB-4B77-920F-698C09F394B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api", "Source\Inixe.CoinManagement.Bitso.Api\Inixe.CoinManagement.Bitso.Api.csproj", "{F1933E07-9E82-430F-9727-31820C16CE82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api.UnitTests", "Source\Inixe.CoinManagement.Bitso.Api.UnitTests\Inixe.CoinManagement.Bitso.Api.UnitTests.csproj", "{C06EBA76-F296-431A-A6E4-3373AFDAF15B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Common", "Source\Inixe.CoinManagement.Common\Inixe.CoinManagement.Common.csproj", "{14EA9422-7E3E-4CB6-9637-3704D04DA608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Kraken.Api", "Source\Inixe.CoinManagement.Kraken.Api\Inixe.CoinManagement.Kraken.Api.csproj", "{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Gemini.Api", "Source\Inixe.CoinManagement.Gemini.Api\Inixe.CoinManagement.Gemini.Api.csproj", "{48F7AB32-82A4-4D4A-91F1-99E0431532A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1AFBBF5-10D1-4591-AFE5-FC6CF8635450}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.GDAX.Api", "Source\Inixe.CoinManagement.GDAX.Api\Inixe.CoinManagement.GDAX.Api.csproj", "{CAFC9F13-B2EA-417A-B557-D086BEE929BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1933E07-9E82-430F-9727-31820C16CE82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1933E07-9E82-430F-9727-31820C16CE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1933E07-9E82-430F-9727-31820C16CE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1933E07-9E82-430F-9727-31820C16CE82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06EBA76-F296-431A-A6E4-3373AFDAF15B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06EBA76-F296-431A-A6E4-3373AFDAF15B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06EBA76-F296-431A-A6E4-3373AFDAF15B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06EBA76-F296-431A-A6E4-3373AFDAF15B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14EA9422-7E3E-4CB6-9637-3704D04DA608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14EA9422-7E3E-4CB6-9637-3704D04DA608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14EA9422-7E3E-4CB6-9637-3704D04DA608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14EA9422-7E3E-4CB6-9637-3704D04DA608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48F7AB32-82A4-4D4A-91F1-99E0431532A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48F7AB32-82A4-4D4A-91F1-99E0431532A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48F7AB32-82A4-4D4A-91F1-99E0431532A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48F7AB32-82A4-4D4A-91F1-99E0431532A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAFC9F13-B2EA-417A-B557-D086BEE929BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAFC9F13-B2EA-417A-B557-D086BEE929BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAFC9F13-B2EA-417A-B557-D086BEE929BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAFC9F13-B2EA-417A-B557-D086BEE929BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F1933E07-9E82-430F-9727-31820C16CE82} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
+		{C06EBA76-F296-431A-A6E4-3373AFDAF15B} = {B2F06DC3-E861-416A-A384-53DACEA6FF79}
+		{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
+		{48F7AB32-82A4-4D4A-91F1-99E0431532A3} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
+		{CAFC9F13-B2EA-417A-B557-D086BEE929BB} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
+	EndGlobalSection
+EndGlobal
