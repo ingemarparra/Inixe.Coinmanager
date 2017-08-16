@@ -22,6 +22,10 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Represents the diferent Kinds of operations</remarks>
     public enum TransactionType
     {
+        /// <summary>The none</summary>
+        /// <remarks>This value should never be used. It's declared for initialization purposes only.</remarks>
+        None,
+
         /// <summary>The fee charge transaction</summary>
         Fee,
 

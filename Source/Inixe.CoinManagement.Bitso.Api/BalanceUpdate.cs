@@ -19,7 +19,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class BalanceUpdate
     /// </summary>
     /// <remarks>Represents a Balace Change</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class BalanceUpdate
     {
         /// <summary>Gets or sets the currency identifier.</summary>

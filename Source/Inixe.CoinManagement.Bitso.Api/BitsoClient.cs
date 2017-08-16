@@ -299,11 +299,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <summary>Gets the fee schedule.</summary>
         /// <returns>The fee schedule</returns>
         /// <remarks>None</remarks>
-        public FeeSchedule GetFeeSchedule()
+        public AccountFees GetAccountFees()
         {
             var request = new RestRequest("fees", Method.GET);
 
-            var res = this.GetPayload<FeeSchedule>(request, true);
+            var res = this.GetPayload<AccountFees>(request, true);
 
             return res;
         }

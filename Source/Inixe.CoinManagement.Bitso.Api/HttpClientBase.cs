@@ -113,7 +113,7 @@ namespace Inixe.CoinManagement.Bitso.Api
                 request.AddHeader("Authorization", authHeader);
             }
 
-            var response = this.client.Execute<ResponseSingle<T>>(request);
+            var response = this.Client.Execute<ResponseSingle<T>>(request);
             if (response.Data.Success)
             {
                 return response.Data.Payload;
@@ -168,7 +168,7 @@ namespace Inixe.CoinManagement.Bitso.Api
                 request.AddHeader("Authorization", authHeader);
             }
 
-            var response2 = this.client.Execute<ResponseCollection<T>>(request);
+            var response2 = this.Client.Execute<ResponseCollection<T>>(request);
 
             if (response2.Data.Success)
             {

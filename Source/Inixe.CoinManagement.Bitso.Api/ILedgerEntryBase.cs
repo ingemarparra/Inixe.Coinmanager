@@ -14,7 +14,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Interface ILedgerEntry
     /// </summary>
     /// <remarks>Represents base Ledger data</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public interface ILedgerEntryBase
     {
         /// <summary>Gets or sets the balances updates made after the operations is done.</summary>

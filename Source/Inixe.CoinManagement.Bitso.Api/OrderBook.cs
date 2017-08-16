@@ -18,7 +18,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class OrderBook
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class OrderBook
     {
         /// <summary>Initializes a new instance of the <see cref="OrderBook"/> class.</summary>

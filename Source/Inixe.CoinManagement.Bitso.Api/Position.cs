@@ -18,7 +18,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class Position
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class Position
     {
         /// <summary>Gets or sets the currency name.</summary>

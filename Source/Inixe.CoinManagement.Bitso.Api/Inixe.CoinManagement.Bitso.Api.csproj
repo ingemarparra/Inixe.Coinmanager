@@ -53,7 +53,7 @@
     <Compile Include="BitsoClient.cs" />
     <Compile Include="BitsoException.cs" />
     <Compile Include="Fee.cs" />
-    <Compile Include="FeeSchedule.cs" />
+    <Compile Include="AccountFees.cs" />
     <Compile Include="HttpClientBase.cs" />
     <Compile Include="IFundingOperationDetails.cs" />
     <Compile Include="ILedgerEntry.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Tick.cs" />
     <Compile Include="Ticker.cs" />
     <Compile Include="Trade.cs" />
+    <Compile Include="Withdrawal.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json">

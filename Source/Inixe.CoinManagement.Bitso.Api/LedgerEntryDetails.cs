@@ -23,7 +23,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <seealso cref="Inixe.CoinManagement.Bitso.Api.IWithdrawalOperationDetails" />
     /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ITradeOperationDetails" />
     /// <remarks>This acts like a facade for the different operations detiails.</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     internal sealed class LedgerEntryDetails : IFundingOperationDetails, IWithdrawalOperationDetails, ITradeOperationDetails
     {
         /// <inheritdoc/>

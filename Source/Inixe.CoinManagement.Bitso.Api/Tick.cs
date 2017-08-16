@@ -17,7 +17,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <summary>
     /// Class Tick
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class Tick
     {
         /// <summary>Gets or sets the name of the book.</summary>

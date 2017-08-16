@@ -21,6 +21,10 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>None</remarks>
     public enum MarketSide
     {
+        /// <summary>The none value.</summary>
+        /// <remarks>This value should never be used. It's declared for initialization purposes only.</remarks>
+        None,
+
         /// <summary>The buy</summary>
         Buy,
 
@@ -32,7 +36,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class Trade
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class Trade
     {
         /// <summary>Gets or sets the name of the book.</summary>

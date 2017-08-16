@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="FeeSchedule.cs" company="Inixe">
+// <copyright file="AccountFees.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,14 +18,14 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class FeeSchedule
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class FeeSchedule
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+    public class AccountFees
     {
-        /// <summary>Initializes a new instance of the <see cref="FeeSchedule"/> class.</summary>
-        public FeeSchedule()
+        /// <summary>Initializes a new instance of the <see cref="AccountFees"/> class.</summary>
+        public AccountFees()
         {
             this.TradeFees = new List<Fee>();
-            this.WithdrawalFees = new List<Fee>();
+            this.WithdrawalFees = new Dictionary<string, decimal>();
         }
 
         /// <summary>Gets or sets the trade fees.</summary>
@@ -35,6 +35,6 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets or sets the withdrawal fees.</summary>
         /// <value>The withdrawal fees.</value>
-        public IList<Fee> WithdrawalFees { get; set; }
+        public Dictionary<string, decimal> WithdrawalFees { get; set; }
     }
 }

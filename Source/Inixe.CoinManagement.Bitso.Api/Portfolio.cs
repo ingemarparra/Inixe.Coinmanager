@@ -18,7 +18,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class Portfolio
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class Portfolio
     {
         /// <summary>Initializes a new instance of the <see cref="Portfolio"/> class.</summary>

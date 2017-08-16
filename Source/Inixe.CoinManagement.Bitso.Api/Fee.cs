@@ -18,7 +18,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class Fee
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class Fee
     {
         /// <summary>Gets or sets the name of the book.</summary>

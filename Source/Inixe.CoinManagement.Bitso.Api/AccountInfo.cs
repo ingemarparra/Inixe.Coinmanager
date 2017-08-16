@@ -21,6 +21,10 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Account Status</remarks>
     public enum AccountStatus
     {
+        /// <summary>The none value</summary>
+        /// <remarks>This value should never be used. It's declared for initialization purposes only.</remarks>
+        None,
+
         /// <summary>The active</summary>
         Active,
 
@@ -32,7 +36,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class AccountStatus
     /// </summary>
     /// <remarks>None</remarks>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class AccountInfo
     {
         /// <summary>Gets or sets the client identifier.</summary>

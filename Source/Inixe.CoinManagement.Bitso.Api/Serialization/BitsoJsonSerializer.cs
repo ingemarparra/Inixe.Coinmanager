@@ -13,6 +13,7 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
     using System.Text;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
     using RestSharp;
     using RestSharp.Deserializers;
     using RestSharp.Serializers;
@@ -32,13 +33,19 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
         public BitsoJsonSerializer()
         {
             this.ContentType = "application/json";
-            this.serializer = new Newtonsoft.Json.JsonSerializer
-            {
-                MissingMemberHandling = MissingMemberHandling.Ignore,
-                NullValueHandling = NullValueHandling.Include,
-                DefaultValueHandling = DefaultValueHandling.Include,
-                DateTimeZoneHandling = DateTimeZoneHandling.Local,
-            };
+            this.serializer = new Newtonsoft.Json.JsonSerializer();
+
+
+            this.serializer.MissingMemberHandling = MissingMemberHandling.Ignore;
+            this.serializer.NullValueHandling = NullValueHandling.Include;
+            this.serializer.DefaultValueHandling = DefaultValueHandling.Include;
+            this.serializer.DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
+            this.serializer.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+
+            var contractResolver = new DefaultContractResolver();
+            contractResolver.NamingStrategy = new SnakeCaseNamingStrategy();
+
+            this.serializer.ContractResolver = contractResolver;
         }
 
         /// <summary>

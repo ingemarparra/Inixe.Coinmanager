@@ -9,6 +9,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
     using System.Security;
     using Inixe.CoinManagement.Bitso.Api;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Linq;
 
     /// <summary>
     /// The Bitso Client Integration Tests
@@ -91,6 +92,12 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
 
             Assert.AreNotEqual<int>(0, res.Count);
             Assert.IsFalse(string.IsNullOrWhiteSpace(res[0].BookName));
+            Assert.AreNotEqual<decimal>(0M, res[0].MaximumAmount);
+            Assert.AreNotEqual<decimal>(0M, res[0].MaximumPrice);
+            Assert.AreNotEqual<decimal>(0M, res[0].MaximumValue);
+            Assert.AreNotEqual<decimal>(0M, res[0].MinimumAmount);
+            Assert.AreNotEqual<decimal>(0M, res[0].MinimumPrice);
+            Assert.AreNotEqual<decimal>(0M, res[0].MinimumValue);
         }
 
         /// <summary>Tests the GetTicker for expected behavior.</summary>
@@ -102,10 +109,18 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             var res = client.GetTicker("btc_mxn");
 
             Assert.IsNotNull(res);
-            Assert.IsFalse(string.IsNullOrWhiteSpace(res.Book));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(res.BookName));
 
             Assert.AreNotEqual<decimal>(0M, res.Ask);
             Assert.AreNotEqual<decimal>(0M, res.Bid);
+            Assert.AreNotEqual<decimal>(0M, res.VolumeWeightedAveragePrice);
+            Assert.AreNotEqual<decimal>(0M, res.Low);
+            Assert.AreNotEqual<decimal>(0M, res.High);
+            Assert.AreNotEqual<decimal>(0M, res.Last);
+            Assert.AreNotEqual<decimal>(0M, res.Volume);
+
+            var diff = res.CreatedAt - default(System.DateTime);
+            Assert.IsTrue(diff > System.TimeSpan.Zero);
         }
 
         /// <summary>Tests the GetAllTickers for expected behavior.</summary>
@@ -128,6 +143,16 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             var res = client.GetTrades("btc_mxn");
 
             Assert.AreNotEqual<int>(0, res.Count);
+            Assert.AreNotEqual<decimal>(0, res[0].Amount);
+            Assert.IsFalse(string.IsNullOrEmpty(res[0].BookName));
+
+            Assert.IsTrue(res[0].MakerSide != MarketSide.None);
+            Assert.AreNotEqual<decimal>(0M, res[0].Price);
+            Assert.AreNotEqual<decimal>(0M, res[0].Amount);
+            Assert.AreNotEqual<long>(0, res[0].TradeId);
+
+            var diff = res[0].CreatedAt - default(System.DateTime);
+            Assert.IsTrue(diff > System.TimeSpan.Zero);
         }
 
         /// <summary>Tests the GetOrderBook for expected behavior.</summary>
@@ -139,11 +164,34 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             var res = client.GetOrderBook("btc_mxn");
 
             Assert.IsNotNull(res);
+            Assert.AreNotEqual<int>(0, res.Asks.Count);
+            Assert.AreNotEqual<int>(0, res.Bids.Count);
+            Assert.AreNotEqual<long>(0, res.Sequence);
 
-            res = client.GetOrderBook("btc_mxn", true);
+            var diff = res.UpdatedAt - default(System.DateTime);
+            Assert.IsTrue(diff > System.TimeSpan.Zero);
+
+            Assert.AreNotEqual<decimal>(0M, res.Asks[0].Amount);
+            Assert.AreNotEqual<decimal>(0M, res.Asks[0].Price);
+            Assert.IsFalse(string.IsNullOrEmpty(res.Asks[0].OrderId));
+            Assert.IsFalse(string.IsNullOrEmpty(res.Asks[0].BookName));
+
+            const bool AggregateResults = true;
+
+            res = client.GetOrderBook("btc_mxn", AggregateResults);
+
             Assert.IsNotNull(res);
             Assert.AreNotEqual<int>(0, res.Asks.Count);
             Assert.AreNotEqual<int>(0, res.Bids.Count);
+            Assert.AreNotEqual<long>(0, res.Sequence);
+
+            diff = res.UpdatedAt - default(System.DateTime);
+            Assert.IsTrue(diff > System.TimeSpan.Zero);
+
+            Assert.AreNotEqual<decimal>(0M, res.Asks[0].Amount);
+            Assert.AreNotEqual<decimal>(0M, res.Asks[0].Price);
+            Assert.IsTrue(string.IsNullOrEmpty(res.Asks[0].OrderId));
+            Assert.IsFalse(string.IsNullOrEmpty(res.Asks[0].BookName));
         }
 
         /// <summary>Tests the GetAccountInfo for expected behavior.</summary>
@@ -155,7 +203,16 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                 try
                 {
                     var res = client.GetAccountInfo();
+
                     Assert.IsNotNull(res);
+                    Assert.IsFalse(string.IsNullOrEmpty(res.ClientId));
+                    Assert.AreNotEqual<decimal>(0M, res.DailyLimit);
+                    Assert.AreNotEqual<decimal>(0M, res.MonthlyLimit);
+                    Assert.AreNotEqual<decimal>(0M, res.DailyRemaining);
+                    Assert.IsFalse(string.IsNullOrEmpty(res.Email));
+                    Assert.IsFalse(string.IsNullOrEmpty(res.FirstName));
+                    Assert.IsFalse(string.IsNullOrEmpty(res.LastName));
+                    Assert.AreNotEqual<AccountStatus>(AccountStatus.None, res.Status);
                 }
                 catch (BitsoException ex)
                 {
@@ -174,8 +231,10 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                 try
                 {
                     var res = client.GetPortfolio();
+
                     Assert.IsNotNull(res);
                     Assert.AreNotEqual<int>(0, res.Balances.Count);
+                    Assert.IsFalse(string.IsNullOrEmpty(res.Balances[0].Currency));
                 }
                 catch (BitsoException ex)
                 {
@@ -185,17 +244,23 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             }
         }
 
-        /// <summary>Tests the GetFeeSchedule for expected behavior.</summary>
+        /// <summary>Tests the GetAccountFees for expected behavior.</summary>
         [TestMethod]
-        public void GetFeeScheduleExpected()
+        public void GetAccountFeesExpected()
         {
             using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
             {
                 try
                 {
-                    var res = client.GetFeeSchedule();
+                    var res = client.GetAccountFees();
                     Assert.IsNotNull(res);
                     Assert.AreNotEqual<int>(0, res.TradeFees.Count);
+
+                    Assert.IsFalse(string.IsNullOrEmpty(res.TradeFees[0].BookName));
+                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].Percent);
+                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].Value);
+                    Assert.AreNotEqual<int>(0, res.WithdrawalFees.Count);
+                    Assert.AreNotEqual<decimal>(0M, res.WithdrawalFees.First().Value);
                 }
                 catch (BitsoException ex)
                 {
@@ -216,6 +281,10 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                     var res = client.GetAllLedgerEntries();
                     Assert.IsNotNull(res);
                     Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<int>(0, res[0].Balances.Count);
+                    Assert.AreNotEqual<TransactionType>(TransactionType.None, res[0].Kind);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Id));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Balances[0].Currency));
 
                     res = client.GetAllLedgerEntries(string.Empty, SortDirection.Ascending, 5);
                     Assert.IsNotNull(res);
@@ -240,6 +309,8 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                     var res = client.GetLedgerTrade();
                     Assert.IsNotNull(res);
                     Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Details.OrderId));
+                    Assert.AreNotEqual<long>(0, res[0].Details.TradeId);
 
                     res = client.GetLedgerTrade(string.Empty, SortDirection.Ascending, 5);
                     Assert.IsNotNull(res);
@@ -264,6 +335,8 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                     var res = client.GetLedgerFee();
                     Assert.IsNotNull(res);
                     Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Details.OrderId));
+                    Assert.AreNotEqual<long>(0, res[0].Details.TradeId);
 
                     res = client.GetLedgerFee(string.Empty, SortDirection.Ascending, 5);
                     Assert.IsNotNull(res);
