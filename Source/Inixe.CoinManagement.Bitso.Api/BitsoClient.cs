@@ -8,7 +8,10 @@ namespace Inixe.CoinManagement.Bitso.Api
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Security;
+    using System.Text;
+    using Inixe.CoinManagement.Bitso.Api.Serialization;
     using RestSharp;
 
     /// <summary>
@@ -52,6 +55,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         public BitsoClient(string apiKey, SecureString apiSecret)
             : base(DefaultApiUrl, apiKey, apiSecret)
         {
+            this.ConfigureClient();
         }
 
         /// <summary>Initializes a new instance of the <see cref="BitsoClient"/> class.</summary>
@@ -62,6 +66,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         public BitsoClient(string serverUrl, string apiKey, SecureString apiSecret)
             : base(string.IsNullOrWhiteSpace(serverUrl) ? DefaultApiUrl : serverUrl, apiKey, apiSecret)
         {
+            this.ConfigureClient();
         }
 
         /// <summary>Initializes a new instance of the <see cref="BitsoClient" /> class.</summary>
@@ -71,6 +76,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         public BitsoClient(string serverUrl, string apiKey, string apiSecret)
             : base(string.IsNullOrWhiteSpace(serverUrl) ? DefaultApiUrl : serverUrl, apiKey, apiSecret)
         {
+            this.ConfigureClient();
         }
 
         /// <summary>Gets the available pairs.</summary>
@@ -300,6 +306,177 @@ namespace Inixe.CoinManagement.Bitso.Api
             var res = this.GetPayload<FeeSchedule>(request, true);
 
             return res;
+        }
+
+        /// <summary>Gets all ledger entries.</summary>
+        /// <returns>A list of ledger entries</returns>
+        public IList<ILedgerEntry> GetAllLedgerEntries()
+        {
+            return this.GetAllLedgerEntries(string.Empty, SortDirection.Desending, 25);
+        }
+
+        /// <summary>Gets all ledger entries.</summary>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of ledger entries</returns>
+        public IList<ILedgerEntry> GetAllLedgerEntries(string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            var request = new RestRequest("ledger", Method.GET);
+
+            var marker = new Parameter();
+            var sort = new Parameter();
+            var limit = new Parameter();
+
+            marker.Name = "marker";
+            marker.Value = markerTag;
+            marker.Type = ParameterType.QueryString;
+
+            sort.Name = "sort";
+            sort.Value = sortDirection == SortDirection.Desending ? "desc" : "asc";
+            sort.Type = ParameterType.QueryString;
+
+            limit.Name = "limit";
+            limit.Value = resultLimit;
+            limit.Type = ParameterType.QueryString;
+
+            request.AddParameter(marker);
+            request.AddParameter(sort);
+            request.AddParameter(limit);
+
+            var res = this.GetPayloadList<LedgerEntryBase>(request, true).ToList();
+
+            return res.ConvertAll(x => (ILedgerEntry)x);
+        }
+
+        /// <summary>Gets a ledger withdrawal.</summary>
+        /// <returns>A list of Withdrawal entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerWithdrawalEntry> GetLedgerWithdrawal()
+        {
+            return this.GetLedgerWithdrawal(string.Empty, SortDirection.Desending, 25);
+        }
+
+        /// <summary>Gets a ledger withdrawal.</summary>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of Withdrawal entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerWithdrawalEntry> GetLedgerWithdrawal(string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            return this.GetFilteredLedger("withdrawals", markerTag, sortDirection, resultLimit).ConvertAll(x => new LedgerWithdrawalEntry(x));
+        }
+
+        /// <summary>Gets a ledger trade.</summary>
+        /// <returns>A list of trade entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerTradeEntry> GetLedgerTrade()
+        {
+            return this.GetLedgerTrade(string.Empty, SortDirection.Desending, 25);
+        }
+
+        /// <summary>Gets a ledger trade.</summary>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of trade entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerTradeEntry> GetLedgerTrade(string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            return this.GetFilteredLedger("trades", markerTag, sortDirection, resultLimit).ConvertAll(x => new LedgerTradeEntry(x));
+        }
+
+        /// <summary>Gets a ledger trade fee.</summary>
+        /// <returns>A list of trade fee entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerTradeEntry> GetLedgerFee()
+        {
+            return this.GetLedgerFee(string.Empty, SortDirection.Desending, 25);
+        }
+
+        /// <summary>Gets a ledger trade fee.</summary>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of trade fee entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerTradeEntry> GetLedgerFee(string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            return this.GetFilteredLedger("fees", markerTag, sortDirection, resultLimit).ConvertAll(x => new LedgerTradeEntry(x));
+        }
+
+        /// <summary>Gets a ledger funding.</summary>
+        /// <returns>A list of Funding entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerFundingEntry> GetLedgerFunding()
+        {
+            return this.GetLedgerFunding(string.Empty, SortDirection.Desending, 25);
+        }
+
+        /// <summary>Gets a ledger funding.</summary>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of Funding entries</returns>
+        /// <remarks>None</remarks>
+        public IList<LedgerFundingEntry> GetLedgerFunding(string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            return this.GetFilteredLedger("fundings", markerTag, sortDirection, resultLimit).ConvertAll(x => new LedgerFundingEntry(x));
+        }
+
+        /// <summary>Gets the ledger applying a filter over the specified resource.</summary>
+        /// <param name="filter">The filter the resource to filter.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of Entries</returns>
+        /// <exception cref="ArgumentException">When the filter is null</exception>
+        /// <remarks>None</remarks>
+        private List<LedgerEntryBase> GetFilteredLedger(string filter, string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            const string baseResourceName = "ledger";
+
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                throw new ArgumentException("Invalid filter");
+            }
+
+            string resourceName = string.Format("{0}/{1}", baseResourceName, filter);
+
+            var request = new RestRequest(resourceName, Method.GET);
+
+            var marker = new Parameter();
+            var sort = new Parameter();
+            var limit = new Parameter();
+
+            marker.Name = "marker";
+            marker.Value = markerTag;
+            marker.Type = ParameterType.QueryString;
+
+            sort.Name = "sort";
+            sort.Value = sortDirection == SortDirection.Desending ? "desc" : "asc";
+            sort.Type = ParameterType.QueryString;
+
+            limit.Name = "limit";
+            limit.Value = resultLimit;
+            limit.Type = ParameterType.QueryString;
+
+            request.AddParameter(marker);
+            request.AddParameter(sort);
+            request.AddParameter(limit);
+
+            List<LedgerEntryBase> retval = this.GetPayloadList<LedgerEntryBase>(request, true).ToList();
+
+            return retval;
+        }
+
+        /// <summary>Configures the client.</summary>
+        /// <remarks>Adds specific items to the rest client</remarks>
+        private void ConfigureClient()
+        {
+            this.Client.UserAgent = "Inixe CoinManager";
+            this.Client.AddHandler("application/json", new BitsoJsonSerializer());
         }
     }
 }

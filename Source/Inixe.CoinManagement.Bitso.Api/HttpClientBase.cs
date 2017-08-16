@@ -55,8 +55,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             this.apiKey = apiKey;
             this.targetUrl = new Uri(serverUrl);
             this.client = new RestClient(serverUrl);
-            this.client.UserAgent = "Inixe CoinManager";
-            this.client.AddHandler("application/json", new JsonSerializer());
             this.disposedValue = false;
         }
 
@@ -66,6 +64,16 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <value><c>true</c> if automatic errors handling is enabled; otherwise, <c>false</c>.</value>
         /// <remarks>When Enabled. No Client exceptions are thrown on API calls, all api call results will be null or empty lists in case of an error.</remarks>
         public bool AutoHandleErrors { get; set; }
+
+        /// <summary>Gets the Rest Client.</summary>
+        /// <value>The Rest client.</value>
+        protected IRestClient Client
+        {
+            get
+            {
+                return this.client;
+            }
+        }
 
         private bool CanSignRequests
         {
@@ -209,6 +217,31 @@ namespace Inixe.CoinManagement.Bitso.Api
             return string.Format(CultureInfo.InvariantCulture, "{0}", mils);
         }
 
+        private static string GetFullQueryString(List<Parameter> parameters, string resourceName)
+        {
+            var sb = new StringBuilder();
+
+            var resourceData = parameters.Where(x => x.Type == ParameterType.QueryString).Select(y => string.Format("{0}={1}&", y.Name, y.Value));
+            foreach (var item in resourceData)
+            {
+                sb.Append(item);
+            }
+
+            var queryParameters = sb.ToString();
+            string retval;
+            if (string.IsNullOrEmpty(queryParameters))
+            {
+                retval = string.Format("{0}/", resourceName);
+            }
+            else
+            {
+                var trimmedQs = queryParameters.Substring(0, queryParameters.Length - 1);
+                retval = string.Format("{0}?{1}", resourceName, trimmedQs);
+            }
+
+            return retval;
+        }
+
         private string CreateAuthorizationHeaderContent(IRestRequest request)
         {
             var nonce = CreateNonce();
@@ -229,7 +262,9 @@ namespace Inixe.CoinManagement.Bitso.Api
             rawSignature.Append(method);
 
             // Appending the Path Part
-            rawSignature.AppendFormat(CultureInfo.InvariantCulture, "{0}{1}/", this.targetUrl.PathAndQuery, request.Resource);
+            var resourceName = GetFullQueryString(request.Parameters, request.Resource);
+            rawSignature.AppendFormat(CultureInfo.InvariantCulture, "{0}{1}", this.targetUrl.PathAndQuery, resourceName);
+
             if (payload != null)
             {
                 rawSignature.Append(payload);

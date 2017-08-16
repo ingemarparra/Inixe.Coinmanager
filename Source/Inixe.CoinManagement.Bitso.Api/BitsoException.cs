@@ -11,6 +11,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Inixe.CoinManagement.Bitso.Api.Serialization;
 
     /// <summary>
     /// Class BitsoException
@@ -21,22 +22,36 @@ namespace Inixe.CoinManagement.Bitso.Api
         private readonly ApiError errorInfo;
         private readonly string authHeader;
 
+        /// <summary>Initializes a new instance of the <see cref="BitsoException"/> class.</summary>
+        /// <param name="content">The content.</param>
+        /// <param name="authHeader">The authentication header.</param>
         internal BitsoException(string content, string authHeader)
         {
-            JsonSerializer serializer = new JsonSerializer();
+            var serializer = new BitsoJsonSerializer();
 
             var res = serializer.Deserialize<ErrorResponse>(content);
             this.errorInfo = res.Error;
             this.authHeader = authHeader;
         }
 
+        /// <summary>Initializes a new instance of the <see cref="BitsoException"/> class.</summary>
+        /// <param name="content">The content.</param>
         internal BitsoException(string content)
             : this(content, string.Empty)
         {
         }
 
-        public string Header { get { return this.authHeader; } }
+        /// <summary>Gets the header.</summary>
+        /// <value>The header.</value>
+        public string Header
+        {
+            get
+            {
+                return this.authHeader;
+            }
+        }
 
+        /// <summary>Gets a message that describes the current exception.</summary>
         public override string Message
         {
             get
@@ -45,6 +60,8 @@ namespace Inixe.CoinManagement.Bitso.Api
             }
         }
 
+        /// <summary>Gets the code.</summary>
+        /// <value>The code.</value>
         public string Code
         {
             get

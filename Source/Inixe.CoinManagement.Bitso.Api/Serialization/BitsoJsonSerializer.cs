@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="JsonSerializer.cs" company="Inixe">
+// <copyright file="BitsoJsonSerializer.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Inixe.CoinManagement.Bitso.Api
+namespace Inixe.CoinManagement.Bitso.Api.Serialization
 {
     using System;
     using System.Collections.Generic;
@@ -21,15 +21,15 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Default JSON serializer for request bodies
     /// Doesn't currently use the SerializeAs attribute, defers to Newtonsoft's attributes
     /// </summary>
-    public class JsonSerializer : IDeserializer, ISerializer
+    public class BitsoJsonSerializer : IDeserializer, ISerializer
     {
         private readonly Newtonsoft.Json.JsonSerializer serializer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonSerializer"/> class.
+        /// Initializes a new instance of the <see cref="BitsoJsonSerializer"/> class.
         /// </summary>
         /// <remarks>None</remarks>
-        public JsonSerializer()
+        public BitsoJsonSerializer()
         {
             this.ContentType = "application/json";
             this.serializer = new Newtonsoft.Json.JsonSerializer
@@ -42,12 +42,12 @@ namespace Inixe.CoinManagement.Bitso.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonSerializer"/> class.
+        /// Initializes a new instance of the <see cref="BitsoJsonSerializer"/> class.
         /// Default serializer with overload for allowing custom Json.NET settings
         /// </summary>
         /// <param name="serializer">The selected serializer</param>
         /// <remarks>None</remarks>
-        public JsonSerializer(Newtonsoft.Json.JsonSerializer serializer)
+        public BitsoJsonSerializer(Newtonsoft.Json.JsonSerializer serializer)
         {
             this.ContentType = "application/json";
             this.serializer = serializer;
