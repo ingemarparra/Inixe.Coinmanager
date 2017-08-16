@@ -6,10 +6,10 @@
 
 namespace Inixe.CoinManagement.Bitso.Api.UnitTests
 {
+    using System.Linq;
     using System.Security;
     using Inixe.CoinManagement.Bitso.Api;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Linq;
 
     /// <summary>
     /// The Bitso Client Integration Tests

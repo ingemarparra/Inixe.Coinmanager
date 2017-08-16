@@ -52,13 +52,17 @@
     <Compile Include="BalanceUpdate.cs" />
     <Compile Include="BitsoClient.cs" />
     <Compile Include="BitsoException.cs" />
+    <Compile Include="CryptoCurrencyWithdrawal.cs" />
     <Compile Include="Fee.cs" />
     <Compile Include="AccountFees.cs" />
     <Compile Include="HttpClientBase.cs" />
+    <Compile Include="ICrytoCurrencyTransferDetails.cs" />
     <Compile Include="IFundingOperationDetails.cs" />
     <Compile Include="ILedgerEntry.cs" />
     <Compile Include="ILedgerEntryBase.cs" />
+    <Compile Include="ISpeiTransferDetails.cs" />
     <Compile Include="ITradeOperationDetails.cs" />
+    <Compile Include="IWithdrawalBase.cs" />
     <Compile Include="IWithdrawalOperationDetails.cs" />
     <Compile Include="LedgerEntryDetails.cs" />
     <Compile Include="LedgerFundingEntry.cs" />
@@ -73,10 +77,14 @@
     <Compile Include="LedgerEntryBase.cs" />
     <Compile Include="ResponseSingle.cs" />
     <Compile Include="ResponseCollection{T}.cs" />
+    <Compile Include="BanxicoData.cs" />
+    <Compile Include="SpeiReturnData.cs" />
+    <Compile Include="SpeiWithdrawal.cs" />
     <Compile Include="Tick.cs" />
     <Compile Include="Ticker.cs" />
     <Compile Include="Trade.cs" />
-    <Compile Include="Withdrawal.cs" />
+    <Compile Include="TransferDetails.cs" />
+    <Compile Include="WithdrawalBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json">
