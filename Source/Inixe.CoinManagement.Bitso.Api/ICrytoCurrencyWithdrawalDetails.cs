@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ICrytoCurrencyTransferDetails.cs" company="Inixe">
+// <copyright file="ICrytoCurrencyWithdrawalDetails.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,8 +13,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Interface ICrytoCurrencyTransferDetails
     /// </summary>
     /// <remarks>Represents the a Crypto currency transfer details</remarks>
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public interface ICrytoCurrencyTransferDetails
+    public interface ICrytoCurrencyWithdrawalDetails
     {
         /// <summary>Gets or sets the withdrawal address.</summary>
         /// <value>The withdrawal address.</value>

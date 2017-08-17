@@ -33,6 +33,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     public class BitsoClient : HttpClientBase
     {
         private const string DefaultApiUrl = "https://api.bitso.com/v3";
+        private readonly BitsoJsonSerializer serializer;
 
         /// <summary>Initializes a new instance of the <see cref="BitsoClient"/> class.</summary>
         /// <remarks>This is de default constructor. The URL that will be used is the production URL <c>https://api.bitso.com/v3</c></remarks>
@@ -55,6 +56,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         public BitsoClient(string apiKey, SecureString apiSecret)
             : base(DefaultApiUrl, apiKey, apiSecret)
         {
+            this.serializer = new BitsoJsonSerializer();
             this.ConfigureClient();
         }
 
@@ -66,6 +68,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         public BitsoClient(string serverUrl, string apiKey, SecureString apiSecret)
             : base(string.IsNullOrWhiteSpace(serverUrl) ? DefaultApiUrl : serverUrl, apiKey, apiSecret)
         {
+            this.serializer = new BitsoJsonSerializer();
             this.ConfigureClient();
         }
 
@@ -76,7 +79,44 @@ namespace Inixe.CoinManagement.Bitso.Api
         public BitsoClient(string serverUrl, string apiKey, string apiSecret)
             : base(string.IsNullOrWhiteSpace(serverUrl) ? DefaultApiUrl : serverUrl, apiKey, apiSecret)
         {
+            this.serializer = new BitsoJsonSerializer();
             this.ConfigureClient();
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="BitsoClient"/> class.</summary>
+        /// <param name="restClient">The rest client to use. This is often usefull for unit testing, If <c>null</c> a default RestClient will be used</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="apiKey">The Api key value</param>
+        /// <param name="apiSecret">The Api secret value</param>
+        /// <remarks>None</remarks>
+        public BitsoClient(IRestClient restClient, string serverUrl, string apiKey, SecureString apiSecret)
+            : base(restClient, string.IsNullOrWhiteSpace(serverUrl) ? DefaultApiUrl : serverUrl, apiKey, apiSecret)
+        {
+            this.serializer = new BitsoJsonSerializer();
+            this.ConfigureClient();
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="BitsoClient" /> class.</summary>
+        /// <param name="restClient">The rest client to use. This is often usefull for unit testing, If <c>null</c> a default RestClient will be used</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="apiKey">The API key.</param>
+        /// <param name="apiSecret">The API secret.</param>
+        public BitsoClient(IRestClient restClient, string serverUrl, string apiKey, string apiSecret)
+            : base(restClient, string.IsNullOrWhiteSpace(serverUrl) ? DefaultApiUrl : serverUrl, apiKey, apiSecret)
+        {
+            this.serializer = new BitsoJsonSerializer();
+            this.ConfigureClient();
+        }
+
+        /// <summary>Gets the serializer.</summary>
+        /// <value>The serializer.</value>
+        /// <remarks>Gets the serializer instance used by the client, this is useful for changing settings such as tracing and name handling</remarks>
+        public BitsoJsonSerializer Serializer
+        {
+            get
+            {
+                return this.serializer;
+            }
         }
 
         /// <summary>Gets the available pairs.</summary>
@@ -425,6 +465,43 @@ namespace Inixe.CoinManagement.Bitso.Api
             return this.GetFilteredLedger("fundings", markerTag, sortDirection, resultLimit).ConvertAll(x => new LedgerFundingEntry(x));
         }
 
+        /// <summary>Gets all ledger entries.</summary>
+        /// <returns>A list of ledger entries</returns>
+        public IList<IWithdrawalBase> GetWithdrawals()
+        {
+            return this.GetWithdrawals(25);
+        }
+
+        /// <summary>Gets all ledger entries.</summary>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of ledger entries</returns>
+        public IList<IWithdrawalBase> GetWithdrawals(long resultLimit)
+        {
+            var request = new RestRequest("withdrawals", Method.GET);
+
+            var limit = new Parameter();
+
+            limit.Name = "limit";
+            limit.Value = resultLimit;
+            limit.Type = ParameterType.QueryString;
+
+            request.AddParameter(limit);
+
+            var res = this.GetPayloadList<WithdrawalBase>(request, true).ToList();
+
+            return res.ConvertAll(x => (IWithdrawalBase)x);
+        }
+
+        /// <summary>Gets the banks information.</summary>
+        /// <returns></returns>
+        public IList<BankCode> GetBanksInfo()
+        {
+            var request = new RestRequest("mx_bank_codes", Method.GET);
+            var res = this.GetPayloadList<BankCode>(request, true);
+
+            return res;
+        }
+
         /// <summary>Gets the ledger applying a filter over the specified resource.</summary>
         /// <param name="filter">The filter the resource to filter.</param>
         /// <param name="markerTag">The marker tag.</param>
@@ -476,7 +553,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         private void ConfigureClient()
         {
             this.Client.UserAgent = "Inixe CoinManager";
-            this.Client.AddHandler("application/json", new BitsoJsonSerializer());
+            this.Client.AddHandler("application/json", this.serializer);
         }
     }
 }

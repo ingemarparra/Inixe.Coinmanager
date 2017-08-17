@@ -49,10 +49,13 @@ namespace Inixe.CoinManagement.Bitso.Api
         Sp,
 
         /// <summary>The bitcoin method</summary>
-        Bitcoin,
+        Btc,
 
         /// <summary>The ether method</summary>
-        Ether,
+        Eth,
+
+        /// <summary>The ripple method</summary>
+        Rp,
     }
 
     /// <summary>
@@ -78,11 +81,13 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <inheritdoc/>
         public TransferMethod Method { get; set; }
 
+        public string MethodName { get; set; }
+
         /// <inheritdoc/>
         public decimal Amount { get; set; }
 
         /// <summary>Gets or sets the details.</summary>
         /// <value>The details.</value>
-        internal TransferDetails Details { get; set; }
+        public WithdrawalTransferDetails Details { get; set; }
     }
 }

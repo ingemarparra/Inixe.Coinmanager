@@ -85,6 +85,19 @@ namespace Inixe.CoinManagement.Bitso.Api
             }
         }
 
+        public string MethodName
+        {
+            get
+            {
+                return this.wrapped.MethodName;
+            }
+
+            set
+            {
+                throw new InvalidOperationException("This is a readonly instance");
+            }
+        }
+
         /// <inheritdoc/>
         public TransferMethod Method
         {
@@ -115,7 +128,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets the details.</summary>
         /// <value>The details.</value>
-        public ISpeiTransferDetails Details
+        public ISpeiWithdrawalDetails Details
         {
             get
             {

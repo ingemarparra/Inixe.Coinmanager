@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BitsoClientTests.cs" company="Inixe">
+// <copyright file="BitsoClientIntegrationTests.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,7 +16,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
     /// </summary>
     /// <remarks>Integration Tests</remarks>
     [TestClass]
-    public class BitsoClientTests
+    public class BitsoClientIntegrationTests
     {
         /// <summary>Gets or sets the test context.</summary>
         /// <value>The test context.</value>
@@ -83,6 +83,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the AvailableBooks for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void AvailableBooksExpected()
         {
@@ -101,6 +102,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetTicker for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetTickerExpected1()
         {
@@ -124,6 +126,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetAllTickers for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetAllTickersExpected()
         {
@@ -135,6 +138,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetTrades for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetTradesExpected()
         {
@@ -156,6 +160,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetOrderBook for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetOrderBookExpected1()
         {
@@ -195,6 +200,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetAccountInfo for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetAccountInfoExpected()
         {
@@ -223,6 +229,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetPortfolio for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetPortfolioExpected()
         {
@@ -245,6 +252,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetAccountFees for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetAccountFeesExpected()
         {
@@ -271,6 +279,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetAllLedgerEntries for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetAllLedgerEntriesExpected()
         {
@@ -299,6 +308,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetLedgerTrade for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetLedgerTradeExpected()
         {
@@ -325,6 +335,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetLedgerFee for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetLedgerFeeExpected()
         {
@@ -351,6 +362,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetLedgerWithdrawal for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetLedgerWithdrawalExpected()
         {
@@ -375,6 +387,7 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
         }
 
         /// <summary>Tests the GetLedgerFunding for expected behavior.</summary>
+        [TestCategory("Integration Test")]
         [TestMethod]
         public void GetLedgerFundingExpected()
         {
@@ -389,6 +402,54 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                     res = client.GetLedgerFunding(string.Empty, SortDirection.Ascending, 5);
                     Assert.IsNotNull(res);
                     Assert.AreEqual<int>(5, res.Count);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>Tests the GetWithdrawals for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetWithdrawalsExpected()
+        {
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetWithdrawals();
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+
+                    res = client.GetWithdrawals(2);
+                    Assert.IsNotNull(res);
+                    Assert.AreEqual<int>(2, res.Count);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>Tests the GetBanksInfo for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetBanksInfoxpected()
+        {
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetBanksInfo();
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Name));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Code));
                 }
                 catch (BitsoException ex)
                 {

@@ -8,6 +8,7 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -40,23 +41,42 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
             this.serializer.DefaultValueHandling = DefaultValueHandling.Include;
             this.serializer.DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
             this.serializer.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-
-            var contractResolver = new DefaultContractResolver();
-            contractResolver.NamingStrategy = new SnakeCaseNamingStrategy();
-
-            this.serializer.ContractResolver = contractResolver;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BitsoJsonSerializer"/> class.
+        /// Initializes a new instance of the <see cref="BitsoJsonSerializer" /> class.
         /// Default serializer with overload for allowing custom Json.NET settings
         /// </summary>
         /// <param name="serializer">The selected serializer</param>
         /// <remarks>None</remarks>
         public BitsoJsonSerializer(Newtonsoft.Json.JsonSerializer serializer)
         {
+            if (this.serializer == null)
+            {
+                throw new ArgumentNullException(nameof(serializer));
+            }
+
             this.ContentType = "application/json";
             this.serializer = serializer;
+        }
+
+        /// <summary>Gets or sets a value indicating whether diagnostics information are enabled.</summary>
+        /// <value><c>true</c> if diagnostics enabled is <c>True</c> serialization operations will be traced; otherwise, if is <c>false</c> no tracing takes place.</value>
+        public bool DiagnosticsEnabled
+        {
+            get
+            {
+                return this.serializer.TraceWriter != null;
+            }
+
+            set
+            {
+                var currentValue = this.DiagnosticsEnabled;
+                if (currentValue != value)
+                {
+                    this.serializer.TraceWriter = value ? new MemoryTraceWriter() : null;
+                }
+            }
         }
 
         /// <summary>
@@ -118,6 +138,13 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
                     return result;
                 }
             }
+        }
+
+        /// <summary>Dumps the diagnostics.</summary>
+        /// <returns>A log with the serialization process data</returns>
+        public string DumpDiagnostics()
+        {
+            return this.DiagnosticsEnabled ? this.serializer.TraceWriter.ToString() : string.Empty;
         }
     }
 }

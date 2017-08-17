@@ -37,6 +37,10 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <value>The method.</value>
         TransferMethod Method { get; set; }
 
+        /// <summary>Gets or sets the name of the method.</summary>
+        /// <value>The name of the method.</value>
+        string MethodName { get; set; }
+
         /// <summary>Gets or sets the amount.</summary>
         /// <value>The amount.</value>
         decimal Amount { get; set; }

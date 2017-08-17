@@ -21,7 +21,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>None</remarks>
     public class HttpClientBase : IDisposable
     {
-        private readonly RestClient client;
+        private readonly IRestClient client;
         private readonly string apiKey;
         private readonly SecureString secureApiSecret;
         private readonly Uri targetUrl;
@@ -44,6 +44,30 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <exception cref="ArgumentException">Invalid URL - serverUrl</exception>
         /// <remarks>None</remarks>
         protected HttpClientBase(string serverUrl, string apiKey, SecureString apiSecret)
+            : this(null, serverUrl, apiKey, apiSecret)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="HttpClientBase"/> class.</summary>
+        /// <param name="restClient">The rest client to use. This is often usefull for unit testing, If <c>null</c> a default RestClient will be used</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="apiKey">The Api key value</param>
+        /// <param name="apiSecret">The Api secret value</param>
+        /// <exception cref="ArgumentException">Invalid URL - serverUrl</exception>
+        /// <remarks>None</remarks>
+        protected HttpClientBase(IRestClient restClient, string serverUrl, string apiKey, string apiSecret)
+            : this(restClient, serverUrl, apiKey, CreateSecureApiSecret(apiSecret))
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="HttpClientBase"/> class.</summary>
+        /// <param name="restClient">The rest client to use. This is often usefull for unit testing, If <c>null</c> a default RestClient will be used</param>
+        /// <param name="serverUrl">The server URL.</param>
+        /// <param name="apiKey">The Api key value</param>
+        /// <param name="apiSecret">The Api secret value</param>
+        /// <exception cref="ArgumentException">Invalid URL - serverUrl</exception>
+        /// <remarks>None</remarks>
+        protected HttpClientBase(IRestClient restClient, string serverUrl, string apiKey, SecureString apiSecret)
         {
             if (!System.Uri.IsWellFormedUriString(serverUrl, System.UriKind.Absolute))
             {
@@ -54,7 +78,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
             this.apiKey = apiKey;
             this.targetUrl = new Uri(serverUrl);
-            this.client = new RestClient(serverUrl);
+            this.client = restClient ?? new RestClient(serverUrl);
             this.disposedValue = false;
         }
 

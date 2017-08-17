@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TransferDetails.cs" company="Inixe">
+// <copyright file="WithdrawalTransferDetails.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -17,10 +17,11 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <summary>
     /// Class TransferDetails
     /// </summary>
-    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ICrytoCurrencyTransferDetails" />
-    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ISpeiTransferDetails" />
+    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ICrytoCurrencyWithdrawalDetails" />
+    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ISpeiWithdrawalDetails" />
     /// <remarks>For internal use only.</remarks>
-    internal class TransferDetails : ICrytoCurrencyTransferDetails, ISpeiTransferDetails
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+    internal class WithdrawalTransferDetails : ICrytoCurrencyWithdrawalDetails, ISpeiWithdrawalDetails
     {
         /// <inheritdoc/>
         public string WithdrawalAddress { get; set; }
@@ -32,7 +33,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         public string BeneficiaryName { get; set; }
 
         /// <inheritdoc/>
-        public string BeneficiaryBank { get; set; }
+        public string BeneficiaryBankCode { get; set; }
 
         /// <inheritdoc/>
         public string BeneficiaryClabe { get; set; }
@@ -47,6 +48,6 @@ namespace Inixe.CoinManagement.Bitso.Api
         public string TrackingCode { get; set; }
 
         /// <inheritdoc/>
-        public SpeiReturnData Cep { get; set; }
+        public SpeiCep Cep { get; set; }
     }
 }
