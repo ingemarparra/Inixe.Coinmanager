@@ -421,8 +421,18 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
                 try
                 {
                     var res = client.GetWithdrawals();
+
                     Assert.IsNotNull(res);
                     Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Amount);
+                    Assert.AreNotEqual<TransferStatus>(TransferStatus.None, res[0].Status);
+                    Assert.AreNotEqual<TransferMethod>(TransferMethod.None, res[0].Method);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].MethodName));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Id));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Currency));
+
+                    var diff = res[0].CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
 
                     res = client.GetWithdrawals(2);
                     Assert.IsNotNull(res);

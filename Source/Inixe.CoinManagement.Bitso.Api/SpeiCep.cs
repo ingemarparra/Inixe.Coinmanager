@@ -22,7 +22,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets or sets the return data.</summary>
         /// <value>The return data.</value>
-        [JsonProperty("return")]
-        public SpeiReturnData Data { get; set; }
+        [JsonProperty("0")]
+        public SpeiRemittent Remittent { get; set; }
     }
 }

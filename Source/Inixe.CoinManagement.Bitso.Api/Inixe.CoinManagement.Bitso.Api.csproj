@@ -80,7 +80,8 @@
     <Compile Include="ResponseCollection{T}.cs" />
     <Compile Include="BanxicoData.cs" />
     <Compile Include="SpeiCep.cs" />
-    <Compile Include="SpeiReturnData.cs" />
+    <Compile Include="SpeiRemittent.cs" />
+    <Compile Include="BanxicoTransferTrackData.cs" />
     <Compile Include="SpeiWithdrawal.cs" />
     <Compile Include="Tick.cs" />
     <Compile Include="Ticker.cs" />

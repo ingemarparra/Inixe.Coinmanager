@@ -492,14 +492,122 @@ namespace Inixe.CoinManagement.Bitso.Api
             return res.ConvertAll(x => (IWithdrawalBase)x);
         }
 
+        /// <summary>Gets the crypto currency withdrawals by id.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all Crypto Currency Withdrawals are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<CryptoCurrencyWithdrawal> GetCryptoWithdrawals(string ids)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                throw new ArgumentException("Invalid Id", nameof(ids));
+            }
+
+            return this.GetCryptoWithdrawals(ids, 25);
+        }
+
+        /// <summary>Gets the All crypto currency withdrawals.</summary>
+        /// <param name="resultLimit">The result limit. If <c>null</c> the default value is used and only 25 items are returned</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<CryptoCurrencyWithdrawal> GetCryptoWithdrawals(long? resultLimit)
+        {
+            return this.GetCryptoWithdrawals(string.Empty, resultLimit ?? 25);
+        }
+
+        /// <summary>Gets the crypto currency withdrawals.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all Crypto Currency Withdrawals are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<CryptoCurrencyWithdrawal> GetCryptoWithdrawals(string ids, long resultLimit)
+        {
+            return this.GetFilteredWithdrawals(ids, TransferMethod.Sp, true, resultLimit).ConvertAll(x => new CryptoCurrencyWithdrawal(x));
+        }
+
+        /// <summary>Gets the spei withdrawals by id.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI Withdrawals are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiWithdrawal> GetSpeiWithdrawals(string ids)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                throw new ArgumentException("Invalid Id", nameof(ids));
+            }
+
+            return this.GetSpeiWithdrawals(ids, 25);
+        }
+
+        /// <summary>Gets all the SPEI withdrawals.</summary>
+        /// <param name="resultLimit">The result limit. If <c>null</c> the default value is used and only 25 items are returned</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiWithdrawal> GetSpeiWithdrawals(long? resultLimit)
+        {
+            return this.GetSpeiWithdrawals(string.Empty, resultLimit ?? 25);
+        }
+
+        /// <summary>Gets the SPEI withdrawals.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI Withdrawals are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiWithdrawal> GetSpeiWithdrawals(string ids, long resultLimit)
+        {
+            return this.GetFilteredWithdrawals(ids, TransferMethod.Sp, false, resultLimit).ConvertAll(x => new SpeiWithdrawal(x));
+        }
+
         /// <summary>Gets the banks information.</summary>
-        /// <returns></returns>
+        /// <returns>A list with the registered banks data.</returns>
+        /// <remarks>None</remarks>
         public IList<BankCode> GetBanksInfo()
         {
             var request = new RestRequest("mx_bank_codes", Method.GET);
             var res = this.GetPayloadList<BankCode>(request, true);
 
             return res;
+        }
+
+        private List<WithdrawalBase> GetFilteredWithdrawals(string ids, TransferMethod methodFilter, bool filterExcept, long resultLimit)
+        {
+            if (resultLimit > 100)
+            {
+                throw new ArgumentException("Invalid limit. Maximum limit is 100", nameof(resultLimit));
+            }
+
+            StringBuilder resourceName = new StringBuilder();
+
+            resourceName.Append("withdrawals");
+            if (!string.IsNullOrEmpty(ids))
+            {
+                var rx = new System.Text.RegularExpressions.Regex(@"[-,;:\s]+");
+                resourceName.AppendFormat("/{0}", rx.Replace(ids, "-"));
+            }
+
+            var request = new RestRequest(resourceName.ToString(), Method.GET);
+
+            var limit = new Parameter();
+
+            limit.Name = "limit";
+            limit.Type = ParameterType.QueryString;
+            limit.Value = resultLimit;
+
+            if (string.IsNullOrEmpty(ids))
+            {
+                request.AddParameter(limit);
+            }
+
+            Func<WithdrawalBase, bool> filterBySelector = x => x.Method == methodFilter;
+            Func<WithdrawalBase, bool> filterExceptSelector = x => x.Method != methodFilter;
+            var filter = !filterExcept ? filterBySelector : filterExceptSelector;
+
+            var allWithdrawals = this.GetPayloadList<WithdrawalBase>(request, true);
+            return allWithdrawals.Where(filter).ToList();
         }
 
         /// <summary>Gets the ledger applying a filter over the specified resource.</summary>
@@ -513,6 +621,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         private List<LedgerEntryBase> GetFilteredLedger(string filter, string markerTag, SortDirection sortDirection, long resultLimit)
         {
             const string baseResourceName = "ledger";
+
+            if (resultLimit > 100)
+            {
+                throw new ArgumentException("Invalid limit. Maximum limit is 100", nameof(resultLimit));
+            }
 
             if (string.IsNullOrWhiteSpace(filter))
             {

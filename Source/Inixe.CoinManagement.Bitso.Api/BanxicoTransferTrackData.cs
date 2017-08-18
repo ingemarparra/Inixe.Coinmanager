@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SpeiReturnData.cs" company="Inixe">
+// <copyright file="BanxicoTransferTrackData.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,9 +10,9 @@ namespace Inixe.CoinManagement.Bitso.Api
     using Newtonsoft.Json.Serialization;
 
     /// <summary>
-    /// Class SpeiReturnData
+    /// Class BanxicoTransferTrackData
     /// </summary>
-    public class SpeiReturnData
+    public class BanxicoTransferTrackData
     {
         /// <summary>Gets or sets the query status.</summary>
         /// <value>The query status.</value>
