@@ -32,6 +32,9 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     public class BitsoClient : HttpClientBase
     {
+        /// <summary>The default filter limit for all calls that requiere a limit parameter If ommited</summary>
+        public const int DefaultFilterLimit = 25;
+
         private const string DefaultApiUrl = "https://api.bitso.com/v3";
         private readonly BitsoJsonSerializer serializer;
 
@@ -268,7 +271,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>A list of Trades</returns>
         public IList<Trade> GetTrades(string bookName)
         {
-            return this.GetTrades(bookName, string.Empty, SortDirection.Desending, 25);
+            return this.GetTrades(bookName, string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
 
         /// <summary>Gets the trades.</summary>
@@ -352,7 +355,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>A list of ledger entries</returns>
         public IList<ILedgerEntry> GetAllLedgerEntries()
         {
-            return this.GetAllLedgerEntries(string.Empty, SortDirection.Desending, 25);
+            return this.GetAllLedgerEntries(string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
 
         /// <summary>Gets all ledger entries.</summary>
@@ -394,7 +397,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<LedgerWithdrawalEntry> GetLedgerWithdrawal()
         {
-            return this.GetLedgerWithdrawal(string.Empty, SortDirection.Desending, 25);
+            return this.GetLedgerWithdrawal(string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
 
         /// <summary>Gets a ledger withdrawal.</summary>
@@ -413,7 +416,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<LedgerTradeEntry> GetLedgerTrade()
         {
-            return this.GetLedgerTrade(string.Empty, SortDirection.Desending, 25);
+            return this.GetLedgerTrade(string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
 
         /// <summary>Gets a ledger trade.</summary>
@@ -432,7 +435,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<LedgerTradeEntry> GetLedgerFee()
         {
-            return this.GetLedgerFee(string.Empty, SortDirection.Desending, 25);
+            return this.GetLedgerFee(string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
 
         /// <summary>Gets a ledger trade fee.</summary>
@@ -451,7 +454,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<LedgerFundingEntry> GetLedgerFunding()
         {
-            return this.GetLedgerFunding(string.Empty, SortDirection.Desending, 25);
+            return this.GetLedgerFunding(string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
 
         /// <summary>Gets a ledger funding.</summary>
@@ -465,17 +468,19 @@ namespace Inixe.CoinManagement.Bitso.Api
             return this.GetFilteredLedger("fundings", markerTag, sortDirection, resultLimit).ConvertAll(x => new LedgerFundingEntry(x));
         }
 
-        /// <summary>Gets all ledger entries.</summary>
-        /// <returns>A list of ledger entries</returns>
-        public IList<IWithdrawalBase> GetWithdrawals()
+        /// <summary>Gets the last 25 withdrawals.</summary>
+        /// <returns>A list with the Account Withdrawals</returns>
+        /// <remarks>None</remarks>
+        public IList<ITransfer> GetWithdrawals()
         {
-            return this.GetWithdrawals(25);
+            return this.GetWithdrawals(DefaultFilterLimit);
         }
 
-        /// <summary>Gets all ledger entries.</summary>
+        /// <summary>Gets all the withdrawal transfers.</summary>
         /// <param name="resultLimit">The result limit.</param>
-        /// <returns>A list of ledger entries</returns>
-        public IList<IWithdrawalBase> GetWithdrawals(long resultLimit)
+        /// <returns>A list with the Account Withdrawals</returns>
+        /// <remarks>None</remarks>
+        public IList<ITransfer> GetWithdrawals(long resultLimit)
         {
             var request = new RestRequest("withdrawals", Method.GET);
 
@@ -489,7 +494,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
             var res = this.GetPayloadList<WithdrawalBase>(request, true).ToList();
 
-            return res.ConvertAll(x => (IWithdrawalBase)x);
+            return res.ConvertAll(x => (ITransfer)x);
         }
 
         /// <summary>Gets the crypto currency withdrawals by id.</summary>
@@ -504,7 +509,7 @@ namespace Inixe.CoinManagement.Bitso.Api
                 throw new ArgumentException("Invalid Id", nameof(ids));
             }
 
-            return this.GetCryptoWithdrawals(ids, 25);
+            return this.GetCryptoWithdrawals(ids, DefaultFilterLimit);
         }
 
         /// <summary>Gets the All crypto currency withdrawals.</summary>
@@ -513,7 +518,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<CryptoCurrencyWithdrawal> GetCryptoWithdrawals(long? resultLimit)
         {
-            return this.GetCryptoWithdrawals(string.Empty, resultLimit ?? 25);
+            return this.GetCryptoWithdrawals(string.Empty, resultLimit ?? DefaultFilterLimit);
         }
 
         /// <summary>Gets the crypto currency withdrawals.</summary>
@@ -524,7 +529,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<CryptoCurrencyWithdrawal> GetCryptoWithdrawals(string ids, long resultLimit)
         {
-            return this.GetFilteredWithdrawals(ids, TransferMethod.Sp, true, resultLimit).ConvertAll(x => new CryptoCurrencyWithdrawal(x));
+            return this.GetFilteredTransfers<WithdrawalBase>("withdrawals", ids, TransferMethod.Sp, true, resultLimit).ConvertAll(x => new CryptoCurrencyWithdrawal(x));
         }
 
         /// <summary>Gets the spei withdrawals by id.</summary>
@@ -539,7 +544,7 @@ namespace Inixe.CoinManagement.Bitso.Api
                 throw new ArgumentException("Invalid Id", nameof(ids));
             }
 
-            return this.GetSpeiWithdrawals(ids, 25);
+            return this.GetSpeiWithdrawals(ids, DefaultFilterLimit);
         }
 
         /// <summary>Gets all the SPEI withdrawals.</summary>
@@ -548,7 +553,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<SpeiWithdrawal> GetSpeiWithdrawals(long? resultLimit)
         {
-            return this.GetSpeiWithdrawals(string.Empty, resultLimit ?? 25);
+            return this.GetSpeiWithdrawals(string.Empty, resultLimit ?? DefaultFilterLimit);
         }
 
         /// <summary>Gets the SPEI withdrawals.</summary>
@@ -559,7 +564,106 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<SpeiWithdrawal> GetSpeiWithdrawals(string ids, long resultLimit)
         {
-            return this.GetFilteredWithdrawals(ids, TransferMethod.Sp, false, resultLimit).ConvertAll(x => new SpeiWithdrawal(x));
+            return this.GetFilteredTransfers<WithdrawalBase>("withdrawals", ids, TransferMethod.Sp, false, resultLimit).ConvertAll(x => new SpeiWithdrawal(x));
+        }
+
+        /// <summary>Gets the last 25 fundings.</summary>
+        /// <returns>A list of account Funding transfers</returns>
+        /// <remarks>None</remarks>
+        public IList<ITransfer> GetFundings()
+        {
+            return this.GetFundings(DefaultFilterLimit);
+        }
+
+        /// <summary>Gets all the fundings.</summary>
+        /// <param name="resultLimit">The result limit. Max if 100</param>
+        /// <returns>A list of account Funding transfers</returns>
+        /// <remarks>None</remarks>
+        public IList<ITransfer> GetFundings(long resultLimit)
+        {
+            var request = new RestRequest("fundings", Method.GET);
+
+            var limit = new Parameter();
+
+            limit.Name = "limit";
+            limit.Value = resultLimit;
+            limit.Type = ParameterType.QueryString;
+
+            request.AddParameter(limit);
+
+            var res = this.GetPayloadList<FundingBase>(request, true).ToList();
+
+            return res.ConvertAll(x => (ITransfer)x);
+        }
+
+        /// <summary>Gets the crypto currency fundings by id.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all Crypto Currency fundings are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<CryptoCurrencyFunding> GetCryptoFundings(string ids)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                throw new ArgumentException("Invalid Id", nameof(ids));
+            }
+
+            return this.GetCryptoFundings(ids, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the All crypto currency fundings.</summary>
+        /// <param name="resultLimit">The result limit. If <c>null</c> the default value is used and only 25 items are returned</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<CryptoCurrencyFunding> GetCryptoFundings(long? resultLimit)
+        {
+            return this.GetCryptoFundings(string.Empty, resultLimit ?? DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the crypto currency fundings.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all Crypto Currency fundings are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<CryptoCurrencyFunding> GetCryptoFundings(string ids, long resultLimit)
+        {
+            return this.GetFilteredTransfers<FundingBase>("fundings", ids, TransferMethod.Sp, true, resultLimit).ConvertAll(x => new CryptoCurrencyFunding(x));
+        }
+
+        /// <summary>Gets the spei fundings by id.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI fundings are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiFunding> GetSpeiFundings(string ids)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                throw new ArgumentException("Invalid Id", nameof(ids));
+            }
+
+            return this.GetSpeiFundings(ids, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets all the SPEI fundings.</summary>
+        /// <param name="resultLimit">The result limit. If <c>null</c> the default value is used and only 25 items are returned</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiFunding> GetSpeiFundings(long? resultLimit)
+        {
+            return this.GetSpeiFundings(string.Empty, resultLimit ?? DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the SPEI fundings.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI fundings are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiFunding> GetSpeiFundings(string ids, long resultLimit)
+        {
+            return this.GetFilteredTransfers<FundingBase>("fundings", ids, TransferMethod.Sp, false, resultLimit).ConvertAll(x => new SpeiFunding(x));
         }
 
         /// <summary>Gets the banks information.</summary>
@@ -573,7 +677,8 @@ namespace Inixe.CoinManagement.Bitso.Api
             return res;
         }
 
-        private List<WithdrawalBase> GetFilteredWithdrawals(string ids, TransferMethod methodFilter, bool filterExcept, long resultLimit)
+        private List<T> GetFilteredTransfers<T>(string resource, string ids, TransferMethod methodFilter, bool filterExcept, long resultLimit)
+            where T : ITransfer
         {
             if (resultLimit > 100)
             {
@@ -582,7 +687,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
             StringBuilder resourceName = new StringBuilder();
 
-            resourceName.Append("withdrawals");
+            resourceName.Append(resource);
             if (!string.IsNullOrEmpty(ids))
             {
                 var rx = new System.Text.RegularExpressions.Regex(@"[-,;:\s]+");
@@ -602,11 +707,11 @@ namespace Inixe.CoinManagement.Bitso.Api
                 request.AddParameter(limit);
             }
 
-            Func<WithdrawalBase, bool> filterBySelector = x => x.Method == methodFilter;
-            Func<WithdrawalBase, bool> filterExceptSelector = x => x.Method != methodFilter;
+            Func<T, bool> filterBySelector = x => x.Method == methodFilter;
+            Func<T, bool> filterExceptSelector = x => x.Method != methodFilter;
             var filter = !filterExcept ? filterBySelector : filterExceptSelector;
 
-            var allWithdrawals = this.GetPayloadList<WithdrawalBase>(request, true);
+            var allWithdrawals = this.GetPayloadList<T>(request, true);
             return allWithdrawals.Where(filter).ToList();
         }
 

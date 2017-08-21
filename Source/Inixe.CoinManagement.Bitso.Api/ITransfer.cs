@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IWithdrawalBase.cs" company="Inixe">
+// <copyright file="ITransfer.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,14 +11,13 @@ namespace Inixe.CoinManagement.Bitso.Api
     using Newtonsoft.Json.Serialization;
 
     /// <summary>
-    /// Interface IWithdrawalBase
+    /// Interface ITransfer
     /// </summary>
     /// <remarks>Represents the common withdrawal data, for both fiat and crypto</remarks>
-    public interface IWithdrawalBase
+    public interface ITransfer
     {
         /// <summary>Gets or sets the identifier.</summary>
         /// <value>The identifier.</value>
-        [JsonProperty("wid")]
         string Id { get; set; }
 
         /// <summary>Gets or sets the status.</summary>

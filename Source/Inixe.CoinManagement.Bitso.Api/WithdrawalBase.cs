@@ -63,7 +63,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    internal class WithdrawalBase : IWithdrawalBase
+    internal class WithdrawalBase : ITransfer
     {
         /// <inheritdoc/>
         [JsonProperty("wid")]
@@ -81,6 +81,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <inheritdoc/>
         public TransferMethod Method { get; set; }
 
+        /// <inheritdoc/>
         public string MethodName { get; set; }
 
         /// <inheritdoc/>

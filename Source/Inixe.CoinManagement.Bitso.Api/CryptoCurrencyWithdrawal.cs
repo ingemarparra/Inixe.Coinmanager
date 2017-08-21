@@ -17,8 +17,8 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <summary>
     /// Class CryptoCurrencyWithdrawal
     /// </summary>
-    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.IWithdrawalBase" />
-    public class CryptoCurrencyWithdrawal : IWithdrawalBase
+    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ITransfer" />
+    public class CryptoCurrencyWithdrawal : ITransfer
     {
         private readonly WithdrawalBase wrapped;
 

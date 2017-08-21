@@ -446,6 +446,41 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             }
         }
 
+        /// <summary>Tests the GetFundings for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetFundingsExpected()
+        {
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetFundings();
+
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Amount);
+                    Assert.AreNotEqual<TransferStatus>(TransferStatus.None, res[0].Status);
+                    Assert.AreNotEqual<TransferMethod>(TransferMethod.None, res[0].Method);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].MethodName));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Id));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Currency));
+
+                    var diff = res[0].CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
+
+                    res = client.GetFundings(2);
+                    Assert.IsNotNull(res);
+                    Assert.AreEqual<int>(2, res.Count);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
         /// <summary>Tests the GetBanksInfo for expected behavior.</summary>
         [TestCategory("Integration Test")]
         [TestMethod]

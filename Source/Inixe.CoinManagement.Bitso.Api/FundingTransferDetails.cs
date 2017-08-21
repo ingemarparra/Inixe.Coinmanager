@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="WithdrawalTransferDetails.cs" company="Inixe">
+// <copyright file="FundingTransferDetails.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,28 +15,23 @@ namespace Inixe.CoinManagement.Bitso.Api
     using Newtonsoft.Json.Serialization;
 
     /// <summary>
-    /// Class TransferDetails
+    /// Class FundingTransferDetails
     /// </summary>
-    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ICrytoCurrencyWithdrawalDetails" />
-    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ISpeiFundingDetails" />
-    /// <remarks>For internal use only.</remarks>
+    /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    internal class WithdrawalTransferDetails : ICrytoCurrencyWithdrawalDetails, ISpeiWithdrawalDetails
+    internal class FundingTransferDetails : ICrytoCurrencyFundingDetails, ISpeiFundingDetails
     {
         /// <inheritdoc/>
-        public string WithdrawalAddress { get; set; }
+        public string SenderName { get; set; }
 
         /// <inheritdoc/>
-        public string TransferHash { get; set; }
+        public string SenderBank { get; set; }
 
         /// <inheritdoc/>
-        public string BeneficiaryName { get; set; }
+        public string SenderClabe { get; set; }
 
         /// <inheritdoc/>
-        public string BeneficiaryBankCode { get; set; }
-
-        /// <inheritdoc/>
-        public string BeneficiaryClabe { get; set; }
+        public string RecievingClabe { get; set; }
 
         /// <inheritdoc/>
         public string NumericReference { get; set; }
@@ -48,6 +43,12 @@ namespace Inixe.CoinManagement.Bitso.Api
         public string TrackingCode { get; set; }
 
         /// <inheritdoc/>
-        public SpeiCep Cep { get; set; }
+        public string BeneficiaryName { get; set; }
+
+        /// <inheritdoc/>
+        public string FundingAddress { get; set; }
+
+        /// <inheritdoc/>
+        public string TransferHash { get; set; }
     }
 }

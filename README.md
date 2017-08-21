@@ -14,7 +14,11 @@ to analyse the cryptocurrencies behavior from a Mexican peso reference perspecti
   * Gemini
   * GDAX
   * Bitfinex
-
+* Code Analyzers
+  * Trends Analyzers
+* Code Indicators
+  * MACD
+  
 ### Prerequisites
 
 The project has no external dependencies at the time.
@@ -45,7 +49,7 @@ Please refer to the API documentation in order to create your API Keys [here](ht
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [Contributing](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -57,7 +61,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [License](LICENSE.md) file for details
 
 ## Acknowledgments
 

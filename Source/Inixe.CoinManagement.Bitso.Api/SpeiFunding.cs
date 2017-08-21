@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SpeiWithdrawal.cs" company="Inixe">
-// Copyright (c) Inixe 2017. All rights reserved.
+// <copyright file="SpeiFunding.cs" company="GBM">
+//   GBM GRUPO BURSÁTIL MEXICANO, S.A DE C.V., CASA DE BOLSA
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -11,20 +11,18 @@ namespace Inixe.CoinManagement.Bitso.Api
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
 
     /// <summary>
-    /// Class SpeiWithdrawal
+    /// Class SpeiFunding
     /// </summary>
-    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ITransfer" />
-    public class SpeiWithdrawal : ITransfer
+    /// <remarks>None</remarks>
+    public class SpeiFunding : ITransfer
     {
-        private readonly WithdrawalBase wrapped;
+        private readonly FundingBase wrapped;
 
-        /// <summary>Initializes a new instance of the <see cref="SpeiWithdrawal"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="SpeiFunding"/> class.</summary>
         /// <param name="data">The data.</param>
-        internal SpeiWithdrawal(WithdrawalBase data)
+        internal SpeiFunding(FundingBase data)
         {
             this.wrapped = data;
         }
@@ -129,7 +127,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets the details.</summary>
         /// <value>The details.</value>
-        public ISpeiWithdrawalDetails Details
+        public ISpeiFundingDetails Details
         {
             get
             {
