@@ -67,6 +67,7 @@
     <Compile Include="ILedgerEntryBase.cs" />
     <Compile Include="ISpeiFundingDetails.cs" />
     <Compile Include="ISpeiWithdrawalDetails.cs" />
+    <Compile Include="ITrade.cs" />
     <Compile Include="ITradeOperationDetails.cs" />
     <Compile Include="ITransfer.cs" />
     <Compile Include="IWithdrawalOperationDetails.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Tick.cs" />
     <Compile Include="Ticker.cs" />
     <Compile Include="Trade.cs" />
+    <Compile Include="TradeInfo.cs" />
     <Compile Include="WithdrawalTransferDetails.cs" />
     <Compile Include="WithdrawalBase.cs" />
   </ItemGroup>

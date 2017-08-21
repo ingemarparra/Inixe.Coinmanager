@@ -6,9 +6,9 @@
 
 namespace Inixe.CoinManagement.Bitso.Api
 {
+    using System.Runtime.Serialization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Class SPEI CEP

@@ -16,54 +16,48 @@ namespace Inixe.CoinManagement.Bitso.Api
     using Newtonsoft.Json.Serialization;
 
     /// <summary>
-    /// The Makers Side
-    /// </summary>
-    /// <remarks>None</remarks>
-    public enum MarketSide
-    {
-        /// <summary>The none value.</summary>
-        /// <remarks>This value should never be used. It's declared for initialization purposes only.</remarks>
-        None,
-
-        /// <summary>The buy</summary>
-        Buy,
-
-        /// <summary>The sell</summary>
-        Sell,
-    }
-
-    /// <summary>
     /// Class Trade
     /// </summary>
-    /// <remarks>None</remarks>
+    /// <remarks>Holds User Trades Data</remarks>
+    /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ITrade" />
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Trade
+    public class Trade : ITrade
     {
-        /// <summary>Gets or sets the name of the book.</summary>
-        /// <value>The name of the book.</value>
-        [JsonProperty("book")]
+        /// <inheritdoc/>
         public string BookName { get; set; }
 
-        /// <summary>Gets or sets the created at.</summary>
-        /// <value>The created at.</value>
+        /// <inheritdoc/>
         public DateTime CreatedAt { get; set; }
 
-        /// <summary>Gets or sets the amount.</summary>
-        /// <value>The amount.</value>
-        public decimal Amount { get; set; }
-
-        /// <summary>Gets or sets the maker side.</summary>
-        /// <value>The maker side.</value>
-        [JsonProperty("maker_side", ItemConverterType = typeof(StringEnumConverter))]
+        /// <inheritdoc/>
+        [JsonProperty("side", ItemConverterType = typeof(StringEnumConverter))]
         public MarketSide MakerSide { get; set; }
 
-        /// <summary>Gets or sets the price.</summary>
-        /// <value>The price.</value>
+        /// <inheritdoc/>
         public decimal Price { get; set; }
 
-        /// <summary>Gets or sets the trade identifier.</summary>
-        /// <value>The trade identifier.</value>
-        [JsonProperty("tid")]
+        /// <inheritdoc/>
         public long TradeId { get; set; }
+
+        /// <summary>Gets or sets the order identifier.</summary>
+        /// <value>The order identifier.</value>
+        [JsonProperty("oid", ItemConverterType = typeof(StringEnumConverter))]
+        public string OrderId { get; set; }
+
+        /// <summary>Gets or sets the fees currency name.</summary>
+        /// <value>The fees currency.</value>
+        public string FeesCurrency { get; set; }
+
+        /// <summary>Gets or sets the fees amount.</summary>
+        /// <value>The fees amount.</value>
+        public decimal FeesAmount { get; set; }
+
+        /// <summary>Gets or sets the minor currency amount.</summary>
+        /// <value>The minor.</value>
+        public decimal Minor { get; set; }
+
+        /// <summary>Gets or sets the major currency amount.</summary>
+        /// <value>The major.</value>
+        public decimal Major { get; set; }
     }
 }

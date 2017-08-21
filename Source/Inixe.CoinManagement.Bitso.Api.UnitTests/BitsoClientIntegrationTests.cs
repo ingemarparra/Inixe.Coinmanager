@@ -481,6 +481,61 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             }
         }
 
+        /// <summary>Tests the GetUserTradeByOrderId for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetUserTradeByOrderIdExpected()
+        {
+            var oid = (string)this.TestContext.Properties["OrderId"];
+
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetUserTradeByOrderId(oid);
+
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<decimal>(0M, res.Price);
+
+                    var diff = res.CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>Tests the GetUserTrades for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetUserTradesExpected()
+        {
+            const string BookName = "btc_mxn";
+
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetUserTrades(BookName);
+
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Price);
+
+                    var diff = res[0].CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
         /// <summary>Tests the GetBanksInfo for expected behavior.</summary>
         [TestCategory("Integration Test")]
         [TestMethod]

@@ -238,7 +238,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>A list of Trades</returns>
         /// <exception cref="System.ArgumentNullException">When pair is <c>null</c></exception>
         /// <remarks>None</remarks>
-        public IList<Trade> GetTrades(CurrencyPair pair)
+        public IList<TradeInfo> GetTrades(CurrencyPair pair)
         {
             if (pair == null)
             {
@@ -256,7 +256,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>A list of Trades</returns>
         /// <exception cref="System.ArgumentNullException">When pair is <c>null</c></exception>
         /// <remarks>None</remarks>
-        public IList<Trade> GetTrades(CurrencyPair pair, string markerTag, SortDirection sortDirection, long resultLimit)
+        public IList<TradeInfo> GetTrades(CurrencyPair pair, string markerTag, SortDirection sortDirection, long resultLimit)
         {
             if (pair == null)
             {
@@ -269,7 +269,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <summary>Gets the trades.</summary>
         /// <param name="bookName">Name of the book.</param>
         /// <returns>A list of Trades</returns>
-        public IList<Trade> GetTrades(string bookName)
+        public IList<TradeInfo> GetTrades(string bookName)
         {
             return this.GetTrades(bookName, string.Empty, SortDirection.Desending, DefaultFilterLimit);
         }
@@ -281,7 +281,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <param name="resultLimit">The result limit.</param>
         /// <returns>A list of Trades</returns>
         /// <remarks>None</remarks>
-        public IList<Trade> GetTrades(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
+        public IList<TradeInfo> GetTrades(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
         {
             var request = new RestRequest("trades", Method.GET);
             var book = new Parameter();
@@ -310,7 +310,7 @@ namespace Inixe.CoinManagement.Bitso.Api
             request.AddParameter(sort);
             request.AddParameter(limit);
 
-            var res = this.GetPayloadList<Trade>(request);
+            var res = this.GetPayloadList<TradeInfo>(request);
 
             return res;
         }
@@ -677,14 +677,105 @@ namespace Inixe.CoinManagement.Bitso.Api
             return res;
         }
 
-        private List<T> GetFilteredTransfers<T>(string resource, string ids, TransferMethod methodFilter, bool filterExcept, long resultLimit)
-            where T : ITransfer
+        /// <summary>Gets the user trade by order identifier.</summary>
+        /// <param name="id">The order identifier.</param>
+        /// <returns>if valid and found, the requested Trade is returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">When <paramref name="id"/> represents a list of ids or is <c>null</c></exception>
+        /// <remarks>None</remarks>
+        public Trade GetUserTradeByOrderId(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Invalid Order Id", nameof(id));
+            }
+
+            // To avoid Id lists
+            var idList = id.Replace('-', ',');
+            var parametrizedIds = GetParametrizedResourceName("order_trades", idList);
+            var verificationIds = string.Format("order_trades/{0}", idList);
+
+            if (verificationIds != parametrizedIds)
+            {
+                // It's a list!!
+                throw new ArgumentException("Only single operations are allowed", nameof(id));
+            }
+
+            var res = this.GetFilteredOrders("order_trades", id, null);
+            return res.Count > 0 ? res[0] : null;
+        }
+
+        /// <summary>Gets the user trades.</summary>
+        /// <param name="bookName">Name of the currency book.</param>
+        /// <returns>if the requested book Trades are returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">Invalid limit. Maximum limit is 100 - resultLimit</exception>
+        public IList<Trade> GetUserTrades(string bookName)
+        {
+            return this.GetUserTrades(string.Empty, bookName, string.Empty, SortDirection.Desending, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the user trades.</summary>
+        /// <param name="bookName">Name of the currency book.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>if the requested book Trades are returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">Invalid limit. Maximum limit is 100 - resultLimit</exception>
+        public IList<Trade> GetUserTrades(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            return this.GetUserTrades(string.Empty, bookName, markerTag, sortDirection, resultLimit);
+        }
+
+        /// <summary>Gets the user trades.</summary>
+        /// <param name="ids">The trade ids to look for.</param>
+        /// <param name="bookName">Name of the currency book.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>if valid and found, the requested Trades are returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">Invalid limit. Maximum limit is 100 - resultLimit</exception>
+        public IList<Trade> GetUserTrades(string ids, string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
         {
             if (resultLimit > 100)
             {
                 throw new ArgumentException("Invalid limit. Maximum limit is 100", nameof(resultLimit));
             }
 
+            var marker = new Parameter();
+            var sort = new Parameter();
+            var limit = new Parameter();
+            var book = new Parameter();
+
+            book.Name = "book";
+            book.Value = bookName;
+            book.Type = ParameterType.QueryString;
+
+            marker.Name = "marker";
+            marker.Value = markerTag;
+            marker.Type = ParameterType.QueryString;
+
+            sort.Name = "sort";
+            sort.Value = sortDirection == SortDirection.Desending ? "desc" : "asc";
+            sort.Type = ParameterType.QueryString;
+
+            limit.Name = "limit";
+            limit.Value = resultLimit;
+            limit.Type = ParameterType.QueryString;
+
+            var parameters = new List<Parameter>();
+            parameters.Add(book);
+            parameters.Add(marker);
+            parameters.Add(sort);
+
+            if (string.IsNullOrEmpty(ids))
+            {
+                parameters.Add(limit);
+            }
+
+            return this.GetFilteredOrders("user_trades", ids, parameters);
+        }
+
+        private static string GetParametrizedResourceName(string resource, string ids)
+        {
             StringBuilder resourceName = new StringBuilder();
 
             resourceName.Append(resource);
@@ -694,7 +785,36 @@ namespace Inixe.CoinManagement.Bitso.Api
                 resourceName.AppendFormat("/{0}", rx.Replace(ids, "-"));
             }
 
-            var request = new RestRequest(resourceName.ToString(), Method.GET);
+            return resourceName.ToString();
+        }
+
+        private IList<Trade> GetFilteredOrders(string resource, string ids, IEnumerable<Parameter> parameters)
+        {
+            var resourceName = GetParametrizedResourceName(resource, ids);
+
+            var request = new RestRequest(resourceName, Method.GET);
+
+            if (parameters != null)
+            {
+                foreach (var p in parameters)
+                {
+                    request.AddParameter(p);
+                }
+            }
+
+            return this.GetPayloadList<Trade>(request, true);
+        }
+
+        private List<T> GetFilteredTransfers<T>(string resource, string ids, TransferMethod methodFilter, bool filterExcept, long resultLimit)
+            where T : ITransfer
+        {
+            if (resultLimit > 100)
+            {
+                throw new ArgumentException("Invalid limit. Maximum limit is 100", nameof(resultLimit));
+            }
+
+            var resourceName = GetParametrizedResourceName(resource, ids);
+            var request = new RestRequest(resourceName, Method.GET);
 
             var limit = new Parameter();
 
@@ -711,8 +831,8 @@ namespace Inixe.CoinManagement.Bitso.Api
             Func<T, bool> filterExceptSelector = x => x.Method != methodFilter;
             var filter = !filterExcept ? filterBySelector : filterExceptSelector;
 
-            var allWithdrawals = this.GetPayloadList<T>(request, true);
-            return allWithdrawals.Where(filter).ToList();
+            var transfers = this.GetPayloadList<T>(request, true);
+            return transfers.Where(filter).ToList();
         }
 
         /// <summary>Gets the ledger applying a filter over the specified resource.</summary>

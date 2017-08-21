@@ -1,14 +1,14 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SpeiCep.cs" company="Inixe">
+// <copyright file="SpeiRemittent.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Inixe.CoinManagement.Bitso.Api
 {
+    using System.Runtime.Serialization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Class SpeiRemittent
