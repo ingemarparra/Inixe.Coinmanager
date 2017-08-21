@@ -58,6 +58,7 @@
     <Compile Include="Fee.cs" />
     <Compile Include="AccountFees.cs" />
     <Compile Include="FundingBase.cs" />
+    <Compile Include="FundingDestination.cs" />
     <Compile Include="FundingTransferDetails.cs" />
     <Compile Include="HttpClientBase.cs" />
     <Compile Include="ICrytoCurrencyFundingDetails.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Ticker.cs" />
     <Compile Include="Trade.cs" />
     <Compile Include="TradeInfo.cs" />
+    <Compile Include="TradeOrder.cs" />
     <Compile Include="WithdrawalTransferDetails.cs" />
     <Compile Include="WithdrawalBase.cs" />
   </ItemGroup>

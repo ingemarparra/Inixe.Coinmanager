@@ -508,6 +508,57 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             }
         }
 
+        /// <summary>Tests the GetOpenTradeOrders for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetOpenTradeOrdersExpected()
+        {
+            const string BookName = "btc_mxn";
+
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetOpenTradeOrders(BookName);
+
+                    Assert.IsNotNull(res);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>Tests the GetTradeOrderByOrderId for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetTradeOrderByOrderIdExpected()
+        {
+            var oid = (string)this.TestContext.Properties["OrderId"];
+
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetTradeOrderByOrderId(oid);
+
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Price);
+
+                    var diff = res[0].CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
         /// <summary>Tests the GetUserTrades for expected behavior.</summary>
         [TestCategory("Integration Test")]
         [TestMethod]
@@ -536,10 +587,34 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             }
         }
 
+        /// <summary>Tests the GetFundingDestinations for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetFundingDestinationsExpected()
+        {
+            const string CurrencyName = "mxn";
+
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetFundingDestinations(CurrencyName);
+                    Assert.IsNotNull(res);
+                    Assert.IsFalse(string.IsNullOrEmpty(res.AccountIdentifierName));
+                    Assert.IsFalse(string.IsNullOrEmpty(res.AccountIdentifier));
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
         /// <summary>Tests the GetBanksInfo for expected behavior.</summary>
         [TestCategory("Integration Test")]
         [TestMethod]
-        public void GetBanksInfoxpected()
+        public void GetBanksInfoExpected()
         {
             using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
             {

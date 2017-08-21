@@ -666,6 +666,30 @@ namespace Inixe.CoinManagement.Bitso.Api
             return this.GetFilteredTransfers<FundingBase>("fundings", ids, TransferMethod.Sp, false, resultLimit).ConvertAll(x => new SpeiFunding(x));
         }
 
+        /// <summary>Gets the funding destinations.</summary>
+        /// <param name="currencyCode">The currency code.</param>
+        /// <returns>A list with the Funding destinations registered</returns>
+        /// <exception cref="ArgumentException">When <paramref name="currencyCode"/> is <c>null</c> or empty.</exception>
+        /// <remarks>None</remarks>
+        public FundingDestination GetFundingDestinations(string currencyCode)
+        {
+            if (string.IsNullOrWhiteSpace(currencyCode))
+            {
+                throw new ArgumentException("Invalid Currency Code", nameof(currencyCode));
+            }
+
+            var request = new RestRequest("funding_destination", Method.GET);
+
+            var currency = new Parameter();
+            currency.Type = ParameterType.QueryString;
+            currency.Value = currencyCode;
+            currency.Name = "fund_currency";
+
+            request.AddParameter(currency);
+
+            return this.GetPayload<FundingDestination>(request, true);
+        }
+
         /// <summary>Gets the banks information.</summary>
         /// <returns>A list with the registered banks data.</returns>
         /// <remarks>None</remarks>
@@ -675,6 +699,106 @@ namespace Inixe.CoinManagement.Bitso.Api
             var res = this.GetPayloadList<BankCode>(request, true);
 
             return res;
+        }
+
+        /// <summary>Gets the user trade by order identifier.</summary>
+        /// <param name="id">The order identifier.</param>
+        /// <returns>if valid and found, the requested Trade is returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">When <paramref name="id"/> represents a list of ids or is <c>null</c></exception>
+        /// <remarks>None</remarks>
+        public IList<TradeOrder> GetTradeOrderByOrderId(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Invalid Order Id", nameof(id));
+            }
+
+            var resourceName = GetParametrizedResourceName("orders", id);
+
+            var request = new RestRequest(resourceName, Method.GET);
+            var res = this.GetPayloadList<TradeOrder>(request, true);
+
+            return res;
+        }
+
+        /// <summary>Gets the open trade orders.</summary>
+        /// <param name="pair">The currency pair.</param>
+        /// <returns>A list of Open orders</returns>
+        /// <remarks>None</remarks>
+        public IList<TradeOrder> GetOpenTradeOrders(CurrencyPair pair)
+        {
+            if (pair == null)
+            {
+                throw new ArgumentNullException(nameof(pair));
+            }
+
+            return this.GetOpenTradeOrders(pair.BookName);
+        }
+
+        /// <summary>Gets the open trade orders.</summary>
+        /// <param name="pair">The currency pair.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of Open orders</returns>
+        /// <remarks>None</remarks>
+        public IList<TradeOrder> GetOpenTradeOrders(CurrencyPair pair, string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            if (pair == null)
+            {
+                throw new ArgumentNullException(nameof(pair));
+            }
+
+            return this.GetOpenTradeOrders(pair.BookName, markerTag, sortDirection, resultLimit);
+        }
+
+        /// <summary>Gets the open trade orders.</summary>
+        /// <param name="bookName">Name of the book.</param>
+        /// <returns>A list of Open orders</returns>
+        /// <remarks>None</remarks>
+        public IList<TradeOrder> GetOpenTradeOrders(string bookName)
+        {
+            return this.GetOpenTradeOrders(bookName, string.Empty, SortDirection.Desending, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the open trade orders.</summary>
+        /// <param name="bookName">Name of the book.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list of Open orders</returns>
+        /// <remarks>None</remarks>
+        public IList<TradeOrder> GetOpenTradeOrders(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            var request = new RestRequest("ledger", Method.GET);
+
+            var marker = new Parameter();
+            var sort = new Parameter();
+            var limit = new Parameter();
+            var book = new Parameter();
+
+            book.Name = "book";
+            book.Value = bookName;
+            book.Type = ParameterType.QueryString;
+
+            marker.Name = "marker";
+            marker.Value = markerTag;
+            marker.Type = ParameterType.QueryString;
+
+            sort.Name = "sort";
+            sort.Value = sortDirection == SortDirection.Desending ? "desc" : "asc";
+            sort.Type = ParameterType.QueryString;
+
+            limit.Name = "limit";
+            limit.Value = resultLimit;
+            limit.Type = ParameterType.QueryString;
+
+            request.AddParameter(book);
+            request.AddParameter(marker);
+            request.AddParameter(sort);
+            request.AddParameter(limit);
+
+            return this.GetPayloadList<TradeOrder>(request, true).ToList();
         }
 
         /// <summary>Gets the user trade by order identifier.</summary>
@@ -705,12 +829,41 @@ namespace Inixe.CoinManagement.Bitso.Api
         }
 
         /// <summary>Gets the user trades.</summary>
+        /// <param name="pair">The currency pair.</param>
+        /// <returns>if the requested book Trades are returned. Otherwise null is returned.</returns>
+        public IList<Trade> GetUserTrades(CurrencyPair pair)
+        {
+            if (pair == null)
+            {
+                throw new ArgumentNullException(nameof(pair));
+            }
+
+            return this.GetUserTrades(string.Empty, pair.BookName, string.Empty, SortDirection.Desending, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the user trades.</summary>
         /// <param name="bookName">Name of the currency book.</param>
         /// <returns>if the requested book Trades are returned. Otherwise null is returned.</returns>
-        /// <exception cref="ArgumentException">Invalid limit. Maximum limit is 100 - resultLimit</exception>
         public IList<Trade> GetUserTrades(string bookName)
         {
             return this.GetUserTrades(string.Empty, bookName, string.Empty, SortDirection.Desending, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets the user trades.</summary>
+        /// <param name="pair">The currency pair.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>if the requested book Trades are returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">Invalid limit. Maximum limit is 100 - resultLimit</exception>
+        public IList<Trade> GetUserTrades(CurrencyPair pair, string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            if (pair == null)
+            {
+                throw new ArgumentNullException(nameof(pair));
+            }
+
+            return this.GetUserTrades(pair.BookName, markerTag, sortDirection, resultLimit);
         }
 
         /// <summary>Gets the user trades.</summary>
@@ -723,6 +876,24 @@ namespace Inixe.CoinManagement.Bitso.Api
         public IList<Trade> GetUserTrades(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
         {
             return this.GetUserTrades(string.Empty, bookName, markerTag, sortDirection, resultLimit);
+        }
+
+        /// <summary>Gets the user trades.</summary>
+        /// <param name="ids">The trade ids to look for.</param>
+        /// <param name="pair">The currency pair.</param>
+        /// <param name="markerTag">The marker tag.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>if valid and found, the requested Trades are returned. Otherwise null is returned.</returns>
+        /// <exception cref="ArgumentException">Invalid limit. Maximum limit is 100 - resultLimit</exception>
+        public IList<Trade> GetUserTrades(string ids, CurrencyPair pair, string markerTag, SortDirection sortDirection, long resultLimit)
+        {
+            if (pair == null)
+            {
+                throw new ArgumentNullException(nameof(pair));
+            }
+
+            return this.GetUserTrades(ids, pair.BookName, markerTag, sortDirection, resultLimit);
         }
 
         /// <summary>Gets the user trades.</summary>
