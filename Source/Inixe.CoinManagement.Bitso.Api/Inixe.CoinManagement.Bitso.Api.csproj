@@ -96,6 +96,7 @@
     <Compile Include="Trade.cs" />
     <Compile Include="TradeInfo.cs" />
     <Compile Include="TradeOrder.cs" />
+    <Compile Include="TradeInstruction.cs" />
     <Compile Include="WithdrawalTransferDetails.cs" />
     <Compile Include="WithdrawalBase.cs" />
   </ItemGroup>

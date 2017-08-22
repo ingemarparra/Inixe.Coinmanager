@@ -896,6 +896,119 @@ namespace Inixe.CoinManagement.Bitso.Api
             return this.GetUserTrades(ids, pair.BookName, markerTag, sortDirection, resultLimit);
         }
 
+        /// <summary>Cancels the orders specified in <paramref name="ids"/>.</summary>
+        /// <param name="ids">The order ids to cancel.</param>
+        /// <returns>A list of the orders thta were cancelled</returns>
+        /// <remarks>None</remarks>
+        /// <exception cref="ArgumentNullException">ids</exception>
+        public IList<string> CancelOrders(IEnumerable<string> ids)
+        {
+            if (ids == null)
+            {
+                throw new ArgumentNullException(nameof(ids));
+            }
+
+            var idList = new StringBuilder();
+
+            var enumerator = ids.GetEnumerator();
+            if (enumerator.MoveNext())
+            {
+                idList.Append(enumerator.Current);
+
+                while (enumerator.MoveNext())
+                {
+                    idList.AppendFormat(",{0}", enumerator.Current);
+                }
+            }
+
+            return this.CancelOrders(idList.ToString());
+        }
+
+        /// <summary>Cancels the orders supplied in <paramref name="ids"/>.</summary>
+        /// <param name="ids">The order ids.</param>
+        /// <returns>A list of the orders thta were cancelled</returns>
+        /// <remarks>None</remarks>
+        /// <exception cref="ArgumentException">Invalid order id</exception>
+        public IList<string> CancelOrders(string ids)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                throw new ArgumentException("Invalid order id");
+            }
+
+            var resourceName = GetParametrizedResourceName("orders", ids);
+
+            var request = new RestRequest("orders", Method.DELETE);
+
+            return this.GetPayloadList<string>(request, true);
+        }
+
+        /// <summary>Cancels all orders.</summary>
+        /// <returns>A list of the orders thta were cancelled</returns>
+        /// <remarks>None</remarks>
+        public IList<string> CancelAllOrders()
+        {
+            var request = new RestRequest("orders/all", Method.DELETE);
+            var res = this.GetPayloadList<string>(request, true);
+
+            return res;
+        }
+
+        /// <summary>Places a trade order.</summary>
+        /// <param name="instruction">The instruction.</param>
+        /// <returns>The trade order created</returns>
+        /// <exception cref="ArgumentNullException">instruction</exception>
+        /// <exception cref="ArgumentException">
+        /// invalid order only an amount should be captured, not both - instruction
+        /// or
+        /// invalid order market side - instruction
+        /// or
+        /// invalid order price - instruction
+        /// or
+        /// invalid price - instruction
+        /// </exception>
+        /// <remarks>Places a Trade order using the specified values.</remarks>
+        public TradeOrder PlaceOrder(TradeInstruction instruction)
+        {
+            if (instruction == null)
+            {
+                throw new ArgumentNullException(nameof(instruction));
+            }
+
+            if (instruction.MajorCurrencyAmount.HasValue == instruction.MinorCurrencyAmount.HasValue)
+            {
+                throw new ArgumentException("invalid order only an amount should be captured, not both", nameof(instruction));
+            }
+
+            if (instruction.Side == MarketSide.None)
+            {
+                throw new ArgumentException("invalid order market side", nameof(instruction));
+            }
+
+            if (instruction.OrderType == TradeOrderType.None)
+            {
+                throw new ArgumentException("invalid order price", nameof(instruction));
+            }
+
+            if (string.IsNullOrWhiteSpace(instruction.BookName))
+            {
+                throw new ArgumentException("invalid book name", nameof(instruction));
+            }
+
+            if (instruction.Price == 0)
+            {
+                throw new ArgumentException("invalid price", nameof(instruction));
+            }
+
+            var request = new RestRequest("orders", Method.POST);
+
+            request.AddBody(instruction);
+
+            var res = this.GetPayload<TradeOrder>(request, true);
+
+            return res;
+        }
+
         /// <summary>Gets the user trades.</summary>
         /// <param name="ids">The trade ids to look for.</param>
         /// <param name="bookName">Name of the currency book.</param>

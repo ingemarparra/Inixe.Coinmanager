@@ -27,6 +27,9 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>The limit order</summary>
         Limit,
+
+        /// <summary>The market order</summary>
+        Market,
     }
 
     /// <summary>
