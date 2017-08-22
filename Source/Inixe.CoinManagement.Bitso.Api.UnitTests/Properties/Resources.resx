@@ -117,6 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountFeesResponse" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": {
+        "fees": [{
+            "book": "btc_mxn",
+            "fee_decimal": "0.0001",
+            "fee_percent": "0.01"
+        }, {
+            "book": "eth_mxn",
+            "fee_decimal": "0.001",
+            "fee_percent": "0.1"
+        }],
+        "withdrawal_fees": {
+            "btc": "0.001",
+            "eth": "0.0025"
+        }
+    }
+}</value>
+  </data>
   <data name="AccountStatusResponse" xml:space="preserve">
     <value>{
     "success": true,
@@ -140,6 +160,195 @@
 }</value>
     <comment>Original Documentation Response</comment>
   </data>
+  <data name="AvailableBooksResponse" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": [{
+        "book": "btc_mxn",
+        "minimum_amount": ".003",
+        "maximum_amount": "1000.00",
+        "minimum_price": "100.00",
+        "maximum_price": "1000000.00",
+        "minimum_value": "25.00",
+        "maximum_value": "1000000.00"
+    }, {
+        "book": "eth_mxn",
+        "minimum_amount": ".003",
+        "maximum_amount": "1000.00",
+        "minimum_price": "100.0",
+        "maximum_price": "1000000.0",
+        "minimum_value": "25.0",
+        "maximum_value": "1000000.0"
+    }]
+}</value>
+    <comment>Original Documentation Response</comment>
+  </data>
+  <data name="LedgerResponse" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": [{
+        "eid": "c4ca4238a0b923820dcc509a6f75849b",
+        "operation": "trade",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "btc",
+            "amount": "-0.25232073"
+        }, {
+            "currency": "mxn",
+            "amount": "1013.540958479115"
+        }],
+        "details": {
+            "tid": 51756,
+            "oid": "wri0yg8miihs80ngk"
+        }
+    }, {
+        "eid": "6512bd43d9caa6e02c990b0a82652dca",
+        "operation": "fee",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "mxn",
+            "amount": "-10.237787459385"
+        }],
+        "details": {
+            "tid": 51756,
+            "oid": "19vaqiv72drbphig"
+        }
+    }, {
+        "operation": "trade",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "eth",
+            "amount": "4.86859395"
+        }, {
+            "currency": "mxn",
+            "amount": "-626.77"
+        }],
+        "details": {
+            "tid": 51757,
+            "oid": "19vaqiv72drbphig"
+        }
+    }, {
+        "eid": "698d51a19d8a121ce581499d7b701668",
+        "operation": "fee",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "eth",
+            "amount": "0.04917771"
+        }],
+        "details": {
+            "tid": 51757,
+            "oid": "19vaqiv72drbphig"
+        }
+    }, {
+        "eid": "b59c67bf196a4758191e42f76670ceba",
+        "operation": "funding",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "btc",
+            "amount": "0.48650929"
+        }],
+        "details": {
+            "fid": "fc23c28a23905d8614499816c3ade455",
+            "method": "btc",
+            "funding_address": "18MsnATiNiKLqUHDTRKjurwMg7inCrdNEp"
+        }
+    }, {
+        "eid": "b0baee9d279d34fa1dfd71aadb908c3f",
+        "operation": "funding",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "mxn",
+            "amount": "300.15"
+        }],
+        "details": {
+            "fid": "3ef729ccf0cc56079ca546d58083dc12",
+            "method": "sp"
+        }
+
+    }, {
+        "eid": "96e79218965eb72c92a549dd5a330112",
+        "operation": "withdrawal",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "balance_updates": [{
+            "currency": "mxn",
+            "amount": "-200.15"
+        }],
+        "details": {
+            "wid": "c5b8d7f0768ee91d3b33bee648318688",
+            "method": "sp"
+        }
+    }]
+}</value>
+  </data>
+  <data name="OrderBookResponse1" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": {
+        "asks": [{
+            "book": "btc_mxn",
+            "price": "5632.24",
+            "amount": "1.34491802"
+        },{
+            "book": "btc_mxn",
+            "price": "5633.44",
+            "amount": "0.4259"
+        },{
+            "book": "btc_mxn",
+            "price": "5642.14",
+            "amount": "1.21642"
+        }],
+        "bids": [{
+            "book": "btc_mxn",
+            "price": "6123.55",
+            "amount": "1.12560000"
+        },{
+            "book": "btc_mxn",
+            "price": "6121.55",
+            "amount": "2.23976"
+        }],
+        "updated_at": "2016-04-08T17:52:31.000+00:00",
+        "sequence": "27214"
+    }
+}</value>
+    <comment>Original Documentation Response</comment>
+  </data>
+  <data name="OrderBookResponse2" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": {
+        "asks": [{
+            "book": "btc_mxn",
+            "price": "5632.24",
+            "amount": "1.34491802",
+            "oid": "VN5lVpgXf02o6vJ6"
+        },{
+            "book": "btc_mxn",
+            "price": "5633.44",
+            "amount": "0.4259",
+            "oid": "RP8lVpgXf04o6vJ6"
+        },{
+            "book": "btc_mxn",
+            "price": "5642.14",
+            "amount": "1.21642",
+            "oid": "46efbiv72drbphig"
+        }],
+        "bids": [{
+            "book": "btc_mxn",
+            "price": "6123.55",
+            "amount": "1.12560000",
+            "oid": "11brtiv72drbphig"
+        },{
+            "book": "btc_mxn",
+            "price": "6121.55",
+            "amount": "2.23976",
+            "oid": "1ywri0yg8miihs80"
+        }],
+        "updated_at": "2016-04-08T17:52:31.000+00:00",
+        "sequence": "27214"
+    }
+}</value>
+    <comment>Original Documentation Response</comment>
+  </data>
   <data name="PlaceOrderResponse" xml:space="preserve">
     <value>{
     "success": true,
@@ -159,5 +368,67 @@
     }
 	}</value>
     <comment>The documentation states that the order Id will be returned, but it also states that a TradeOrder is Returned</comment>
+  </data>
+  <data name="PortfolioResponse" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": {
+        "balances": [{
+            "currency": "mxn",
+            "total": "100.1234",
+            "locked": "25.1234",
+            "available": "75.0000"
+        }, {
+            "currency": "btc",
+            "total": "4.12345678",
+            "locked": "25.00000000",
+            "available": "75.12345678"
+        }, {
+            "currency": "eth",
+            "total": "50.1234",
+            "locked": "40.1234",
+            "available": "10.0000"
+        }]
+    }
+}</value>
+    <comment>Original Documentation Response</comment>
+  </data>
+  <data name="TickerResponse" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": {
+        "book": "btc_mxn",
+        "volume": "22.31349615",
+        "high": "5750.00",
+        "last": "5633.98",
+        "low": "5450.00",
+        "vwap": "5393.45",
+        "ask": "5632.24",
+        "bid": "5520.01",
+        "created_at": "2016-04-08T17:52:31.000+00:00"
+    }
+}</value>
+    <comment>Original Documentation Response</comment>
+  </data>
+  <data name="TradesInfoResponse" xml:space="preserve">
+    <value>{
+    "success": true,
+    "payload": [{
+        "book": "btc_mxn",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "amount": "0.02000000",
+        "maker_side": "buy",
+        "price": "5545.01",
+        "tid": 55845
+    }, {
+        "book": "btc_mxn",
+        "created_at": "2016-04-08T17:52:31.000+00:00",
+        "amount": "0.33723939",
+        "maker_side": "sell",
+        "price": "5633.98",
+        "tid": 55844
+    }]
+}</value>
+    <comment>Original Documentation Response</comment>
   </data>
 </root>

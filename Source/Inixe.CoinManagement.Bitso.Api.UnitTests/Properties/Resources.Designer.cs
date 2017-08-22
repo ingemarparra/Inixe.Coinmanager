@@ -64,6 +64,32 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests.Properties {
         ///   Looks up a localized string similar to {
         ///    &quot;success&quot;: true,
         ///    &quot;payload&quot;: {
+        ///        &quot;fees&quot;: [{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;fee_decimal&quot;: &quot;0.0001&quot;,
+        ///            &quot;fee_percent&quot;: &quot;0.01&quot;
+        ///        }, {
+        ///            &quot;book&quot;: &quot;eth_mxn&quot;,
+        ///            &quot;fee_decimal&quot;: &quot;0.001&quot;,
+        ///            &quot;fee_percent&quot;: &quot;0.1&quot;
+        ///        }],
+        ///        &quot;withdrawal_fees&quot;: {
+        ///            &quot;btc&quot;: &quot;0.001&quot;,
+        ///            &quot;eth&quot;: &quot;0.0025&quot;
+        ///        }
+        ///    }
+        ///}.
+        /// </summary>
+        internal static string AccountFeesResponse {
+            get {
+                return ResourceManager.GetString("AccountFeesResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: {
         ///        &quot;client_id&quot;: &quot;1234&quot;,
         ///        &quot;first_name&quot;: &quot;Claude&quot;,
         ///        &quot;last_name&quot;:  &quot;Shannon&quot;,
@@ -81,6 +107,113 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests.Properties {
         internal static string AccountStatusResponse {
             get {
                 return ResourceManager.GetString("AccountStatusResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: [{
+        ///        &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///        &quot;minimum_amount&quot;: &quot;.003&quot;,
+        ///        &quot;maximum_amount&quot;: &quot;1000.00&quot;,
+        ///        &quot;minimum_price&quot;: &quot;100.00&quot;,
+        ///        &quot;maximum_price&quot;: &quot;1000000.00&quot;,
+        ///        &quot;minimum_value&quot;: &quot;25.00&quot;,
+        ///        &quot;maximum_value&quot;: &quot;1000000.00&quot;
+        ///    }, {
+        ///        &quot;book&quot;: &quot;eth_mxn&quot;,
+        ///        &quot;minimum_amount&quot;: &quot;.003&quot;,
+        ///        &quot;maximum_amount&quot;: &quot;1000.00&quot;,
+        ///        &quot;minimum_price&quot;: &quot;100.0&quot;,
+        ///        &quot;maximum_price&quot;: &quot;1000000.0&quot;,
+        ///        &quot;minimum_value&quot;: &quot;25.0&quot;, [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AvailableBooksResponse {
+            get {
+                return ResourceManager.GetString("AvailableBooksResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: [{
+        ///        &quot;eid&quot;: &quot;c4ca4238a0b923820dcc509a6f75849b&quot;,
+        ///        &quot;operation&quot;: &quot;trade&quot;,
+        ///        &quot;created_at&quot;: &quot;2016-04-08T17:52:31.000+00:00&quot;,
+        ///        &quot;balance_updates&quot;: [{
+        ///            &quot;currency&quot;: &quot;btc&quot;,
+        ///            &quot;amount&quot;: &quot;-0.25232073&quot;
+        ///        }, {
+        ///            &quot;currency&quot;: &quot;mxn&quot;,
+        ///            &quot;amount&quot;: &quot;1013.540958479115&quot;
+        ///        }],
+        ///        &quot;details&quot;: {
+        ///            &quot;tid&quot;: 51756,
+        ///            &quot;oid&quot;: &quot;wri0yg8miihs80ngk&quot;
+        ///        }
+        ///    }, {
+        ///        &quot;eid&quot;: &quot;6 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LedgerResponse {
+            get {
+                return ResourceManager.GetString("LedgerResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: {
+        ///        &quot;asks&quot;: [{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;5632.24&quot;,
+        ///            &quot;amount&quot;: &quot;1.34491802&quot;
+        ///        },{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;5633.44&quot;,
+        ///            &quot;amount&quot;: &quot;0.4259&quot;
+        ///        },{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;5642.14&quot;,
+        ///            &quot;amount&quot;: &quot;1.21642&quot;
+        ///        }],
+        ///        &quot;bids&quot;: [{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;6123.55&quot;,
+        ///            &quot;amount&quot;: &quot;1.1256 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OrderBookResponse1 {
+            get {
+                return ResourceManager.GetString("OrderBookResponse1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: {
+        ///        &quot;asks&quot;: [{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;5632.24&quot;,
+        ///            &quot;amount&quot;: &quot;1.34491802&quot;,
+        ///            &quot;oid&quot;: &quot;VN5lVpgXf02o6vJ6&quot;
+        ///        },{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;5633.44&quot;,
+        ///            &quot;amount&quot;: &quot;0.4259&quot;,
+        ///            &quot;oid&quot;: &quot;RP8lVpgXf04o6vJ6&quot;
+        ///        },{
+        ///            &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///            &quot;price&quot;: &quot;5642.14&quot;,
+        ///            &quot;amount&quot;: &quot;1.21642&quot;,
+        ///            &quot;oid&quot;: &quot;46efbiv72drbphig&quot;
+        ///        [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OrderBookResponse2 {
+            get {
+                return ResourceManager.GetString("OrderBookResponse2", resourceCulture);
             }
         }
         
@@ -106,6 +239,81 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests.Properties {
         internal static string PlaceOrderResponse {
             get {
                 return ResourceManager.GetString("PlaceOrderResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: {
+        ///        &quot;balances&quot;: [{
+        ///            &quot;currency&quot;: &quot;mxn&quot;,
+        ///            &quot;total&quot;: &quot;100.1234&quot;,
+        ///            &quot;locked&quot;: &quot;25.1234&quot;,
+        ///            &quot;available&quot;: &quot;75.0000&quot;
+        ///        }, {
+        ///            &quot;currency&quot;: &quot;btc&quot;,
+        ///            &quot;total&quot;: &quot;4.12345678&quot;,
+        ///            &quot;locked&quot;: &quot;25.00000000&quot;,
+        ///            &quot;available&quot;: &quot;75.12345678&quot;
+        ///        }, {
+        ///            &quot;currency&quot;: &quot;eth&quot;,
+        ///            &quot;total&quot;: &quot;50.1234&quot;,
+        ///            &quot;locked&quot;: &quot;40.1234&quot;,
+        ///            &quot;available&quot;: &quot;10.0000&quot;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PortfolioResponse {
+            get {
+                return ResourceManager.GetString("PortfolioResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: {
+        ///        &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///        &quot;volume&quot;: &quot;22.31349615&quot;,
+        ///        &quot;high&quot;: &quot;5750.00&quot;,
+        ///        &quot;last&quot;: &quot;5633.98&quot;,
+        ///        &quot;low&quot;: &quot;5450.00&quot;,
+        ///        &quot;vwap&quot;: &quot;5393.45&quot;,
+        ///        &quot;ask&quot;: &quot;5632.24&quot;,
+        ///        &quot;bid&quot;: &quot;5520.01&quot;,
+        ///        &quot;created_at&quot;: &quot;2016-04-08T17:52:31.000+00:00&quot;
+        ///    }
+        ///}.
+        /// </summary>
+        internal static string TickerResponse {
+            get {
+                return ResourceManager.GetString("TickerResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;success&quot;: true,
+        ///    &quot;payload&quot;: [{
+        ///        &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///        &quot;created_at&quot;: &quot;2016-04-08T17:52:31.000+00:00&quot;,
+        ///        &quot;amount&quot;: &quot;0.02000000&quot;,
+        ///        &quot;maker_side&quot;: &quot;buy&quot;,
+        ///        &quot;price&quot;: &quot;5545.01&quot;,
+        ///        &quot;tid&quot;: 55845
+        ///    }, {
+        ///        &quot;book&quot;: &quot;btc_mxn&quot;,
+        ///        &quot;created_at&quot;: &quot;2016-04-08T17:52:31.000+00:00&quot;,
+        ///        &quot;amount&quot;: &quot;0.33723939&quot;,
+        ///        &quot;maker_side&quot;: &quot;sell&quot;,
+        ///        &quot;price&quot;: &quot;5633.98&quot;,
+        ///        &quot;tid&quot;: 55844
+        ///    }]
+        ///}.
+        /// </summary>
+        internal static string TradesInfoResponse {
+            get {
+                return ResourceManager.GetString("TradesInfoResponse", resourceCulture);
             }
         }
     }

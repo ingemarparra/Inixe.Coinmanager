@@ -150,6 +150,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>The Currency Ticker</returns>
         public Ticker GetTicker(string bookName)
         {
+            if (string.IsNullOrWhiteSpace(bookName))
+            {
+                throw new ArgumentException("invalid book name", nameof(bookName));
+            }
+
             var request = new RestRequest("ticker", Method.GET);
             var book = new Parameter();
 
@@ -180,6 +185,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>The current Order book</returns>
         public OrderBook GetOrderBook(CurrencyPair pair)
         {
+            if (pair == null)
+            {
+                throw new ArgumentNullException(nameof(pair));
+            }
+
             return this.GetOrderBook(pair, false);
         }
 
@@ -204,6 +214,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>The current Order book</returns>
         public OrderBook GetOrderBook(string bookName)
         {
+            if (string.IsNullOrWhiteSpace(bookName))
+            {
+                throw new ArgumentException("invalid book name", nameof(bookName));
+            }
+
             return this.GetOrderBook(bookName, false);
         }
 
@@ -213,6 +228,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>The current Order book</returns>
         public OrderBook GetOrderBook(string bookName, bool aggregatedResults)
         {
+            if (string.IsNullOrWhiteSpace(bookName))
+            {
+                throw new ArgumentException("invalid book name", nameof(bookName));
+            }
+
             var request = new RestRequest("order_book", Method.GET);
             var book = new Parameter();
             var aggregate = new Parameter();
@@ -283,6 +303,11 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<TradeInfo> GetTrades(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
         {
+            if (string.IsNullOrWhiteSpace(bookName))
+            {
+                throw new ArgumentException("invalid book name", nameof(bookName));
+            }
+
             var request = new RestRequest("trades", Method.GET);
             var book = new Parameter();
             var marker = new Parameter();
@@ -975,29 +1000,11 @@ namespace Inixe.CoinManagement.Bitso.Api
                 throw new ArgumentNullException(nameof(instruction));
             }
 
-            if (instruction.MajorCurrencyAmount.HasValue == instruction.MinorCurrencyAmount.HasValue)
+            var validator = new TradeInstructionValidator();
+            var validationResult = validator.Validate(instruction);
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentException("invalid order only an amount should be captured, not both", nameof(instruction));
-            }
-
-            if (instruction.Side == MarketSide.None)
-            {
-                throw new ArgumentException("invalid order market side", nameof(instruction));
-            }
-
-            if (instruction.OrderType == TradeOrderType.None)
-            {
-                throw new ArgumentException("invalid order price", nameof(instruction));
-            }
-
-            if (string.IsNullOrWhiteSpace(instruction.BookName))
-            {
-                throw new ArgumentException("invalid book name", nameof(instruction));
-            }
-
-            if (instruction.Price == 0)
-            {
-                throw new ArgumentException("invalid price", nameof(instruction));
+                throw new ArgumentException(validationResult.Errors[0].ErrorMessage, nameof(instruction));
             }
 
             var request = new RestRequest("orders", Method.POST);
@@ -1005,6 +1012,45 @@ namespace Inixe.CoinManagement.Bitso.Api
             request.AddBody(instruction);
 
             var res = this.GetPayload<TradeOrder>(request, true);
+
+            return res;
+        }
+
+        /// <summary>Withdraws the specified instruction.</summary>
+        /// <param name="instruction">The instruction.</param>
+        /// <param name="method">The method.</param>
+        /// <returns>The Operation details</returns>
+        /// <exception cref="ArgumentException">invalid withdraw method</exception>
+        public CryptoCurrencyWithdrawal Withdraw(CryptoCurrencyWithdrawalInstruction instruction, TransferMethod method)
+        {
+            var resourceMappings = new Dictionary<TransferMethod, string>
+            {
+                { TransferMethod.Btc, "bitcoin_withdrawal" },
+                { TransferMethod.Eth, "ether_withdrawal" },
+            };
+
+            if (instruction == null)
+            {
+                throw new ArgumentNullException(nameof(instruction));
+            }
+
+            var validator = new CryptoCurrencyWithdrawalInstructionValidator();
+            var validationResult = validator.Validate(instruction);
+            if (!validationResult.IsValid)
+            {
+                throw new ArgumentException(validationResult.Errors[0].ErrorMessage, nameof(instruction));
+            }
+
+            if (!resourceMappings.ContainsKey(method))
+            {
+                throw new ArgumentException("invalid withdraw method");
+            }
+
+            var request = new RestRequest(resourceMappings[method], Method.POST);
+
+            request.AddBody(instruction);
+
+            var res = this.GetPayload<CryptoCurrencyWithdrawal>(request, true);
 
             return res;
         }

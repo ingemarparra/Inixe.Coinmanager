@@ -23,16 +23,21 @@ namespace Inixe.CoinManagement.Bitso.Api
     {
         private CurrencyPair pair;
 
+        /// <summary>Initializes a new instance of the <see cref="TradeInstruction"/> class.</summary>
         public TradeInstruction()
             : this(string.Empty)
         {
         }
 
+        /// <summary>Initializes a new instance of the <see cref="TradeInstruction"/> class.</summary>
+        /// <param name="pair">The pair.</param>
         public TradeInstruction(CurrencyPair pair)
         {
             this.Pair = pair;
         }
 
+        /// <summary>Initializes a new instance of the <see cref="TradeInstruction"/> class.</summary>
+        /// <param name="bookName">Name of the book.</param>
         public TradeInstruction(string bookName)
         {
             this.BookName = bookName;
