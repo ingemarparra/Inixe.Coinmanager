@@ -3,20 +3,20 @@
 The goal of the project is to create a tool that can help users on the Mexican Crypto Currency exchange to analyse and have a better control on their day to day operations.
 May be at some point in time this will evolve in toa bot, but at the time it's not the main goal.
 
-In order to achieve this, the web is flooded with tools for analysing cryptocurrencies having the US dollar as reference. The project is going to incorcoporate the market data of the mexican exchanges
+In order to achieve the main goal we must understand how the mexican market reacts to , the web is flooded with tools for analysing cryptocurrencies having the US dollar as reference. The project is going to incorcoporate the market data of the mexican exchanges
 to analyse the cryptocurrencies behavior from a Mexican peso reference perspective.
 
 ## Road Map
 
-* Code the Mexican Cryptocurrencies API libraries
-* Code reference Market data API libraries
+* Mexican Cryptocurrencies API libraries
+* Reference Market data API libraries
   * Kraken
   * Gemini
   * GDAX
   * Bitfinex
-* Code Analyzers
+* Analyzers
   * Trends Analyzers
-* Code Indicators
+* Indicators
   * MACD
   
 ### Prerequisites
