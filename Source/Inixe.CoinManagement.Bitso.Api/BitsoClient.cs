@@ -13,6 +13,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     using System.Text;
     using Inixe.CoinManagement.Bitso.Api.Serialization;
     using RestSharp;
+    using System.IO;
 
     /// <summary>
     /// Enum SortDirection
@@ -1102,6 +1103,39 @@ namespace Inixe.CoinManagement.Bitso.Api
             }
 
             return this.GetFilteredOrders("user_trades", ids, parameters);
+        }
+
+        /// <summary>Documents the upload.</summary>
+        /// <param name="docType">Type of the document.</param>
+        /// <param name="filePath">The file path.</param>
+        /// <returns><c>True</c> when success. <c>False</c> otherwise.</returns>
+        /// <exception cref="ArgumentException">Invalid filePath - filePath</exception>
+        public bool DocumentUpload(KycDocumentType docType, string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+            {
+                throw new ArgumentException("Invalid filePath", nameof(filePath));
+            }
+
+            try
+            {
+                using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    var extension = System.IO.Path.GetExtension(filePath);
+                    var kycDoc = new KycProofDocument(docType, stream, extension);
+
+                    var request = new RestRequest("kyc_documents", Method.POST);
+                    request.AddBody(request);
+
+                    var res = this.GetPayload<NullResponse>(request, true);
+
+                    return res != null;
+                }
+            }
+            catch (IOException)
+            {
+                throw;
+            }
         }
 
         private static string GetParametrizedResourceName(string resource, string ids)

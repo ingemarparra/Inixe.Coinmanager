@@ -41,15 +41,58 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>None</remarks>
     internal class KycProofDocument
     {
-        public KycProofDocument(KycDocumentType docType, Stream stream)
+        /// <summary>Initializes a new instance of the <see cref="KycProofDocument"/> class.</summary>
+        /// <param name="docType">Type of the document.</param>
+        /// <param name="stream">The stream.</param>
+        /// <param name="fileType">Type of the file.</param>
+        /// <exception cref="ArgumentException">Invalid document type - docType</exception>
+        /// <exception cref="ArgumentNullException">
+        /// stream
+        /// or
+        /// fileType
+        /// </exception>
+        public KycProofDocument(KycDocumentType docType, Stream stream, string fileType)
         {
+            if (docType == KycDocumentType.None)
+            {
+                throw new ArgumentException("Invalid document type", nameof(docType));
+            }
 
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
+            if (string.IsNullOrWhiteSpace(fileType))
+            {
+                throw new ArgumentNullException(nameof(fileType));
+            }
+
+            this.DocumentType = docType;
+            this.FileType = fileType;
+            this.LoadDocument(stream);
         }
 
+        /// <summary>Gets or sets the type of the document.</summary>
+        /// <value>The type of the document.</value>
         public KycDocumentType DocumentType { get; set; }
 
+        /// <summary>Gets or sets the type of the file.</summary>
+        /// <value>The type of the file.</value>
         public string FileType { get; set; }
 
+        /// <summary>Gets or sets the contents.</summary>
+        /// <value>The contents.</value>
         public string Contents { get; set; }
+
+        private void LoadDocument(Stream stream)
+        {
+            stream.Position = 0;
+            using (var reader = new BinaryReader(stream))
+            {
+                var bytes = reader.ReadBytes(int.MaxValue);
+                this.Contents = Convert.ToBase64String(bytes);
+            }
+        }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="LedgerFundingEntry.cs" />
     <Compile Include="LedgerTradeEntry.cs" />
     <Compile Include="LedgerWithdrawalEntry.cs" />
+    <Compile Include="NullResponse.cs" />
     <Compile Include="Serialization\BitsoContractResolver.cs" />
     <Compile Include="Serialization\BitsoJsonSerializer.cs" />
     <Compile Include="CurrencyPair.cs" />
