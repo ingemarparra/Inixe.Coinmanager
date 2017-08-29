@@ -15,39 +15,39 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>None</remarks>
     public interface ISpeiFundingDetails
     {
-        /// <summary>Gets or sets the name of the sender.</summary>
+        /// <summary>Gets the name of the sender.</summary>
         /// <value>The name of the sender.</value>
-        string SenderName { get; set; }
+        string SenderName { get; }
 
-        /// <summary>Gets or sets the sender bank.</summary>
+        /// <summary>Gets the sender bank.</summary>
         /// <value>The sender bank.</value>
-        string SenderBank { get; set; }
+        string SenderBank { get; }
 
-        /// <summary>Gets or sets the sender clabe.</summary>
+        /// <summary>Gets the sender clabe.</summary>
         /// <value>The sender clabe.</value>
-        string SenderClabe { get; set; }
+        string SenderClabe { get; }
 
-        /// <summary>Gets or sets the recieving clabe.</summary>
+        /// <summary>Gets the recieving clabe.</summary>
         /// <value>The recieving clabe.</value>
         [JsonProperty("receive_clabe")]
-        string RecievingClabe { get; set; }
+        string RecievingClabe { get; }
 
-        /// <summary>Gets or sets the numeric reference.</summary>
+        /// <summary>Gets the numeric reference.</summary>
         /// <value>The numeric reference.</value>
-        string NumericReference { get; set; }
+        string NumericReference { get; }
 
-        /// <summary>Gets or sets the concept.</summary>
+        /// <summary>Gets the concept.</summary>
         /// <value>The concept.</value>
         [JsonProperty("concepto")]
-        string Concept { get; set; }
+        string Concept { get; }
 
-        /// <summary>Gets or sets the tracking code.</summary>
+        /// <summary>Gets the tracking code.</summary>
         /// <value>The tracking code.</value>
         [JsonProperty("clave_rastreo")]
-        string TrackingCode { get; set; }
+        string TrackingCode { get; }
 
-        /// <summary>Gets or sets the name of the beneficiary.</summary>
+        /// <summary>Gets the name of the beneficiary.</summary>
         /// <value>The name of the beneficiary.</value>
-        string BeneficiaryName { get; set; }
+        string BeneficiaryName { get; }
     }
 }

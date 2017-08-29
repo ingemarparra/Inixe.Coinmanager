@@ -19,14 +19,14 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>None</remarks>
     public interface ICrytoCurrencyFundingDetails
     {
-        /// <summary>Gets or sets the withdrawal address.</summary>
+        /// <summary>Gets the withdrawal address.</summary>
         /// <value>The withdrawal address.</value>
         [JsonProperty("funding_address")]
-        string FundingAddress { get; set; }
+        string FundingAddress { get; }
 
-        /// <summary>Gets or sets the transfer hash.</summary>
+        /// <summary>Gets the transfer hash.</summary>
         /// <value>The transfer hash.</value>
         [JsonProperty("tx_hash")]
-        string TransferHash { get; set; }
+        string TransferHash { get; }
     }
 }

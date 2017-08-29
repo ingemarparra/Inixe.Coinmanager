@@ -12,12 +12,12 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Holds the detiails for a trade operation</remarks>
     public interface ITradeOperationDetails
     {
-        /// <summary>Gets or sets the trade identifier.</summary>
+        /// <summary>Gets the trade identifier.</summary>
         /// <value>The trade identifier.</value>
-        long TradeId { get; set; }
+        long TradeId { get; }
 
-        /// <summary>Gets or sets the order identifier.</summary>
+        /// <summary>Gets the order identifier.</summary>
         /// <value>The order identifier.</value>
-        string OrderId { get; set; }
+        string OrderId { get; }
     }
 }

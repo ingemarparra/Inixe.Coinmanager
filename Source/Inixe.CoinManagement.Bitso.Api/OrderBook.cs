@@ -19,7 +19,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class OrderBook
+    public sealed class OrderBook
     {
         /// <summary>Initializes a new instance of the <see cref="OrderBook"/> class.</summary>
         public OrderBook()
@@ -28,20 +28,20 @@ namespace Inixe.CoinManagement.Bitso.Api
             this.Bids = new List<Tick>();
         }
 
-        /// <summary>Gets or sets the asks.</summary>
+        /// <summary>Gets the asks.</summary>
         /// <value>The asks.</value>
-        public IList<Tick> Asks { get; set; }
+        public IList<Tick> Asks { get; internal set; }
 
-        /// <summary>Gets or sets the bids.</summary>
+        /// <summary>Gets the bids.</summary>
         /// <value>The bids.</value>
-        public IList<Tick> Bids { get; set; }
+        public IList<Tick> Bids { get; internal set; }
 
-        /// <summary>Gets or sets the updated at.</summary>
+        /// <summary>Gets the updated at.</summary>
         /// <value>The updated at.</value>
-        public DateTime UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; internal set; }
 
-        /// <summary>Gets or sets the sequence.</summary>
+        /// <summary>Gets the sequence.</summary>
         /// <value>The sequence.</value>
-        public long Sequence { get; set; }
+        public long Sequence { get; internal set; }
     }
 }

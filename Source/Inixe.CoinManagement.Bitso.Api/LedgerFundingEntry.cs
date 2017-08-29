@@ -21,7 +21,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ILedgerEntryBase" />
     /// <remarks>Represents a Funding Entry on the ledger</remarks>
-    public class LedgerFundingEntry : ILedgerEntryBase
+    public sealed class LedgerFundingEntry : ILedgerEntryBase
     {
         private readonly LedgerEntryBase wrapped;
 
@@ -39,11 +39,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 return this.wrapped.Balances;
             }
-
-            set
-            {
-                throw new NotImplementedException("This is a readonly property");
-            }
         }
 
         /// <inheritdoc/>
@@ -52,11 +47,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             get
             {
                 return this.wrapped.CreatedAt;
-            }
-
-            set
-            {
-                throw new NotImplementedException("This is a readonly property");
             }
         }
 
@@ -67,11 +57,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 return this.wrapped.Id;
             }
-
-            set
-            {
-                throw new NotImplementedException("This is a readonly property");
-            }
         }
 
         /// <inheritdoc/>
@@ -80,11 +65,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             get
             {
                 return this.wrapped.Kind;
-            }
-
-            set
-            {
-                throw new NotImplementedException("This is a readonly property");
             }
         }
 

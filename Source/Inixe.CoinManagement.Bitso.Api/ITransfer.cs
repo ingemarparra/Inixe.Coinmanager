@@ -16,32 +16,32 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Represents the common withdrawal data, for both fiat and crypto</remarks>
     public interface ITransfer
     {
-        /// <summary>Gets or sets the identifier.</summary>
+        /// <summary>Gets the identifier.</summary>
         /// <value>The identifier.</value>
-        string Id { get; set; }
+        string Id { get; }
 
-        /// <summary>Gets or sets the status.</summary>
+        /// <summary>Gets the status.</summary>
         /// <value>The status.</value>
-        TransferStatus Status { get; set; }
+        TransferStatus Status { get; }
 
-        /// <summary>Gets or sets the time when the withdrawal was issued.</summary>
+        /// <summary>Gets the time when the withdrawal was issued.</summary>
         /// <value>The created at.</value>
-        DateTime CreatedAt { get; set; }
+        DateTime CreatedAt { get; }
 
-        /// <summary>Gets or sets the currency.</summary>
+        /// <summary>Gets the currency.</summary>
         /// <value>The currency.</value>
-        string Currency { get; set; }
+        string Currency { get; }
 
-        /// <summary>Gets or sets the method.</summary>
+        /// <summary>Gets the method.</summary>
         /// <value>The method.</value>
-        TransferMethod Method { get; set; }
+        TransferMethod Method { get; }
 
-        /// <summary>Gets or sets the name of the method.</summary>
+        /// <summary>Gets the name of the method.</summary>
         /// <value>The name of the method.</value>
-        string MethodName { get; set; }
+        string MethodName { get; }
 
-        /// <summary>Gets or sets the amount.</summary>
+        /// <summary>Gets the amount.</summary>
         /// <value>The amount.</value>
-        decimal Amount { get; set; }
+        decimal Amount { get; }
     }
 }

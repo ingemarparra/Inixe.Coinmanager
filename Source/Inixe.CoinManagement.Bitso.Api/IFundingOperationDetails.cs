@@ -12,16 +12,16 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Holds the details of a funding. This can be from any currency</remarks>
     public interface IFundingOperationDetails
     {
-        /// <summary>Gets or sets the funds operation identifier.</summary>
+        /// <summary>Gets the funds operation identifier.</summary>
         /// <value>The funds operation identifier.</value>
-        string FundsOperationId { get; set; }
+        string FundsOperationId { get; }
 
-        /// <summary>Gets or sets the funding method.</summary>
+        /// <summary>Gets the funding method.</summary>
         /// <value>The method.</value>
-        string Method { get; set; }
+        string Method { get; }
 
-        /// <summary>Gets or sets the recieving address.</summary>
+        /// <summary>Gets the recieving address.</summary>
         /// <value>the recieving address.</value>
-        string Address { get; set; }
+        string Address { get; }
     }
 }

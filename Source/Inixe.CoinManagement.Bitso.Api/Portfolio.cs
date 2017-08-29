@@ -19,7 +19,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Portfolio
+    public sealed class Portfolio
     {
         /// <summary>Initializes a new instance of the <see cref="Portfolio"/> class.</summary>
         public Portfolio()
@@ -27,8 +27,8 @@ namespace Inixe.CoinManagement.Bitso.Api
             this.Balances = new List<Position>();
         }
 
-        /// <summary>Gets or sets the balances.</summary>
+        /// <summary>Gets the balances.</summary>
         /// <value>The balances.</value>
-        public IList<Position> Balances { get; set; }
+        public IList<Position> Balances { get; internal set; }
     }
 }

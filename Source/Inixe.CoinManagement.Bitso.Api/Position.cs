@@ -19,22 +19,22 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Position
+    public sealed class Position
     {
-        /// <summary>Gets or sets the currency name.</summary>
+        /// <summary>Gets the currency name.</summary>
         /// <value>The currency.</value>
-        public string Currency { get; set; }
+        public string Currency { get; internal set; }
 
-        /// <summary>Gets or sets the total amount for the currency.</summary>
+        /// <summary>Gets the total amount for the currency.</summary>
         /// <value>The total.</value>
-        public decimal Total { get; set; }
+        public decimal Total { get; internal set; }
 
-        /// <summary>Gets or sets the locked amount in orders.</summary>
+        /// <summary>Gets the locked amount in orders.</summary>
         /// <value>The locked.</value>
-        public decimal Locked { get; set; }
+        public decimal Locked { get; internal set; }
 
-        /// <summary>Gets or sets the available amount.</summary>
+        /// <summary>Gets the available amount.</summary>
         /// <value>The available.</value>
-        public decimal Available { get; set; }
+        public decimal Available { get; internal set; }
     }
 }

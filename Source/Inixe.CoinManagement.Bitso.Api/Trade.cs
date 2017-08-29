@@ -21,43 +21,43 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Holds User Trades Data</remarks>
     /// <seealso cref="Inixe.CoinManagement.Bitso.Api.ITrade" />
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Trade : ITrade
+    public sealed class Trade : ITrade
     {
         /// <inheritdoc/>
-        public string BookName { get; set; }
+        public string BookName { get; internal set; }
 
         /// <inheritdoc/>
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; internal set; }
 
         /// <inheritdoc/>
         [JsonProperty("side", ItemConverterType = typeof(StringEnumConverter))]
-        public MarketSide MakerSide { get; set; }
+        public MarketSide MakerSide { get; internal set; }
 
         /// <inheritdoc/>
-        public decimal Price { get; set; }
+        public decimal Price { get; internal set; }
 
         /// <inheritdoc/>
-        public long TradeId { get; set; }
+        public long TradeId { get; internal set; }
 
-        /// <summary>Gets or sets the order identifier.</summary>
+        /// <summary>Gets the order identifier.</summary>
         /// <value>The order identifier.</value>
         [JsonProperty("oid", ItemConverterType = typeof(StringEnumConverter))]
-        public string OrderId { get; set; }
+        public string OrderId { get; internal set; }
 
-        /// <summary>Gets or sets the fees currency name.</summary>
+        /// <summary>Gets the fees currency name.</summary>
         /// <value>The fees currency.</value>
-        public string FeesCurrency { get; set; }
+        public string FeesCurrency { get; internal set; }
 
-        /// <summary>Gets or sets the fees amount.</summary>
+        /// <summary>Gets the fees amount.</summary>
         /// <value>The fees amount.</value>
-        public decimal FeesAmount { get; set; }
+        public decimal FeesAmount { get; internal set; }
 
-        /// <summary>Gets or sets the minor currency amount.</summary>
+        /// <summary>Gets the minor currency amount.</summary>
         /// <value>The minor.</value>
-        public decimal Minor { get; set; }
+        public decimal Minor { get; internal set; }
 
-        /// <summary>Gets or sets the major currency amount.</summary>
+        /// <summary>Gets the major currency amount.</summary>
         /// <value>The major.</value>
-        public decimal Major { get; set; }
+        public decimal Major { get; internal set; }
     }
 }

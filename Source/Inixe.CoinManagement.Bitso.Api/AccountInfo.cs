@@ -37,69 +37,69 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class AccountInfo
+    public sealed class AccountInfo
     {
-        /// <summary>Gets or sets the client identifier.</summary>
+        /// <summary>Gets the client identifier.</summary>
         /// <value>The client identifier.</value>
-        public string ClientId { get; set; }
+        public string ClientId { get; internal set; }
 
-        /// <summary>Gets or sets the first name.</summary>
+        /// <summary>Gets the first name.</summary>
         /// <value>The first name.</value>
-        public string FirstName { get; set; }
+        public string FirstName { get; internal set; }
 
-        /// <summary>Gets or sets the last name.</summary>
+        /// <summary>Gets the last name.</summary>
         /// <value>The last name.</value>
-        public string LastName { get; set; }
+        public string LastName { get; internal set; }
 
-        /// <summary>Gets or sets the status.</summary>
+        /// <summary>Gets the status.</summary>
         /// <value>The status.</value>
-        public AccountStatus Status { get; set; }
+        public AccountStatus Status { get; internal set; }
 
-        /// <summary>Gets or sets the daily limit.</summary>
+        /// <summary>Gets the daily limit.</summary>
         /// <value>The daily limit.</value>
-        public decimal DailyLimit { get; set; }
+        public decimal DailyLimit { get; internal set; }
 
-        /// <summary>Gets or sets the daily remaining.</summary>
+        /// <summary>Gets the daily remaining.</summary>
         /// <value>The daily remaining.</value>
-        public decimal DailyRemaining { get; set; }
+        public decimal DailyRemaining { get; internal set; }
 
-        /// <summary>Gets or sets the monthly limit.</summary>
+        /// <summary>Gets the monthly limit.</summary>
         /// <value>The monthly limit.</value>
-        public decimal MonthlyLimit { get; set; }
+        public decimal MonthlyLimit { get; internal set; }
 
-        /// <summary>Gets or sets the cellphone number status.</summary>
+        /// <summary>Gets the cellphone number status.</summary>
         /// <value>The cellphone number status.</value>
         [JsonProperty("cellphone_number")]
-        public string CellphoneNumberStatus { get; set; }
+        public string CellphoneNumberStatus { get; internal set; }
 
-        /// <summary>Gets or sets the cellphone number.</summary>
+        /// <summary>Gets the cellphone number.</summary>
         /// <value>The cellphone number.</value>
         [JsonProperty("cellphone_number_stored")]
-        public string CellphoneNumber { get; set; }
+        public string CellphoneNumber { get; internal set; }
 
-        /// <summary>Gets or sets the email.</summary>
+        /// <summary>Gets the email.</summary>
         /// <value>The email.</value>
         [JsonProperty("email_stored")]
-        public string Email { get; set; }
+        public string Email { get; internal set; }
 
-        /// <summary>Gets or sets the official identifier.</summary>
+        /// <summary>Gets the official identifier.</summary>
         /// <value>The official identifier.</value>
         [JsonProperty("official_id")]
-        public string OfficialId { get; set; }
+        public string OfficialId { get; internal set; }
 
-        /// <summary>Gets or sets the proof of residency.</summary>
+        /// <summary>Gets the proof of residency.</summary>
         /// <value>The proof of residency.</value>
         [JsonProperty("proof_of_residency")]
-        public string ProofOfResidency { get; set; }
+        public string ProofOfResidency { get; internal set; }
 
-        /// <summary>Gets or sets the signed contract.</summary>
+        /// <summary>Gets the signed contract.</summary>
         /// <value>The signed contract.</value>
         [JsonProperty("signed_contract")]
-        public string SignedContract { get; set; }
+        public string SignedContract { get; internal set; }
 
-        /// <summary>Gets or sets the origin of funds.</summary>
+        /// <summary>Gets the origin of funds.</summary>
         /// <value>The origin of funds.</value>
         [JsonProperty("origin_of_funds")]
-        public string OriginOfFunds { get; set; }
+        public string OriginOfFunds { get; internal set; }
     }
 }

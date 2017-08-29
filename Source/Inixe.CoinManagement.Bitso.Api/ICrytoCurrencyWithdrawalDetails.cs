@@ -15,14 +15,14 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Represents the a Crypto currency transfer details</remarks>
     public interface ICrytoCurrencyWithdrawalDetails
     {
-        /// <summary>Gets or sets the withdrawal address.</summary>
+        /// <summary>Gets the withdrawal address.</summary>
         /// <value>The withdrawal address.</value>
         [JsonProperty("withdrawal_address")]
-        string WithdrawalAddress { get; set; }
+        string WithdrawalAddress { get; }
 
-        /// <summary>Gets or sets the transfer hash.</summary>
+        /// <summary>Gets the transfer hash.</summary>
         /// <value>The transfer hash.</value>
         [JsonProperty("tx_hash")]
-        string TransferHash { get; set; }
+        string TransferHash { get; }
     }
 }

@@ -17,27 +17,27 @@ namespace Inixe.CoinManagement.Bitso.Api
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public interface ILedgerEntryBase
     {
-        /// <summary>Gets or sets the balances updates made after the operations is done.</summary>
+        /// <summary>Gets the balances updates made after the operations is done.</summary>
         /// <value>The balances.</value>
         /// <remarks>Once the operation is done a balance summary for every currency involved is generated. Every balance update summarises the amount been affected for the currency balance.</remarks>
         [JsonProperty("balance_updates")]
-        IList<BalanceUpdate> Balances { get; set; }
+        IList<BalanceUpdate> Balances { get; }
 
-        /// <summary>Gets or sets the created at date.</summary>
+        /// <summary>Gets the created at date.</summary>
         /// <value>The created at.</value>
         /// <remarks>None</remarks>
-        DateTime CreatedAt { get; set; }
+        DateTime CreatedAt { get; }
 
-        /// <summary>Gets or sets the ledger identifier.</summary>
+        /// <summary>Gets the ledger identifier.</summary>
         /// <value>The ledger identifier.</value>
         /// <remarks>None</remarks>
         [JsonProperty("eid")]
-        string Id { get; set; }
+        string Id { get; }
 
-        /// <summary>Gets or sets the Ledger entry kind.</summary>
+        /// <summary>Gets the Ledger entry kind.</summary>
         /// <value>The ledger entry kind.</value>
         /// <remarks>None</remarks>
         [JsonProperty("operation", ItemConverterType = typeof(StringEnumConverter))]
-        TransactionType Kind { get; set; }
+        TransactionType Kind { get; }
     }
 }

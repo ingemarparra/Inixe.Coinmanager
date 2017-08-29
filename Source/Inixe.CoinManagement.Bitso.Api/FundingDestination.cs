@@ -19,14 +19,14 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class FundingDestination
+    public sealed class FundingDestination
     {
-        /// <summary>Gets or sets the name of the account identifier.</summary>
+        /// <summary>Gets the name of the account identifier.</summary>
         /// <value>The name of the account identifier.</value>
-        public string AccountIdentifierName { get; set; }
+        public string AccountIdentifierName { get; internal set; }
 
-        /// <summary>Gets or sets the account identifier.</summary>
+        /// <summary>Gets the account identifier.</summary>
         /// <value>The account identifier.</value>
-        public string AccountIdentifier { get; set; }
+        public string AccountIdentifier { get; internal set; }
     }
 }

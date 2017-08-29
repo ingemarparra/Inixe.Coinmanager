@@ -19,21 +19,21 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Fee
+    public sealed class Fee
     {
-        /// <summary>Gets or sets the name of the book.</summary>
+        /// <summary>Gets the name of the book.</summary>
         /// <value>The name of the book.</value>
         [JsonProperty("book")]
-        public string BookName { get; set; }
+        public string BookName { get; internal set; }
 
-        /// <summary>Gets or sets the value.</summary>
+        /// <summary>Gets the value.</summary>
         /// <value>The value.</value>
         [JsonProperty("fee_decimal")]
-        public decimal Value { get; set; }
+        public decimal Value { get; internal set; }
 
-        /// <summary>Gets or sets the percent.</summary>
+        /// <summary>Gets the percent.</summary>
         /// <value>The percent.</value>
         [JsonProperty("fee_percent")]
-        public decimal Percent { get; set; }
+        public decimal Percent { get; internal set; }
     }
 }

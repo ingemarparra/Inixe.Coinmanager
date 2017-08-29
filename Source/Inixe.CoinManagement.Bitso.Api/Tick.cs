@@ -18,24 +18,24 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class Tick
     /// </summary>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Tick
+    public sealed class Tick
     {
-        /// <summary>Gets or sets the name of the book.</summary>
+        /// <summary>Gets the name of the book.</summary>
         /// <value>The name of the book.</value>
         [JsonProperty("book")]
-        public string BookName { get; set; }
+        public string BookName { get; internal set; }
 
-        /// <summary>Gets or sets the price.</summary>
+        /// <summary>Gets the price.</summary>
         /// <value>The price.</value>
-        public decimal Price { get; set; }
+        public decimal Price { get; internal set; }
 
-        /// <summary>Gets or sets the amount.</summary>
+        /// <summary>Gets the amount.</summary>
         /// <value>The amount.</value>
-        public decimal Amount { get; set; }
+        public decimal Amount { get; internal set; }
 
-        /// <summary>Gets or sets the order identifier.</summary>
+        /// <summary>Gets the order identifier.</summary>
         /// <value>The order identifier.</value>
         [JsonProperty("oid")]
-        public string OrderId { get; set; }
+        public string OrderId { get; internal set; }
     }
 }

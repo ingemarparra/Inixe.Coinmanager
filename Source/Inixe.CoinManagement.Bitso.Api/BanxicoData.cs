@@ -13,106 +13,106 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class SpeiCda
     /// </summary>
     /// <remarks>Holds the Spei Specific data</remarks>
-    public class BanxicoData
+    public sealed class BanxicoData
     {
-        /// <summary>Gets or sets the original string.</summary>
+        /// <summary>Gets the original string.</summary>
         /// <value>The original string.</value>
         [JsonProperty("cadenaOriginal")]
-        public string OriginalString { get; set; }
+        public string OriginalString { get; internal set; }
 
-        /// <summary>Gets or sets the payment concept.</summary>
+        /// <summary>Gets the payment concept.</summary>
         /// <value>The payment concept.</value>
         [JsonProperty("conceptoPago")]
-        public string PaymentConcept { get; set; }
+        public string PaymentConcept { get; internal set; }
 
-        /// <summary>Gets or sets the beneficiary account.</summary>
+        /// <summary>Gets the beneficiary account.</summary>
         /// <value>The beneficiary account.</value>
         [JsonProperty("cuentaBeneficiario")]
-        public string BeneficiaryAccount { get; set; }
+        public string BeneficiaryAccount { get; internal set; }
 
-        /// <summary>Gets or sets the ordering account.</summary>
+        /// <summary>Gets the ordering account.</summary>
         /// <value>The ordering account.</value>
         [JsonProperty("cuentaOrdenante")]
-        public string OrderingAccount { get; set; }
+        public string OrderingAccount { get; internal set; }
 
-        /// <summary>Gets or sets the name of the beneficiary.</summary>
+        /// <summary>Gets the name of the beneficiary.</summary>
         /// <value>The name of the beneficiary.</value>
         [JsonProperty("nombreBeneficiario")]
-        public string BeneficiaryName { get; set; }
+        public string BeneficiaryName { get; internal set; }
 
-        /// <summary>Gets or sets the name of the beneficiary insitution.</summary>
+        /// <summary>Gets the name of the beneficiary insitution.</summary>
         /// <value>The name of the beneficiary insitution.</value>
         [JsonProperty("nombreInstBeneficiaria")]
-        public string BeneficiaryInsitutionName { get; set; }
+        public string BeneficiaryInsitutionName { get; internal set; }
 
-        /// <summary>Gets or sets the name of the ordering institution.</summary>
+        /// <summary>Gets the name of the ordering institution.</summary>
         /// <value>The name of the ordering institution.</value>
         [JsonProperty("nombreInstOrdenante")]
-        public string OrderingInstitutionName { get; set; }
+        public string OrderingInstitutionName { get; internal set; }
 
-        /// <summary>Gets or sets the name of the ordering party.</summary>
+        /// <summary>Gets the name of the ordering party.</summary>
         /// <value>The name of the ordering party.</value>
         [JsonProperty("nombreOrdenante")]
-        public string OrderingPartyName { get; set; }
+        public string OrderingPartyName { get; internal set; }
 
-        /// <summary>Gets or sets the numeric reference.</summary>
+        /// <summary>Gets the numeric reference.</summary>
         /// <value>The numeric reference.</value>
         [JsonProperty("referenciaNumerica")]
-        public string NumericReference { get; set; }
+        public string NumericReference { get; internal set; }
 
-        /// <summary>Gets or sets the beneficiary taxation number.</summary>
+        /// <summary>Gets the beneficiary taxation number.</summary>
         /// <value>The beneficiary taxation number.</value>
         [JsonProperty("rfcCurpBeneficiario")]
-        public string BeneficiaryTaxationNumber { get; set; }
+        public string BeneficiaryTaxationNumber { get; internal set; }
 
-        /// <summary>Gets or sets the ordering taxation number.</summary>
+        /// <summary>Gets the ordering taxation number.</summary>
         /// <value>The ordering taxation number.</value>
         [JsonProperty("rfcCurpOrdenante")]
-        public string OrderingTaxationNumber { get; set; }
+        public string OrderingTaxationNumber { get; internal set; }
 
-        /// <summary>Gets or sets the digital stamp.</summary>
+        /// <summary>Gets the digital stamp.</summary>
         /// <value>The digital stamp.</value>
         [JsonProperty("selloDigital")]
-        public string DigitalStamp { get; set; }
+        public string DigitalStamp { get; internal set; }
 
-        /// <summary>Gets or sets the certificate series.</summary>
+        /// <summary>Gets the certificate series.</summary>
         /// <value>The certificate series.</value>
         [JsonProperty("serieCertificado")]
-        public string CertificateSeries { get; set; }
+        public string CertificateSeries { get; internal set; }
 
-        /// <summary>Gets or sets the type of the operation.</summary>
+        /// <summary>Gets the type of the operation.</summary>
         /// <value>The type of the operation.</value>
         [JsonProperty("tipoOperacion")]
-        public string OperationType { get; set; }
+        public string OperationType { get; internal set; }
 
-        /// <summary>Gets or sets the time.</summary>
+        /// <summary>Gets the time.</summary>
         /// <value>The time.</value>
         [JsonProperty("hora")]
-        public string Time { get; set; }
+        public string Time { get; internal set; }
 
-        /// <summary>Gets or sets the tax.</summary>
+        /// <summary>Gets the tax.</summary>
         /// <value>The tax.</value>
         [JsonProperty("iva")]
-        public decimal Tax { get; set; }
+        public decimal Tax { get; internal set; }
 
-        /// <summary>Gets or sets the amount.</summary>
+        /// <summary>Gets the amount.</summary>
         /// <value>The amount.</value>
         [JsonProperty("monto")]
-        public decimal Amount { get; set; }
+        public decimal Amount { get; internal set; }
 
-        /// <summary>Gets or sets the type of the payment.</summary>
+        /// <summary>Gets the type of the payment.</summary>
         /// <value>The type of the payment.</value>
         [JsonProperty("tipoPago")]
-        public long PaymentType { get; set; }
+        public long PaymentType { get; internal set; }
 
-        /// <summary>Gets or sets the issue date.</summary>
+        /// <summary>Gets the issue date.</summary>
         /// <value>The issue date.</value>
         [JsonProperty("fechaCaptura")]
-        public long IssueDate { get; set; }
+        public long IssueDate { get; internal set; }
 
-        /// <summary>Gets or sets the operation date.</summary>
+        /// <summary>Gets the operation date.</summary>
         /// <value>The operation date.</value>
         [JsonProperty("fechaOperacion")]
-        public long OperationDate { get; set; }
+        public long OperationDate { get; internal set; }
     }
 }

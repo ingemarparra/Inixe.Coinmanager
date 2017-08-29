@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="HttpClientBase.cs" company="Inixe">
+// <copyright file="BitsoClientBase.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,10 +16,10 @@ namespace Inixe.CoinManagement.Bitso.Api
     using RestSharp;
 
     /// <summary>
-    /// Class HttpClientBase
+    /// Class BitsoClientBase
     /// </summary>
     /// <remarks>None</remarks>
-    public class HttpClientBase : IDisposable
+    public class BitsoClientBase : IDisposable
     {
         private readonly IRestClient client;
         private readonly string apiKey;
@@ -28,46 +28,46 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         private bool disposedValue;
 
-        /// <summary>Initializes a new instance of the <see cref="HttpClientBase"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="BitsoClientBase"/> class.</summary>
         /// <param name="serverUrl">The server URL.</param>
         /// <param name="apiKey">The API key.</param>
         /// <param name="apiSecret">The API secret.</param>
-        protected HttpClientBase(string serverUrl, string apiKey, string apiSecret)
+        protected BitsoClientBase(string serverUrl, string apiKey, string apiSecret)
             : this(serverUrl, apiKey, CreateSecureApiSecret(apiSecret))
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="HttpClientBase"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="BitsoClientBase"/> class.</summary>
         /// <param name="serverUrl">The server URL.</param>
         /// <param name="apiKey">The Api key value</param>
         /// <param name="apiSecret">The Api secret value</param>
         /// <exception cref="ArgumentException">Invalid URL - serverUrl</exception>
         /// <remarks>None</remarks>
-        protected HttpClientBase(string serverUrl, string apiKey, SecureString apiSecret)
+        protected BitsoClientBase(string serverUrl, string apiKey, SecureString apiSecret)
             : this(null, serverUrl, apiKey, apiSecret)
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="HttpClientBase"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="BitsoClientBase"/> class.</summary>
         /// <param name="restClient">The rest client to use. This is often usefull for unit testing, If <c>null</c> a default RestClient will be used</param>
         /// <param name="serverUrl">The server URL.</param>
         /// <param name="apiKey">The Api key value</param>
         /// <param name="apiSecret">The Api secret value</param>
         /// <exception cref="ArgumentException">Invalid URL - serverUrl</exception>
         /// <remarks>None</remarks>
-        protected HttpClientBase(IRestClient restClient, string serverUrl, string apiKey, string apiSecret)
+        protected BitsoClientBase(IRestClient restClient, string serverUrl, string apiKey, string apiSecret)
             : this(restClient, serverUrl, apiKey, CreateSecureApiSecret(apiSecret))
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="HttpClientBase"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="BitsoClientBase"/> class.</summary>
         /// <param name="restClient">The rest client to use. This is often usefull for unit testing, If <c>null</c> a default RestClient will be used</param>
         /// <param name="serverUrl">The server URL.</param>
         /// <param name="apiKey">The Api key value</param>
         /// <param name="apiSecret">The Api secret value</param>
         /// <exception cref="ArgumentException">Invalid URL - serverUrl</exception>
         /// <remarks>None</remarks>
-        protected HttpClientBase(IRestClient restClient, string serverUrl, string apiKey, SecureString apiSecret)
+        protected BitsoClientBase(IRestClient restClient, string serverUrl, string apiKey, SecureString apiSecret)
         {
             if (!System.Uri.IsWellFormedUriString(serverUrl, System.UriKind.Absolute))
             {

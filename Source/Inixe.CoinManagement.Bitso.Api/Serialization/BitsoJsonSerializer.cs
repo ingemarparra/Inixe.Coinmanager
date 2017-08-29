@@ -41,6 +41,7 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
             this.serializer.DefaultValueHandling = DefaultValueHandling.Include;
             this.serializer.DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
             this.serializer.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            this.serializer.ContractResolver = new BitsoContractResolver();
         }
 
         /// <summary>
@@ -105,7 +106,13 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
         /// <returns>An instance of T</returns>
         public T Deserialize<T>(string content)
         {
-            return JsonConvert.DeserializeObject<T>(content);
+            using (var reader = new StringReader(content))
+            {
+                using (var contentReader = new JsonTextReader(reader))
+                {
+                    return this.serializer.Deserialize<T>(contentReader);
+                }
+            }
         }
 
         /// <summary>Deserializes the specified response.</summary>

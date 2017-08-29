@@ -14,15 +14,15 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class SPEI CEP
     /// </summary>
     /// <remarks>Holds CEP data</remarks>
-    public class SpeiCep
+    public sealed class SpeiCep
     {
-        /// <summary>Gets or sets a value indicating whether this <see cref="SpeiCep"/> is success.</summary>
+        /// <summary>Gets a value indicating whether this <see cref="SpeiCep"/> is success.</summary>
         /// <value><c>true</c> if success; otherwise, <c>false</c>.</value>
-        public bool Success { get; set; }
+        public bool Success { get; internal set; }
 
-        /// <summary>Gets or sets the return data.</summary>
+        /// <summary>Gets the return data.</summary>
         /// <value>The return data.</value>
         [JsonProperty("0")]
-        public SpeiRemittent Remittent { get; set; }
+        public SpeiRemittent Remittent { get; internal set; }
     }
 }

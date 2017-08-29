@@ -12,16 +12,16 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Hold the detiails of a Withdrawal operation</remarks>
     public interface IWithdrawalOperationDetails
     {
-        /// <summary>Gets or sets the withdrawal operation identifier.</summary>
+        /// <summary>Gets the withdrawal operation identifier.</summary>
         /// <value>The withdrawal operation identifier.</value>
-        string WithdrawalOperationId { get; set; }
+        string WithdrawalOperationId { get; }
 
-        /// <summary>Gets or sets the withdrawal method.</summary>
+        /// <summary>Gets the withdrawal method.</summary>
         /// <value>The withdrawal method.</value>
-        string Method { get; set; }
+        string Method { get; }
 
-        /// <summary>Gets or sets the benficiary address.</summary>
+        /// <summary>Gets the benficiary address.</summary>
         /// <value>The benficiary address.</value>
-        string BenficiaryAddress { get; set; }
+        string BenficiaryAddress { get; }
     }
 }

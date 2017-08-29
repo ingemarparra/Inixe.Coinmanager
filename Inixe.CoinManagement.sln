@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B2F06DC3-E861-416A-A384-53DACEA6FF79}"
 EndProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markets", "Markets", "{AF5C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api", "Source\Inixe.CoinManagement.Bitso.Api\Inixe.CoinManagement.Bitso.Api.csproj", "{F1933E07-9E82-430F-9727-31820C16CE82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api.UnitTests", "Source\Inixe.CoinManagement.Bitso.Api.UnitTests\Inixe.CoinManagement.Bitso.Api.UnitTests.csproj", "{C06EBA76-F296-431A-A6E4-3373AFDAF15B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api.Tests", "Source\Inixe.CoinManagement.Bitso.Api.UnitTests\Inixe.CoinManagement.Bitso.Api.Tests.csproj", "{C06EBA76-F296-431A-A6E4-3373AFDAF15B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Common", "Source\Inixe.CoinManagement.Common\Inixe.CoinManagement.Common.csproj", "{14EA9422-7E3E-4CB6-9637-3704D04DA608}"
 EndProject
@@ -71,5 +71,8 @@ Global
 		{4A3AF59A-A7DB-4337-A31F-4B7D183E36AA} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
 		{48F7AB32-82A4-4D4A-91F1-99E0431532A3} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
 		{CAFC9F13-B2EA-417A-B557-D086BEE929BB} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42285111-2057-45AE-85E2-4E1144A3C975}
 	EndGlobalSection
 EndGlobal

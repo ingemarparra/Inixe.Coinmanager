@@ -21,12 +21,12 @@ namespace Inixe.CoinManagement.Bitso.Api
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class BankCode
     {
-        /// <summary>Gets or sets the code.</summary>
+        /// <summary>Gets the code.</summary>
         /// <value>The code.</value>
-        public string Code { get; set; }
+        public string Code { get; internal set; }
 
-        /// <summary>Gets or sets the name.</summary>
+        /// <summary>Gets the name.</summary>
         /// <value>The name.</value>
-        public string Name { get; set; }
+        public string Name { get; internal set; }
     }
 }

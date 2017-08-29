@@ -65,7 +65,7 @@
     <Compile Include="FundingBase.cs" />
     <Compile Include="FundingDestination.cs" />
     <Compile Include="FundingTransferDetails.cs" />
-    <Compile Include="HttpClientBase.cs" />
+    <Compile Include="BitsoClientBase.cs" />
     <Compile Include="ICrytoCurrencyFundingDetails.cs" />
     <Compile Include="ICrytoCurrencyWithdrawalDetails.cs" />
     <Compile Include="IFundingOperationDetails.cs" />
@@ -82,6 +82,7 @@
     <Compile Include="LedgerFundingEntry.cs" />
     <Compile Include="LedgerTradeEntry.cs" />
     <Compile Include="LedgerWithdrawalEntry.cs" />
+    <Compile Include="Serialization\BitsoContractResolver.cs" />
     <Compile Include="Serialization\BitsoJsonSerializer.cs" />
     <Compile Include="CurrencyPair.cs" />
     <Compile Include="OrderBook.cs" />

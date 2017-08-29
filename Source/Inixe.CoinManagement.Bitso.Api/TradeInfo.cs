@@ -37,26 +37,26 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>Holds the Public trade information. This is used for market data</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class TradeInfo : ITrade
+    public sealed class TradeInfo : ITrade
     {
         /// <inheritdoc/>
-        public string BookName { get; set; }
+        public string BookName { get; internal set; }
 
         /// <inheritdoc/>
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; internal set; }
 
-        /// <summary>Gets or sets the amount.</summary>
+        /// <summary>Gets the amount.</summary>
         /// <value>The amount.</value>
-        public decimal Amount { get; set; }
+        public decimal Amount { get; internal set; }
 
         /// <inheritdoc/>
         [JsonProperty("maker_side", ItemConverterType = typeof(StringEnumConverter))]
-        public MarketSide MakerSide { get; set; }
+        public MarketSide MakerSide { get; internal set; }
 
         /// <inheritdoc/>
-        public decimal Price { get; set; }
+        public decimal Price { get; internal set; }
 
         /// <inheritdoc/>
-        public long TradeId { get; set; }
+        public long TradeId { get; internal set; }
     }
 }

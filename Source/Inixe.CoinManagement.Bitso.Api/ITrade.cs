@@ -13,26 +13,26 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Represents the Basic trade data</remarks>
     public interface ITrade
     {
-        /// <summary>Gets or sets the name of the book.</summary>
+        /// <summary>Gets the name of the book.</summary>
         /// <value>The name of the book.</value>
         [JsonProperty("book")]
-        string BookName { get; set; }
+        string BookName { get; }
 
-        /// <summary>Gets or sets the created at.</summary>
+        /// <summary>Gets the created at.</summary>
         /// <value>The created at.</value>
-        DateTime CreatedAt { get; set; }
+        DateTime CreatedAt { get; }
 
-        /// <summary>Gets or sets the maker side.</summary>
+        /// <summary>Gets the maker side.</summary>
         /// <value>The maker side.</value>
-        MarketSide MakerSide { get; set; }
+        MarketSide MakerSide { get; }
 
-        /// <summary>Gets or sets the price.</summary>
+        /// <summary>Gets the price.</summary>
         /// <value>The price.</value>
-        decimal Price { get; set; }
+        decimal Price { get; }
 
-        /// <summary>Gets or sets the trade identifier.</summary>
+        /// <summary>Gets the trade identifier.</summary>
         /// <value>The trade identifier.</value>
         [JsonProperty("tid")]
-        long TradeId { get; set; }
+        long TradeId { get; }
     }
 }

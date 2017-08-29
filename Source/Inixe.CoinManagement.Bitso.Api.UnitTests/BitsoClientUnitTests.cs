@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Inixe.CoinManagement.Bitso.Api.UnitTests
+namespace Inixe.CoinManagement.Bitso.Api.Tests
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,13 +39,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseSingle<TradeOrder>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseSingle<TradeOrder>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseSingle<TradeOrder>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.PlaceOrderResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseSingle<TradeOrder>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -78,13 +78,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseCollection<CurrencyPair>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseCollection<CurrencyPair>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseCollection<CurrencyPair>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.AvailableBooksResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseCollection<CurrencyPair>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -116,13 +116,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseSingle<Ticker>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseSingle<Ticker>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseSingle<Ticker>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.TickerResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseSingle<Ticker>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -159,13 +159,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseCollection<TradeInfo>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseCollection<TradeInfo>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseCollection<TradeInfo>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.TradesInfoResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseCollection<TradeInfo>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -200,16 +200,16 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseSingle<OrderBook>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseSingle<OrderBook>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseSingle<OrderBook>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
-                var aggregateParameter = y.Parameters.Find(x => x.Name == "aggregate");
+                var aggregateParameter = request.Parameters.Find(x => x.Name == "aggregate");
                 bool aggregate = aggregateParameter != null ? (bool)aggregateParameter.Value : false;
 
                 responseMock.Object.Content = aggregate ? Properties.Resources.OrderBookResponse1 : Properties.Resources.OrderBookResponse2;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseSingle<OrderBook>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -262,13 +262,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseSingle<AccountInfo>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseSingle<AccountInfo>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseSingle<AccountInfo>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.AccountStatusResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseSingle<AccountInfo>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -301,13 +301,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseSingle<Portfolio>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseSingle<Portfolio>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseSingle<Portfolio>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.PortfolioResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseSingle<Portfolio>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -334,13 +334,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseSingle<AccountFees>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseSingle<AccountFees>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseSingle<AccountFees>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.AccountFeesResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseSingle<AccountFees>>(responseMock.Object);
 
                 return responseMock.Object;
@@ -371,13 +371,13 @@ namespace Inixe.CoinManagement.Bitso.Api.UnitTests
             restMock.SetupAllProperties();
             restMock.Setup(x => x.AddHandler("application/json", It.IsAny<IDeserializer>())).Callback<string, IDeserializer>((ct, d) => deserializer = d);
 
-            restMock.Setup(x => x.Execute<ResponseCollection<LedgerEntryBase>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(y =>
+            restMock.Setup(x => x.Execute<ResponseCollection<LedgerEntryBase>>(It.IsAny<IRestRequest>())).Returns<IRestRequest>(request =>
             {
                 var responseMock = new Mock<IRestResponse<ResponseCollection<LedgerEntryBase>>>(MockBehavior.Strict);
                 responseMock.SetupAllProperties();
 
                 responseMock.Object.Content = Properties.Resources.LedgerResponse;
-                responseMock.Object.Request = y;
+                responseMock.Object.Request = request;
                 responseMock.Object.Data = deserializer.Deserialize<ResponseCollection<LedgerEntryBase>>(responseMock.Object);
 
                 return responseMock.Object;

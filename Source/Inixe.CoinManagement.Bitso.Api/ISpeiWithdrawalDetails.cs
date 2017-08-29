@@ -15,34 +15,34 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <remarks>Represents the Specific data for spei transfers</remarks>
     public interface ISpeiWithdrawalDetails
     {
-        /// <summary>Gets or sets the name of the beneficiary.</summary>
+        /// <summary>Gets the name of the beneficiary.</summary>
         /// <value>The name of the beneficiary.</value>
-        string BeneficiaryName { get; set; }
+        string BeneficiaryName { get; }
 
-        /// <summary>Gets or sets the beneficiary bank.</summary>
+        /// <summary>Gets the beneficiary bank.</summary>
         /// <value>The beneficiary bank.</value>
-        string BeneficiaryBankCode { get; set; }
+        string BeneficiaryBankCode { get; }
 
-        /// <summary>Gets or sets the beneficiary clabe.</summary>
+        /// <summary>Gets the beneficiary clabe.</summary>
         /// <value>The beneficiary clabe.</value>
-        string BeneficiaryClabe { get; set; }
+        string BeneficiaryClabe { get; }
 
-        /// <summary>Gets or sets the numeric reference.</summary>
+        /// <summary>Gets the numeric reference.</summary>
         /// <value>The numeric reference.</value>
-        string NumericReference { get; set; }
+        string NumericReference { get; }
 
-        /// <summary>Gets or sets the concept.</summary>
+        /// <summary>Gets the concept.</summary>
         /// <value>The concept.</value>
         [JsonProperty("concepto")]
-        string Concept { get; set; }
+        string Concept { get; }
 
-        /// <summary>Gets or sets the tracking code.</summary>
+        /// <summary>Gets the tracking code.</summary>
         /// <value>The tracking code.</value>
         [JsonProperty("clave_rastreo")]
-        string TrackingCode { get; set; }
+        string TrackingCode { get; }
 
-        /// <summary>Gets or sets the cep data.</summary>
+        /// <summary>Gets the cep data.</summary>
         /// <value>The cep data.</value>
-        SpeiCep Cep { get; set; }
+        SpeiCep Cep { get; }
     }
 }

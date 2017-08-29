@@ -34,11 +34,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 return this.wrapped.Id;
             }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
-            }
         }
 
         /// <inheritdoc/>
@@ -47,11 +42,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             get
             {
                 return this.wrapped.Status;
-            }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
             }
         }
 
@@ -62,11 +52,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 return this.wrapped.CreatedAt;
             }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
-            }
         }
 
         /// <inheritdoc/>
@@ -75,11 +60,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             get
             {
                 return this.wrapped.Currency;
-            }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
             }
         }
 
@@ -90,11 +70,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 return this.wrapped.MethodName;
             }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
-            }
         }
 
         /// <inheritdoc/>
@@ -104,11 +79,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 return this.wrapped.Method;
             }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
-            }
         }
 
         /// <inheritdoc/>
@@ -117,11 +87,6 @@ namespace Inixe.CoinManagement.Bitso.Api
             get
             {
                 return this.wrapped.Amount;
-            }
-
-            set
-            {
-                throw new InvalidOperationException("This is a readonly instance");
             }
         }
 

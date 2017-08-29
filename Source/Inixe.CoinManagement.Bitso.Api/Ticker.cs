@@ -14,44 +14,44 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// The Price Ticker
     /// </summary>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class Ticker
+    public sealed class Ticker
     {
-        /// <summary>Gets or sets the book.</summary>
+        /// <summary>Gets the book.</summary>
         /// <value>The book.</value>
         [JsonProperty("book")]
-        public string BookName { get; set; }
+        public string BookName { get; internal set; }
 
-        /// <summary>Gets or sets the volume.</summary>
+        /// <summary>Gets the volume.</summary>
         /// <value>Last 24 hours volume.</value>
-        public decimal Volume { get; set; }
+        public decimal Volume { get; internal set; }
 
-        /// <summary>Gets or sets the high.</summary>
+        /// <summary>Gets the high.</summary>
         /// <value>Last 24 hours price high.</value>
-        public decimal High { get; set; }
+        public decimal High { get; internal set; }
 
-        /// <summary>Gets or sets the last.</summary>
+        /// <summary>Gets the last.</summary>
         /// <value>Last traded price.</value>
-        public decimal Last { get; set; }
+        public decimal Last { get; internal set; }
 
-        /// <summary>Gets or sets the low.</summary>
+        /// <summary>Gets the low.</summary>
         /// <value>Last 24 hours price low.</value>
-        public decimal Low { get; set; }
+        public decimal Low { get; internal set; }
 
-        /// <summary>Gets or sets the vwap.</summary>
+        /// <summary>Gets the vwap.</summary>
         /// <value>Last 24 hours volume weighted average price.</value>
         [JsonProperty("vwap")]
-        public decimal VolumeWeightedAveragePrice { get; set; }
+        public decimal VolumeWeightedAveragePrice { get; internal set; }
 
-        /// <summary>Gets or sets the ask.</summary>
+        /// <summary>Gets the ask.</summary>
         /// <value>Lowest sell order.</value>
-        public decimal Ask { get; set; }
+        public decimal Ask { get; internal set; }
 
-        /// <summary>Gets or sets the bid.</summary>
+        /// <summary>Gets the bid.</summary>
         /// <value>Highest buy order.</value>
-        public decimal Bid { get; set; }
+        public decimal Bid { get; internal set; }
 
-        /// <summary>Gets or sets the created at.</summary>
+        /// <summary>Gets the created at.</summary>
         /// <value>Timestamp at which the ticker was generated.</value>
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; internal set; }
     }
 }

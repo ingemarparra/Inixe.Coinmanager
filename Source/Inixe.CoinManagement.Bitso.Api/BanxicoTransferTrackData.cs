@@ -12,21 +12,21 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <summary>
     /// Class BanxicoTransferTrackData
     /// </summary>
-    public class BanxicoTransferTrackData
+    public sealed class BanxicoTransferTrackData
     {
-        /// <summary>Gets or sets the query status.</summary>
+        /// <summary>Gets the query status.</summary>
         /// <value>The query status.</value>
         [JsonProperty("estadoConsulta")]
-        public int QueryStatus { get; set; }
+        public int QueryStatus { get; internal set; }
 
-        /// <summary>Gets or sets the URL.</summary>
+        /// <summary>Gets the URL.</summary>
         /// <value>The URL.</value>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; internal set; }
 
-        /// <summary>Gets or sets the cda.</summary>
+        /// <summary>Gets the cda.</summary>
         /// <value>The cda.</value>
         [JsonProperty("cda")]
-        public BanxicoData Cda { get; set; }
+        public BanxicoData Cda { get; internal set; }
     }
 }

@@ -20,16 +20,16 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>Represents a Balace Change</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class BalanceUpdate
+    public sealed class BalanceUpdate
     {
-        /// <summary>Gets or sets the currency identifier.</summary>
+        /// <summary>Gets the currency identifier.</summary>
         /// <value>The currency identifier.</value>
         /// <remarks>None</remarks>
-        public string Currency { get; set; }
+        public string Currency { get; internal set; }
 
-        /// <summary>Gets or sets the updated amount.</summary>
+        /// <summary>Gets the updated amount.</summary>
         /// <value>The updated amount.</value>
         /// <remarks>None</remarks>
-        public decimal Amount { get; set; }
+        public decimal Amount { get; internal set; }
     }
 }

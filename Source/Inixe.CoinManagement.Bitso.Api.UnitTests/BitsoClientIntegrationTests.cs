@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Inixe.CoinManagement.Bitso.Api.UnitTests
+namespace Inixe.CoinManagement.Bitso.Api.Tests
 {
     using System.Linq;
     using System.Security;

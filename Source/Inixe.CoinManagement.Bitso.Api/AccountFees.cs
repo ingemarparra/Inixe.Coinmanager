@@ -19,7 +19,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class AccountFees
+    public sealed class AccountFees
     {
         /// <summary>Initializes a new instance of the <see cref="AccountFees"/> class.</summary>
         public AccountFees()
@@ -28,13 +28,13 @@ namespace Inixe.CoinManagement.Bitso.Api
             this.WithdrawalFees = new Dictionary<string, decimal>();
         }
 
-        /// <summary>Gets or sets the trade fees.</summary>
+        /// <summary>Gets the trade fees.</summary>
         /// <value>The trade fees.</value>
         [JsonProperty("fees")]
-        public IList<Fee> TradeFees { get; set; }
+        public IList<Fee> TradeFees { get; internal set; }
 
-        /// <summary>Gets or sets the withdrawal fees.</summary>
+        /// <summary>Gets the withdrawal fees.</summary>
         /// <value>The withdrawal fees.</value>
-        public Dictionary<string, decimal> WithdrawalFees { get; set; }
+        public Dictionary<string, decimal> WithdrawalFees { get; internal set; }
     }
 }
