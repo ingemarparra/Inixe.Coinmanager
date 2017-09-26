@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markets", "Markets", "{AF5C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api", "Source\Inixe.CoinManagement.Bitso.Api\Inixe.CoinManagement.Bitso.Api.csproj", "{F1933E07-9E82-430F-9727-31820C16CE82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api.Tests", "Source\Inixe.CoinManagement.Bitso.Api.UnitTests\Inixe.CoinManagement.Bitso.Api.Tests.csproj", "{C06EBA76-F296-431A-A6E4-3373AFDAF15B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Bitso.Api.Tests", "Source\Tests\Inixe.CoinManagement.Bitso.Api.UnitTests\Inixe.CoinManagement.Bitso.Api.Tests.csproj", "{C06EBA76-F296-431A-A6E4-3373AFDAF15B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Common", "Source\Inixe.CoinManagement.Common\Inixe.CoinManagement.Common.csproj", "{14EA9422-7E3E-4CB6-9637-3704D04DA608}"
 EndProject
