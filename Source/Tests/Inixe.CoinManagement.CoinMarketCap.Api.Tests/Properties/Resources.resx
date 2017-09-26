@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CoinMarketCap_Sample" xml:space="preserve">
+    <value>[
+    {
+        "id": "bitcoin", 
+        "name": "Bitcoin", 
+        "symbol": "BTC", 
+        "rank": "1", 
+        "price_usd": "4022.6", 
+        "price_btc": "1.0", 
+        "24h_volume_usd": "1500750000.0", 
+        "market_cap_usd": "66677310255.0", 
+        "available_supply": "16575675.0", 
+        "total_supply": "16575675.0", 
+        "percent_change_1h": "0.69", 
+        "percent_change_24h": "1.14", 
+        "percent_change_7d": "-3.82", 
+        "last_updated": "1505843367", 
+        "price_eur": "3354.8926486", 
+        "24h_volume_eur": "1251642008.25", 
+        "market_cap_eur": "55609610203.0"
+    }, 
+    {
+        "id": "ethereum", 
+        "name": "Ethereum", 
+        "symbol": "ETH", 
+        "rank": "2", 
+        "price_usd": "287.709", 
+        "price_btc": "0.0711504", 
+        "24h_volume_usd": "646428000.0", 
+        "market_cap_usd": "27250220383.0", 
+        "available_supply": "94714522.0", 
+        "total_supply": "94714522.0", 
+        "percent_change_1h": "0.15", 
+        "percent_change_24h": "0.4", 
+        "percent_change_7d": "-2.59", 
+        "last_updated": "1505843370", 
+        "price_eur": "239.952470799", 
+        "24h_volume_eur": "539128062.708", 
+        "market_cap_eur": "22726983552.0"
+    }, 
+    {
+        "id": "bitcoin-cash", 
+        "name": "Bitcoin Cash", 
+        "symbol": "BCH", 
+        "rank": "3", 
+        "price_usd": "502.395", 
+        "price_btc": "0.124242", 
+        "24h_volume_usd": "475325000.0", 
+        "market_cap_usd": "8337288985.0", 
+        "available_supply": "16595088.0", 
+        "total_supply": "16595088.0", 
+        "percent_change_1h": "3.64", 
+        "percent_change_24h": "8.42", 
+        "percent_change_7d": "-2.87", 
+        "last_updated": "1505843399", 
+        "price_eur": "419.002956345", 
+        "24h_volume_eur": "396426278.575", 
+        "market_cap_eur": "6953390723.0"
+    }, 
+    {
+        "id": "ripple", 
+        "name": "Ripple", 
+        "symbol": "XRP", 
+        "rank": "4", 
+        "price_usd": "0.187035", 
+        "price_btc": "0.00004625", 
+        "24h_volume_usd": "54091400.0", 
+        "market_cap_usd": "7171640467.0", 
+        "available_supply": "38343841883.0", 
+        "total_supply": "99994523265.0", 
+        "percent_change_1h": "0.21", 
+        "percent_change_24h": "0.83", 
+        "percent_change_7d": "-12.41", 
+        "last_updated": "1505843355", 
+        "price_eur": "0.1559892474", 
+        "24h_volume_eur": "45112822.6054", 
+        "market_cap_eur": "5981227037.0"
+    }, 
+    {
+        "id": "litecoin", 
+        "name": "Litecoin", 
+        "symbol": "LTC", 
+        "rank": "5", 
+        "price_usd": "54.5589", 
+        "price_btc": "0.0134924", 
+        "24h_volume_usd": "292085000.0", 
+        "market_cap_usd": "2891826698.0", 
+        "available_supply": "53003757.0", 
+        "total_supply": "53003757.0", 
+        "percent_change_1h": "0.65", 
+        "percent_change_24h": "0.11", 
+        "percent_change_7d": "-16.75", 
+        "last_updated": "1505843344", 
+        "price_eur": "45.5027227479", 
+        "24h_volume_eur": "243602102.935", 
+        "market_cap_eur": "2411815276.0"
+    }, 
+    {
+        "id": "dash", 
+        "name": "Dash", 
+        "symbol": "DASH", 
+        "rank": "6", 
+        "price_usd": "326.955", 
+        "price_btc": "0.0808557", 
+        "24h_volume_usd": "33720600.0", 
+        "market_cap_usd": "2474120463.0", 
+        "available_supply": "7567159.0", 
+        "total_supply": "7567159.0", 
+        "percent_change_1h": "0.41", 
+        "percent_change_24h": "-0.29", 
+        "percent_change_7d": "0.66", 
+        "last_updated": "1505843360", 
+        "price_eur": "272.684066505", 
+        "24h_volume_eur": "28123351.3266", 
+        "market_cap_eur": "2063443681.0"
+    }, 
+    {
+        "id": "nem", 
+        "name": "NEM", 
+        "symbol": "XEM", 
+        "rank": "7", 
+        "price_usd": "0.248389", 
+        "price_btc": "0.00006143", 
+        "24h_volume_usd": "5686680.0", 
+        "market_cap_usd": "2235501000.0", 
+        "available_supply": "8999999999.0", 
+        "total_supply": "8999999999.0", 
+        "percent_change_1h": "1.98", 
+        "percent_change_24h": "7.12", 
+        "percent_change_7d": "-1.95", 
+        "last_updated": "1505843363", 
+        "price_eur": "0.2071591583", 
+        "24h_volume_eur": "4742753.67348", 
+        "market_cap_eur": "1864432424.0"
+    }, 
+    {
+        "id": "iota", 
+        "name": "IOTA", 
+        "symbol": "MIOTA", 
+        "rank": "8", 
+        "price_usd": "0.580994", 
+        "price_btc": "0.00014368", 
+        "24h_volume_usd": "14523400.0", 
+        "market_cap_usd": "1614890417.0", 
+        "available_supply": "2779530283.0", 
+        "total_supply": "2779530283.0", 
+        "percent_change_1h": "-0.07", 
+        "percent_change_24h": "0.08", 
+        "percent_change_7d": "-1.77", 
+        "last_updated": "1505843393", 
+        "price_eur": "0.4845553869", 
+        "24h_volume_eur": "12112675.3574", 
+        "market_cap_eur": "1346836372.0"
+    }, 
+    {
+        "id": "monero", 
+        "name": "Monero", 
+        "symbol": "XMR", 
+        "rank": "9", 
+        "price_usd": "97.6671", 
+        "price_btc": "0.024153", 
+        "24h_volume_usd": "39546200.0", 
+        "market_cap_usd": "1475249210.0", 
+        "available_supply": "15104874.0", 
+        "total_supply": "15104874.0", 
+        "percent_change_1h": "0.78", 
+        "percent_change_24h": "-1.45", 
+        "percent_change_7d": "-13.64", 
+        "last_updated": "1505843355", 
+        "price_eur": "81.4554357381", 
+        "24h_volume_eur": "32981965.8082", 
+        "market_cap_eur": "1230374069.0"
+    }, 
+    {
+        "id": "ethereum-classic", 
+        "name": "Ethereum Classic", 
+        "symbol": "ETC", 
+        "rank": "10", 
+        "price_usd": "11.5675", 
+        "price_btc": "0.00286065", 
+        "24h_volume_usd": "72440700.0", 
+        "market_cap_usd": "1106638560.0", 
+        "available_supply": "95667911.0", 
+        "total_supply": "95667911.0", 
+        "percent_change_1h": "0.03", 
+        "percent_change_24h": "0.7", 
+        "percent_change_7d": "-20.89", 
+        "last_updated": "1505843375", 
+        "price_eur": "9.6474222425", 
+        "24h_volume_eur": "60416340.6477", 
+        "market_cap_eur": "922948732.0"
+    }
+]</value>
+  </data>
+</root>

@@ -1,5 +1,5 @@
 .vs/*
-Test*
+#Test*
 *Settings/*.runsettings
 /TestResults/*
 packages
