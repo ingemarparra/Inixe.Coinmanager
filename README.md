@@ -3,26 +3,29 @@
 The goal of the project is to create a tool that can help users on the Mexican Crypto Currency exchange to analyse and have a better control on their day to day operations.
 May be at some point in time this will evolve in toa bot, but at the time it's not the main goal.
 
-In order to achieve this, the web is flooded with tools for analysing cryptocurrencies having the US dollar as reference. The project is going to incorcoporate the market data of the mexican exchanges
-to analyse the cryptocurrencies behavior from a Mexican peso reference perspective.
+In order to achieve the main goal we must understand how the mexican market reacts to changes. The web is flooded with tools for analyzing cryptocurrencies having the US dollar as reference. The project is going to incorcoporate the market data of the mexican exchanges
+to analyze the cryptocurrencies behavior from a Mexican peso reference perspective.
 
 ## Road Map
 
-* Code the Mexican Cryptocurrencies API libraries
-* Code reference Market data API libraries
-  * Kraken
+* Mexican Cryptocurrencies API libraries - *Beta* -
+* Reference Market data API libraries
+  * Kraken - *On It's way* -
   * Gemini
   * GDAX
   * Bitfinex
-* Code Analyzers
+* Analyzers
   * Trends Analyzers
-* Code Indicators
+* Indicators
   * MACD
   
 ### Prerequisites
 
-The project has no external dependencies at the time.
+The project has no external dependencies at the time, but those comming from NuGet.
 
+* [RestSharp](http://restsharp.org/)
+* [Fluent Validation](https://github.com/JeremySkinner/FluentValidation)
+* [Moq](https://github.com/moq/moq)
 
 ### Installing
 
