@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BanxicoData.cs" company="Inixe">
+// <copyright file="SpeiPaymentConfirmation.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,10 +10,10 @@ namespace Inixe.CoinManagement.Bitso.Api
     using Newtonsoft.Json.Serialization;
 
     /// <summary>
-    /// Class SpeiCda
+    /// Class SpeiPaymentConfirmation
     /// </summary>
     /// <remarks>Holds the Spei Specific data</remarks>
-    public sealed class BanxicoData
+    public sealed class SpeiPaymentConfirmation
     {
         /// <summary>Gets the original string.</summary>
         /// <value>The original string.</value>

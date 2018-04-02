@@ -27,6 +27,6 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <summary>Gets the cda.</summary>
         /// <value>The cda.</value>
         [JsonProperty("cda")]
-        public BanxicoData Cda { get; internal set; }
+        public SpeiPaymentConfirmation PaymentConfirmation { get; internal set; }
     }
 }

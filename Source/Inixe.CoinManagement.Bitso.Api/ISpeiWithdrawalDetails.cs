@@ -43,6 +43,6 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets the cep data.</summary>
         /// <value>The cep data.</value>
-        SpeiCep Cep { get; }
+        SpeiPaymentBoucher Cep { get; }
     }
 }

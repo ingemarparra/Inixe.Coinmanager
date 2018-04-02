@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SpeiCep.cs" company="Inixe">
+// <copyright file="SpeiPaymentBoucher.cs" company="Inixe">
 // Copyright (c) Inixe 2017. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,9 +14,9 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// Class SPEI CEP
     /// </summary>
     /// <remarks>Holds CEP data</remarks>
-    public sealed class SpeiCep
+    public sealed class SpeiPaymentBoucher
     {
-        /// <summary>Gets a value indicating whether this <see cref="SpeiCep"/> is success.</summary>
+        /// <summary>Gets a value indicating whether this <see cref="SpeiPaymentBoucher"/> is success.</summary>
         /// <value><c>true</c> if success; otherwise, <c>false</c>.</value>
         public bool Success { get; internal set; }
 

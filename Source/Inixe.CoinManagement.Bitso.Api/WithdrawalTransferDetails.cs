@@ -48,6 +48,6 @@ namespace Inixe.CoinManagement.Bitso.Api
         public string TrackingCode { get; set; }
 
         /// <inheritdoc/>
-        public SpeiCep Cep { get; set; }
+        public SpeiPaymentBoucher Cep { get; set; }
     }
 }
