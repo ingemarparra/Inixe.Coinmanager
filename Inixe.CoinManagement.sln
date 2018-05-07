@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.CoinMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.CoinMarketCap.Api.Tests", "Source\Tests\Inixe.CoinManagement.CoinMarketCap.Api.Tests\Inixe.CoinManagement.CoinMarketCap.Api.Tests.csproj", "{E30B39A8-E896-4267-98BA-A0E1A501A3A1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desk", "Desk", "{4049BE79-FCB5-42DF-891F-617CEF566A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inixe.CoinManagement.Desk", "Source\Inixe.CoinManagement.Desk\Inixe.CoinManagement.Desk.csproj", "{890EB488-0639-4629-A81F-213F82CA4200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,10 @@ Global
 		{E30B39A8-E896-4267-98BA-A0E1A501A3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E30B39A8-E896-4267-98BA-A0E1A501A3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E30B39A8-E896-4267-98BA-A0E1A501A3A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890EB488-0639-4629-A81F-213F82CA4200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890EB488-0639-4629-A81F-213F82CA4200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890EB488-0639-4629-A81F-213F82CA4200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890EB488-0639-4629-A81F-213F82CA4200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +100,7 @@ Global
 		{432F7B0B-BF25-43C9-9B8A-CA745063A6FD} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
 		{879520B6-4E63-4237-A9B3-9535C4FD7F1D} = {CA2C6E30-98B1-4C77-8650-82E8A3B5F59B}
 		{E30B39A8-E896-4267-98BA-A0E1A501A3A1} = {B2F06DC3-E861-416A-A384-53DACEA6FF79}
+		{890EB488-0639-4629-A81F-213F82CA4200} = {4049BE79-FCB5-42DF-891F-617CEF566A76}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42285111-2057-45AE-85E2-4E1144A3C975}

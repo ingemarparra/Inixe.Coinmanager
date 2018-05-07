@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Inixe.CoinManagement.Desk.View.MarketDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Inixe.CoinManagement.Desk.View"
+             xmlns:bitso="clr-namespace:Inixe.CoinManagement.Bitso.Api;assembly=Inixe.CoinManagement.Bitso.Api"
+             xmlns:vm="clr-namespace:Inixe.CoinManagement.Desk.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="250" d:DataContext="{d:DesignInstance Type={x:Type vm:MarketDataViewModel}}">
+    <UserControl.DataContext>
+        <vm:MarketDataViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <SolidColorBrush Opacity="0.4" Color="Gray" x:Key="ListBackgroundBrush" />
+        <SolidColorBrush Opacity="0.4" Color="WhiteSmoke" x:Key="LastPriceBackgroundBrush" />
+    </UserControl.Resources>
+    <StackPanel>
+        <Label FontSize="24" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="WhiteSmoke">Market Data</Label>
+        <ListBox Background="{StaticResource ListBackgroundBrush}" ItemsSource="{Binding Tickers, Mode=OneWay}" Width="250">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel d:DataContext="{d:DesignInstance Type={x:Type bitso:Ticker}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="2">
+                                <TextBlock Text="{Binding BookName}"  FontSize="14" Foreground="DeepSkyBlue" FontWeight="Bold"/>
+                            </StackPanel>
+                            <Grid Grid.Column="0" Grid.Row="1" Background="{StaticResource LastPriceBackgroundBrush}">
+                                <TextBlock Text="{Binding Last, StringFormat=c}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" />
+                            </Grid>
+                            <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Margin="10,0,10,0">
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Setters>
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                            <Setter Property="FontSize" Value="10" />
+                                        </Style.Setters>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                                    <TextBlock Text="Bid:" />
+                                    <TextBlock Text="Ask:" />
+                                    <TextBlock Text="High:" />
+                                    <TextBlock Text="Low:" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Bid, StringFormat=c}" />
+                                    <TextBlock Text="{Binding Ask, StringFormat=c}" />
+                                    <TextBlock Text="{Binding High, StringFormat=c}" />
+                                    <TextBlock Text="{Binding Low, StringFormat=c}" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</UserControl>
+
+    
