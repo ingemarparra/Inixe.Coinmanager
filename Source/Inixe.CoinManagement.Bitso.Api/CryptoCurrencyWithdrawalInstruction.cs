@@ -14,13 +14,15 @@ namespace Inixe.CoinManagement.Bitso.Api
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
-    /// <summary>
-    /// Class CryptoCurrencyWithdrawalInstruction
-    /// </summary>
+    /// <summary>Class CryptoCurrencyWithdrawalInstruction</summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class CryptoCurrencyWithdrawalInstruction
     {
+        /// <summary>Gets or sets the currency.</summary>
+        /// <value>The currency.</value>
+        public string Currency { get; set; }
+
         /// <summary>Gets or sets the amount.</summary>
         /// <value>The amount.</value>
         public decimal Amount { get; set; }
@@ -28,5 +30,9 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <summary>Gets or sets the address.</summary>
         /// <value>The address.</value>
         public string Address { get; set; }
+
+        /// <summary>Gets or sets the destination tag.</summary>
+        /// <value>The destination tag.</value>
+        public string DestinationTag { get; set; }
     }
 }

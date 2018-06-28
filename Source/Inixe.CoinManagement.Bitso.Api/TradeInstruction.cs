@@ -12,6 +12,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     using System.Text;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
     using Newtonsoft.Json.Serialization;
 
     /// <summary>
@@ -67,25 +68,29 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets or sets the side.</summary>
         /// <value>The side.</value>
+        [JsonProperty("side")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public MarketSide Side { get; set; }
 
         /// <summary>Gets or sets the type of the order.</summary>
         /// <value>The type of the order.</value>
         [JsonProperty("type")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public TradeOrderType OrderType { get; set; }
 
         /// <summary>Gets or sets the major currency amount.</summary>
         /// <value>The major currency amount.</value>
-        [JsonProperty("major")]
+        [JsonProperty("major", Required = Required.AllowNull)]
         public decimal? MajorCurrencyAmount { get; set; }
 
         /// <summary>Gets or sets the minor currency amount.</summary>
         /// <value>The minor currency amount.</value>
-        [JsonProperty("minor")]
+        [JsonProperty("minor", Required = Required.AllowNull)]
         public decimal? MinorCurrencyAmount { get; set; }
 
         /// <summary>Gets or sets the price.</summary>
         /// <value>The price.</value>
-        public decimal Price { get; set; }
+        [JsonProperty("price", Required = Required.AllowNull)]
+        public decimal? Price { get; set; }
     }
 }

@@ -56,6 +56,12 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>The ripple method</summary>
         Rp,
+
+        /// <summary>The Little Coin Method</summary>
+        Ltc,
+
+        /// <summary>The Bitcoin cash</summary>
+        Bch,
     }
 
     /// <summary>

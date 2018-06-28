@@ -37,7 +37,7 @@ namespace Inixe.CoinManagement.Bitso.Api.Serialization
             this.serializer = new Newtonsoft.Json.JsonSerializer();
 
             this.serializer.MissingMemberHandling = MissingMemberHandling.Ignore;
-            this.serializer.NullValueHandling = NullValueHandling.Include;
+            this.serializer.NullValueHandling = NullValueHandling.Ignore;
             this.serializer.DefaultValueHandling = DefaultValueHandling.Include;
             this.serializer.DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind;
             this.serializer.DateFormatHandling = DateFormatHandling.IsoDateFormat;

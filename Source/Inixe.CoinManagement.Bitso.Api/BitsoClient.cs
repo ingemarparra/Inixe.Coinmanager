@@ -964,7 +964,7 @@ namespace Inixe.CoinManagement.Bitso.Api
 
             var resourceName = GetParametrizedResourceName("orders", ids);
 
-            var request = new RestRequest("orders", Method.DELETE);
+            var request = new RestRequest(resourceName, Method.DELETE);
 
             return this.GetPayloadList<string>(request, true);
         }
@@ -1010,7 +1010,8 @@ namespace Inixe.CoinManagement.Bitso.Api
 
             var request = new RestRequest("orders", Method.POST);
 
-            request.AddBody(instruction);
+            var body = this.CreateJsonBodyParameter(instruction);
+            request.Parameters.Add(body);
 
             var res = this.GetPayload<TradeOrder>(request, true);
 
@@ -1028,6 +1029,18 @@ namespace Inixe.CoinManagement.Bitso.Api
             {
                 { TransferMethod.Btc, "bitcoin_withdrawal" },
                 { TransferMethod.Eth, "ether_withdrawal" },
+                { TransferMethod.Rp, "ripple_withdrawal" },
+                { TransferMethod.Bch, "bcash_withdrawal" },
+                { TransferMethod.Ltc, "litecoin_withdrawal" },
+            };
+
+            var currencyMappings = new Dictionary<TransferMethod, string>
+            {
+                { TransferMethod.Btc, "btc" },
+                { TransferMethod.Eth, "eth" },
+                { TransferMethod.Rp, "xrp" },
+                { TransferMethod.Bch, "bch" },
+                { TransferMethod.Ltc, "ltc" },
             };
 
             if (instruction == null)
@@ -1047,9 +1060,10 @@ namespace Inixe.CoinManagement.Bitso.Api
                 throw new ArgumentException("invalid withdraw method");
             }
 
+            instruction.Currency = currencyMappings[method];
             var request = new RestRequest(resourceMappings[method], Method.POST);
-
-            request.AddBody(instruction);
+            var body = this.CreateJsonBodyParameter(instruction);
+            request.Parameters.Add(body);
 
             var res = this.GetPayload<CryptoCurrencyWithdrawal>(request, true);
 
@@ -1125,7 +1139,8 @@ namespace Inixe.CoinManagement.Bitso.Api
                     var kycDoc = new KycProofDocument(docType, stream, extension);
 
                     var request = new RestRequest("kyc_documents", Method.POST);
-                    request.AddBody(request);
+                    var body = this.CreateJsonBodyParameter(kycDoc);
+                    request.Parameters.Add(body);
 
                     var res = this.GetPayload<NullResponse>(request, true);
 
@@ -1256,6 +1271,17 @@ namespace Inixe.CoinManagement.Bitso.Api
         {
             this.Client.UserAgent = "Inixe CoinManager";
             this.Client.AddHandler("application/json", this.serializer);
+        }
+
+        private Parameter CreateJsonBodyParameter(object payload)
+        {
+            var retval = new Parameter();
+
+            retval.Type = ParameterType.RequestBody;
+            retval.Value = this.Serializer.Serialize(payload).ToLowerInvariant();
+            retval.Name = "application/json";
+
+            return retval;
         }
     }
 }
