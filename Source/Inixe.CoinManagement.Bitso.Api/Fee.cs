@@ -28,12 +28,22 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>Gets the value.</summary>
         /// <value>The value.</value>
-        [JsonProperty("fee_decimal")]
-        public decimal Value { get; internal set; }
+        [JsonProperty("taker_fee_decimal")]
+        public decimal TakerValue { get; internal set; }
 
         /// <summary>Gets the percent.</summary>
         /// <value>The percent.</value>
-        [JsonProperty("fee_percent")]
-        public decimal Percent { get; internal set; }
+        [JsonProperty("taker_fee_percent")]
+        public decimal TakerPercent { get; internal set; }
+
+        /// <summary>Gets the value.</summary>
+        /// <value>The value.</value>
+        [JsonProperty("maker_fee_decimal")]
+        public decimal MakerValue { get; internal set; }
+
+        /// <summary>Gets the percent.</summary>
+        /// <value>The percent.</value>
+        [JsonProperty("maker_fee_percent")]
+        public decimal MakerPercent { get; internal set; }
     }
 }

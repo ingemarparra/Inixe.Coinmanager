@@ -8,12 +8,12 @@ namespace Inixe.CoinManagement.Bitso.Api
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Security;
     using System.Text;
     using Inixe.CoinManagement.Bitso.Api.Serialization;
     using RestSharp;
-    using System.IO;
 
     /// <summary>
     /// Enum SortDirection
@@ -832,7 +832,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <returns>if valid and found, the requested Trade is returned. Otherwise null is returned.</returns>
         /// <exception cref="ArgumentException">When <paramref name="id"/> represents a list of ids or is <c>null</c></exception>
         /// <remarks>None</remarks>
-        public Trade GetUserTradeByOrderId(string id)
+        public IList<Trade> GetUserTradeByOrderId(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -851,7 +851,7 @@ namespace Inixe.CoinManagement.Bitso.Api
             }
 
             var res = this.GetFilteredOrders("order_trades", id, null);
-            return res.Count > 0 ? res[0] : null;
+            return res.Count > 0 ? res : null;
         }
 
         /// <summary>Gets the user trades.</summary>
@@ -1018,12 +1018,41 @@ namespace Inixe.CoinManagement.Bitso.Api
             return res;
         }
 
+        /// <summary>
+        /// Withdraws the spei.
+        /// </summary>
+        /// <param name="instruction">The instruction.</param>
+        /// <returns>a Spei Withdrawal done data</returns>
+        /// <exception cref="ArgumentNullException">instruction</exception>
+        public SpeiWithdrawal WithdrawSpei(SpeiWithdrawalInstruction instruction)
+        {
+            if (instruction == null)
+            {
+                throw new ArgumentNullException(nameof(instruction));
+            }
+
+            var validator = new SpeiWithdrawalInstructionValidator();
+            var validationResult = validator.Validate(instruction);
+            if (!validationResult.IsValid)
+            {
+                throw new ArgumentException(validationResult.Errors[0].ErrorMessage, nameof(instruction));
+            }
+
+            var request = new RestRequest("spei_withdrawal", Method.POST);
+            var body = this.CreateJsonBodyParameter(instruction);
+            request.Parameters.Add(body);
+
+            var res = this.GetPayload<SpeiWithdrawal>(request, true);
+
+            return res;
+        }
+
         /// <summary>Withdraws the specified instruction.</summary>
         /// <param name="instruction">The instruction.</param>
         /// <param name="method">The method.</param>
         /// <returns>The Operation details</returns>
         /// <exception cref="ArgumentException">invalid withdraw method</exception>
-        public CryptoCurrencyWithdrawal Withdraw(CryptoCurrencyWithdrawalInstruction instruction, TransferMethod method)
+        public CryptoCurrencyWithdrawal WithdrawCrypto(CryptoCurrencyWithdrawalInstruction instruction, TransferMethod method)
         {
             var resourceMappings = new Dictionary<TransferMethod, string>
             {

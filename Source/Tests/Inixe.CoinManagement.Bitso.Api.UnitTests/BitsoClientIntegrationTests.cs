@@ -265,8 +265,10 @@ namespace Inixe.CoinManagement.Bitso.Api.Tests
                     Assert.AreNotEqual<int>(0, res.TradeFees.Count);
 
                     Assert.IsFalse(string.IsNullOrEmpty(res.TradeFees[0].BookName));
-                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].Percent);
-                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].Value);
+                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].TakerPercent);
+                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].TakerValue);
+                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].MakerPercent);
+                    Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].MakerValue);
                     Assert.AreNotEqual<int>(0, res.WithdrawalFees.Count);
                     Assert.AreNotEqual<decimal>(0M, res.WithdrawalFees.First().Value);
                 }
@@ -495,9 +497,9 @@ namespace Inixe.CoinManagement.Bitso.Api.Tests
                     var res = client.GetUserTradeByOrderId(oid);
 
                     Assert.IsNotNull(res);
-                    Assert.AreNotEqual<decimal>(0M, res.Price);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Price);
 
-                    var diff = res.CreatedAt - default(System.DateTime);
+                    var diff = res[0].CreatedAt - default(System.DateTime);
                     Assert.IsTrue(diff > System.TimeSpan.Zero);
                 }
                 catch (BitsoException ex)

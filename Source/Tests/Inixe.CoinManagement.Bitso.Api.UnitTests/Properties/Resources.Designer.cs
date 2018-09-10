@@ -66,19 +66,18 @@ namespace Inixe.CoinManagement.Bitso.Api.Tests.Properties {
         ///    &quot;payload&quot;: {
         ///        &quot;fees&quot;: [{
         ///            &quot;book&quot;: &quot;btc_mxn&quot;,
-        ///            &quot;fee_decimal&quot;: &quot;0.0001&quot;,
-        ///            &quot;fee_percent&quot;: &quot;0.01&quot;
+        ///            &quot;taker_fee_decimal&quot;: &quot;0.0001&quot;,
+        ///            &quot;taker_fee_percent&quot;: &quot;0.01&quot;,
+        ///            &quot;maker_fee_decimal&quot;: &quot;0.0001&quot;,
+        ///            &quot;maker_fee_percent&quot;: &quot;0.01&quot;
         ///        }, {
         ///            &quot;book&quot;: &quot;eth_mxn&quot;,
-        ///            &quot;fee_decimal&quot;: &quot;0.001&quot;,
-        ///            &quot;fee_percent&quot;: &quot;0.1&quot;
+        ///            &quot;taker_fee_decimal&quot;: &quot;0.0001&quot;,
+        ///            &quot;taker_fee_percent&quot;: &quot;0.01&quot;,
+        ///            &quot;maker_fee_decimal&quot;: &quot;0.0001&quot;,
+        ///            &quot;maker_fee_percent&quot;: &quot;0.01&quot;
         ///        }],
-        ///        &quot;withdrawal_fees&quot;: {
-        ///            &quot;btc&quot;: &quot;0.001&quot;,
-        ///            &quot;eth&quot;: &quot;0.0025&quot;
-        ///        }
-        ///    }
-        ///}.
+        ///        &quot;withdra [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AccountFeesResponse {
             get {

@@ -353,8 +353,10 @@ namespace Inixe.CoinManagement.Bitso.Api.Tests
             Assert.AreNotEqual<int>(0, res.TradeFees.Count);
 
             Assert.IsFalse(string.IsNullOrEmpty(res.TradeFees[0].BookName));
-            Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].Percent);
-            Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].Value);
+            Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].TakerPercent);
+            Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].TakerValue);
+            Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].MakerPercent);
+            Assert.AreNotEqual<decimal>(0M, res.TradeFees[0].MakerValue);
             Assert.AreNotEqual<int>(0, res.WithdrawalFees.Count);
             Assert.AreNotEqual<decimal>(0M, res.WithdrawalFees.First().Value);
         }

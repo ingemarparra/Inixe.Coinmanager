@@ -93,12 +93,14 @@
     <Compile Include="LedgerEntryBase.cs" />
     <Compile Include="ResponseSingle.cs" />
     <Compile Include="ResponseCollection{T}.cs" />
+    <Compile Include="SpeiWithdrawalInstruction.cs" />
     <Compile Include="SpeiPaymentConfirmation.cs" />
     <Compile Include="SpeiPaymentBoucher.cs" />
     <Compile Include="SpeiFunding.cs" />
     <Compile Include="SpeiRemittent.cs" />
     <Compile Include="BanxicoTransferTrackData.cs" />
     <Compile Include="SpeiWithdrawal.cs" />
+    <Compile Include="SpeiWithdrawalInstructionValidator.cs" />
     <Compile Include="Tick.cs" />
     <Compile Include="Ticker.cs" />
     <Compile Include="Trade.cs" />
@@ -113,6 +115,9 @@
     <AdditionalFiles Include="..\Shared\stylecop.json">
       <Link>stylecop.json</Link>
     </AdditionalFiles>
+    <None Include="Inixe.CoinManagement.Bitso.Api.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
