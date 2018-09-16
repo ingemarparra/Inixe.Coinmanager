@@ -56,6 +56,7 @@
     <Compile Include="BankCode.cs" />
     <Compile Include="BitsoClient.cs" />
     <Compile Include="BitsoException.cs" />
+    <Compile Include="BitsoTransferFunding.cs" />
     <Compile Include="CryptoCurrencyFunding.cs" />
     <Compile Include="CryptoCurrencyWithdrawal.cs" />
     <Compile Include="CryptoCurrencyWithdrawalInstructionValidator.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="FundingDestination.cs" />
     <Compile Include="FundingTransferDetails.cs" />
     <Compile Include="BitsoClientBase.cs" />
+    <Compile Include="IBitsoTransferFundingDetails.cs" />
     <Compile Include="ICrytoCurrencyFundingDetails.cs" />
     <Compile Include="ICrytoCurrencyWithdrawalDetails.cs" />
     <Compile Include="IFundingOperationDetails.cs" />

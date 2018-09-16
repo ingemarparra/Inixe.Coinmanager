@@ -4,6 +4,8 @@
 /TestResults/*
 packages
 /packages/*
+*.runsettings
+*.nupkg
 */obj/*
 
 #Junk Files

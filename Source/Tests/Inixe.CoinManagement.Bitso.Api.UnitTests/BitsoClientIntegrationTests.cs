@@ -483,6 +483,77 @@ namespace Inixe.CoinManagement.Bitso.Api.Tests
             }
         }
 
+        /// <summary>Tests the GetFundings for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetSpeiFundingsExpected()
+        {
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetSpeiFundings();
+
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Amount);
+                    Assert.AreNotEqual<TransferStatus>(TransferStatus.None, res[0].Status);
+                    Assert.AreNotEqual<TransferMethod>(TransferMethod.None, res[0].Method);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].MethodName));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Id));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Currency));
+
+                    var diff = res[0].CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
+
+                    res = client.GetSpeiFundings(1);
+                    Assert.IsNotNull(res);
+                    Assert.AreEqual<int>(1, res.Count);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>Tests the GetFundings for expected behavior.</summary>
+        [TestCategory("Integration Test")]
+        [TestMethod]
+        public void GetBitsoTransferFundingsExpected()
+        {
+            using (var client = new BitsoClient(this.TestingServerUrl, this.ApiKey, this.ApiSecret))
+            {
+                try
+                {
+                    var res = client.GetBitsoTransferFundings();
+
+                    Assert.IsNotNull(res);
+                    Assert.AreNotEqual<int>(0, res.Count);
+                    Assert.AreNotEqual<decimal>(0M, res[0].Amount);
+                    Assert.AreNotEqual<TransferStatus>(TransferStatus.None, res[0].Status);
+                    Assert.AreNotEqual<TransferMethod>(TransferMethod.None, res[0].Method);
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].MethodName));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Id));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Currency));
+                    Assert.IsFalse(string.IsNullOrEmpty(res[0].Details.Notes));
+
+                    var diff = res[0].CreatedAt - default(System.DateTime);
+                    Assert.IsTrue(diff > System.TimeSpan.Zero);
+
+                    res = client.GetBitsoTransferFundings(1);
+                    Assert.IsNotNull(res);
+                    Assert.AreEqual<int>(1, res.Count);
+                }
+                catch (BitsoException ex)
+                {
+                    this.TestContext.WriteLine(ex.Header);
+                    throw;
+                }
+            }
+        }
+
         /// <summary>Tests the GetUserTradeByOrderId for expected behavior.</summary>
         [TestCategory("Integration Test")]
         [TestMethod]

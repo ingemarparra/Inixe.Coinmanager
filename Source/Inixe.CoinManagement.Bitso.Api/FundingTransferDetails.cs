@@ -19,7 +19,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// </summary>
     /// <remarks>None</remarks>
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    internal class FundingTransferDetails : ICrytoCurrencyFundingDetails, ISpeiFundingDetails
+    internal class FundingTransferDetails : ICrytoCurrencyFundingDetails, ISpeiFundingDetails, IBitsoTransferFundingDetails
     {
         /// <inheritdoc/>
         public string SenderName { get; set; }
@@ -50,5 +50,8 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <inheritdoc/>
         public string TransferHash { get; set; }
+
+        /// <inheritdoc/>
+        public string Notes { get; set; }
     }
 }

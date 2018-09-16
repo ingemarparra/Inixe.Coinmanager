@@ -62,6 +62,9 @@ namespace Inixe.CoinManagement.Bitso.Api
 
         /// <summary>The Bitcoin cash</summary>
         Bch,
+
+        /// <summary>The Bitso Transfer</summary>
+        Bt,
     }
 
     /// <summary>

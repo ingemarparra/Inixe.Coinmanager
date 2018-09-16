@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Inixe.CoinManagement.Bitso.Api</id>
-    <version>1.0.2.0</version>
+    <version>1.0.3.1</version>
     <title>Inixe Bitso API Client</title>
     <authors>Ingemar Parra H.</authors>
     <owners>Ingemar Parra H.</owners>

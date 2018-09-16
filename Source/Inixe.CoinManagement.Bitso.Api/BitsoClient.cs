@@ -681,6 +681,15 @@ namespace Inixe.CoinManagement.Bitso.Api
             return this.GetSpeiFundings(string.Empty, resultLimit ?? DefaultFilterLimit);
         }
 
+        /// <summary>Gets all the SPEI fundings.</summary>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<SpeiFunding> GetSpeiFundings()
+        {
+            long? tmp = null;
+            return this.GetSpeiFundings(tmp);
+        }
+
         /// <summary>Gets the SPEI fundings.</summary>
         /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI fundings are returned.
         /// The list can be a string separated by spaces, commans, colons and semicolons</param>
@@ -690,6 +699,50 @@ namespace Inixe.CoinManagement.Bitso.Api
         public IList<SpeiFunding> GetSpeiFundings(string ids, long resultLimit)
         {
             return this.GetFilteredTransfers<FundingBase>("fundings", ids, TransferMethod.Sp, false, resultLimit).ConvertAll(x => new SpeiFunding(x));
+        }
+
+        /// <summary>Gets the Bitso Transfer fundings by id.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI fundings are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<BitsoTransferFunding> GetBitsoTransferFundings(string ids)
+        {
+            if (string.IsNullOrWhiteSpace(ids))
+            {
+                throw new ArgumentException("Invalid Id", nameof(ids));
+            }
+
+            return this.GetBitsoTransferFundings(ids, DefaultFilterLimit);
+        }
+
+        /// <summary>Gets all the Bitso Transfer fundings.</summary>
+        /// <param name="resultLimit">The result limit. If <c>null</c> the default value is used and only 25 items are returned</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<BitsoTransferFunding> GetBitsoTransferFundings(long? resultLimit)
+        {
+            return this.GetBitsoTransferFundings(string.Empty, resultLimit ?? DefaultFilterLimit);
+        }
+
+        /// <summary>Gets all the Bitso Transfer fundings.</summary>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<BitsoTransferFunding> GetBitsoTransferFundings()
+        {
+            long? tmp = null;
+            return this.GetBitsoTransferFundings(tmp);
+        }
+
+        /// <summary>Gets the Bitso Transfer fundings.</summary>
+        /// <param name="ids">The a list with ids to search for.If <c>null</c> or Empty all SPEI fundings are returned.
+        /// The list can be a string separated by spaces, commans, colons and semicolons</param>
+        /// <param name="resultLimit">The result limit.</param>
+        /// <returns>A list with the Entries found</returns>
+        /// <remarks>None</remarks>
+        public IList<BitsoTransferFunding> GetBitsoTransferFundings(string ids, long resultLimit)
+        {
+            return this.GetFilteredTransfers<FundingBase>("fundings", ids, TransferMethod.Bt, false, resultLimit).ConvertAll(x => new BitsoTransferFunding(x));
         }
 
         /// <summary>Gets the funding destinations.</summary>
@@ -796,7 +849,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         public IList<TradeOrder> GetOpenTradeOrders(string bookName, string markerTag, SortDirection sortDirection, long resultLimit)
         {
-            var request = new RestRequest("ledger", Method.GET);
+            var request = new RestRequest("open_orders", Method.GET);
 
             var marker = new Parameter();
             var sort = new Parameter();
