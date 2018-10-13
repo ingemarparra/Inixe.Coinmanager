@@ -31,7 +31,7 @@ namespace Inixe.CoinManagement.Bitso.Api
     /// <summary>
     /// The Bitso Client
     /// </summary>
-    public class BitsoClient : BitsoClientBase
+    public class BitsoClient : BitsoClientBase, IBitsoClient
     {
         /// <summary>The default filter limit for all calls that requiere a limit parameter If ommited</summary>
         public const int DefaultFilterLimit = 25;
