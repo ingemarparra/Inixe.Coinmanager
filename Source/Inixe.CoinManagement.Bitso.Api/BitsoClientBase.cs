@@ -14,6 +14,8 @@ namespace Inixe.CoinManagement.Bitso.Api
     using System.Security;
     using System.Text;
     using RestSharp;
+    using RateLimiter;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Class BitsoClientBase
@@ -25,6 +27,7 @@ namespace Inixe.CoinManagement.Bitso.Api
         private readonly string apiKey;
         private readonly SecureString secureApiSecret;
         private readonly Uri targetUrl;
+        private readonly TimeLimiter rateLimiter;
 
         private bool disposedValue;
 
@@ -80,6 +83,7 @@ namespace Inixe.CoinManagement.Bitso.Api
             this.targetUrl = new Uri(serverUrl);
             this.client = restClient ?? new RestClient(serverUrl);
             this.disposedValue = false;
+            this.rateLimiter = TimeLimiter.GetFromMaxCountByInterval(300, new TimeSpan(0, 5, 0));
         }
 
         /// <summary>
@@ -126,29 +130,16 @@ namespace Inixe.CoinManagement.Bitso.Api
         protected T GetPayload<T>(RestRequest request, bool useAuthorization)
             where T : class
         {
-            if (useAuthorization)
+            try
             {
-                if (!this.CanSignRequests)
-                {
-                    throw new InvalidOperationException("The request can not be signed");
-                }
-
-                var authHeader = this.CreateAuthorizationHeaderContent(request);
-                request.AddHeader("Authorization", authHeader);
+                var task = this.rateLimiter.Perform(() => this.GetPayloadAsync<T>(request, useAuthorization));
+                task.Wait();
+                return task.Result;
             }
-
-            var response = this.Client.Execute<ResponseSingle<T>>(request);
-            if (response.Data.Success)
+            catch (AggregateException aex)
             {
-                return response.Data.Payload;
+                throw aex.InnerException;
             }
-            else if (!this.AutoHandleErrors)
-            {
-                var authHeader = response.Request.Parameters.FirstOrDefault(x => x.Type == ParameterType.HttpHeader && x.Name == "Authorization");
-                throw new BitsoException(response.Content, (string)authHeader?.Value);
-            }
-
-            return null;
         }
 
         /// <summary>Gets the payload.</summary>
@@ -181,25 +172,16 @@ namespace Inixe.CoinManagement.Bitso.Api
         /// <remarks>None</remarks>
         protected IList<T> GetPayloadList<T>(RestRequest request, bool useAuthorization)
         {
-            if (useAuthorization)
+            try
             {
-                if (!this.CanSignRequests)
-                {
-                    throw new InvalidOperationException("The request can not be signed");
-                }
-
-                var authHeader = this.CreateAuthorizationHeaderContent(request);
-                request.AddHeader("Authorization", authHeader);
+                var task = this.rateLimiter.Perform(() => this.GetPayloadListAsync<T>(request, useAuthorization));
+                task.Wait();
+                return task.Result;
             }
-
-            var response2 = this.Client.Execute<ResponseCollection<T>>(request);
-
-            if (response2.Data.Success)
+            catch (AggregateException aex)
             {
-                return response2.Data.Payload;
+                throw aex.InnerException;
             }
-
-            return new List<T>();
         }
 
         /// <summary>Releases unmanaged and - optionally - managed resources.</summary>
@@ -264,6 +246,58 @@ namespace Inixe.CoinManagement.Bitso.Api
             }
 
             return retval;
+        }
+
+        private Task<T> GetPayloadAsync<T>(RestRequest request, bool useAuthorization)
+            where T : class
+        {
+            if (useAuthorization)
+            {
+                if (!this.CanSignRequests)
+                {
+                    throw new InvalidOperationException("The request can not be signed");
+                }
+
+                var authHeader = this.CreateAuthorizationHeaderContent(request);
+                request.AddHeader("Authorization", authHeader);
+            }
+
+            var response = this.Client.Execute<ResponseSingle<T>>(request);
+            if (response.Data.Success)
+            {
+                return Task.FromResult(response.Data.Payload);
+            }
+            else if (!this.AutoHandleErrors)
+            {
+                var authHeader = response.Request.Parameters.FirstOrDefault(x => x.Type == ParameterType.HttpHeader && x.Name == "Authorization");
+                throw new BitsoException(response.Content, (string)authHeader?.Value);
+            }
+
+            return Task.FromResult<T>(null);
+        }
+
+        private Task<IList<T>> GetPayloadListAsync<T>(RestRequest request, bool useAuthorization)
+        {
+            if (useAuthorization)
+            {
+                if (!this.CanSignRequests)
+                {
+                    throw new InvalidOperationException("The request can not be signed");
+                }
+
+                var authHeader = this.CreateAuthorizationHeaderContent(request);
+                request.AddHeader("Authorization", authHeader);
+            }
+
+            var response2 = this.Client.Execute<ResponseCollection<T>>(request);
+
+            if (response2.Data.Success)
+            {
+                return Task.FromResult(response2.Data.Payload);
+            }
+
+            IList<T> empty = new List<T>();
+            return Task.FromResult(empty);
         }
 
         private string CreateAuthorizationHeaderContent(IRestRequest request)
