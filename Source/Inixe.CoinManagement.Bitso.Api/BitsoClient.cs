@@ -872,7 +872,11 @@ namespace Inixe.CoinManagement.Bitso.Api
             limit.Value = resultLimit;
             limit.Type = ParameterType.QueryString;
 
-            request.AddParameter(book);
+            if (!string.IsNullOrWhiteSpace(bookName))
+            {
+                request.AddParameter(book);
+            }
+
             request.AddParameter(marker);
             request.AddParameter(sort);
             request.AddParameter(limit);
